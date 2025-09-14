@@ -1,0 +1,9 @@
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.csproj.AssemblyReference.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\rpswa.dswa.cache.json
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.AssemblyInfoInputs.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.AssemblyInfo.cs
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.csproj.CoreCompileInputs.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.RazorAssemblyInfo.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.RazorAssemblyInfo.cs

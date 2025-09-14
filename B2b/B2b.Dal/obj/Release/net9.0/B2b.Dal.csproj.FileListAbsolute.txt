@@ -1,0 +1,12 @@
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.deps.json
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.pdb
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.csproj.AssemblyReference.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.AssemblyInfoInputs.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.AssemblyInfo.cs
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.csproj.CoreCompileInputs.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\refint\B2b.Dal.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.pdb
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\ref\B2b.Dal.dll

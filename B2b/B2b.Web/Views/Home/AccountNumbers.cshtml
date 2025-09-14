@@ -1,0 +1,141 @@
+﻿@using System.Configuration;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
+}
+
+
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">Hesap Numaraları</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item active">Hesap Numaraları</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-sm-12" style=" text-align: right;">
+                        <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right insert" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="mdi mdi-plus-circle mr-1"></i> Yeni Hesap Ekle</a>
+                    </div>
+                </div>
+                <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatables">
+                    <thead>
+                        <tr>
+                            <th>Logo</th>
+                            <th>Banka</th>
+                            <th>Şube Kodu</th>
+                            <th>Hesap No</th>
+                            <th>Hesap Adı</th>
+                            <th>Döviz</th>
+                            <th>IBAN No</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- end row -->
+@section scripts {
+    <!-- JsGrid js -->
+    <link href="@Domain/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Domain/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Domain/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="@Domain/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="@Domain/assets/libs/jszip/jszip.min.js"></script>
+    <script src="@Domain/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="@Domain/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="@Domain/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="@Domain/ControllerJs/Definitions/AccountNumbers.js"></script>>
+    <!-- Init js -->
+}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Logo</label>
+                            <input type="text" class="form-control" id="Logo" placeholder="Logo">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Banka</label>
+                            <input type="text" class="form-control" id="Bank" placeholder="Banka">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Şube Kodu</label>
+                            <input type="text" class="form-control" id="BranchCode" placeholder="Şube Kodu">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Hesap No</label>
+                            <input type="text" class="form-control" id="AccountNo" placeholder="Hesap No">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Hesap Adı</label>
+                            <input type="text" class="form-control" id="AccountName" placeholder="Hesap Adı">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Para Birimi</label>
+                            <input type="text" class="form-control" id="Currency" placeholder="Para Birimi">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">IBAN</label>
+                            <input type="text" class="form-control" id="IBAN" placeholder="IBAN">
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" onclick="PostData(this)" class="btn btn-primary" id="btnSumbit">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+[
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.LoginApiController",
+    "Method": "Login",
+    "RelativePath": "api/LoginApi/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "B2b.Infrastructure.RequestDto.AuthenticateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.LoginApiController",
+    "Method": "LogOut",
+    "RelativePath": "api/LoginApi/LogOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.WebUI.Controllers.Api.FileApiController",
+    "Method": "UploadFileImg",
+    "RelativePath": "upload/upload-file",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

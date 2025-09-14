@@ -1,0 +1,11 @@
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\bin\Release\net9.0\B2b.Plugin.deps.json
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\bin\Release\net9.0\B2b.Plugin.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\bin\Release\net9.0\B2b.Plugin.pdb
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.AssemblyInfoInputs.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.AssemblyInfo.cs
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.csproj.CoreCompileInputs.cache
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\refint\B2b.Plugin.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.pdb
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\ref\B2b.Plugin.dll
