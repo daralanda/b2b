@@ -24,10 +24,11 @@ namespace B2b.Web.Controllers.Api
         {
             return Ok(new { data = _service.GetAll(), roleData = _roleService.GetAll(), state = true });
         }
-        [HttpPost]
-        public IActionResult GetById(int id)
+        [HttpGet]
+        public IActionResult GetById()
         {
-            return Ok(new { data = _service.GetById(id), state = true });
+            var userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            return Ok(new { data = _service.GetById(userId), state = true });
         }
         [HttpPost]
         public IActionResult Add(User data)

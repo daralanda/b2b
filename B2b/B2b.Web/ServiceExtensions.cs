@@ -4,9 +4,12 @@ using B2b.Infrastructure.Service.AccountService;
 using B2b.Infrastructure.Service.Authorization;
 using B2b.Infrastructure.Service.BannerService;
 using B2b.Infrastructure.Service.BrandService;
+using B2b.Infrastructure.Service.CampaignService;
+using B2b.Infrastructure.Service.CartService;
 using B2b.Infrastructure.Service.CategoryService;
+using B2b.Infrastructure.Service.CommerceService;
 using B2b.Infrastructure.Service.CurrencyService;
-using B2b.Infrastructure.Service.CustomerService;
+using B2b.Infrastructure.Service.ExchangeService;
 using B2b.Infrastructure.Service.MainService;
 using B2b.Infrastructure.Service.OrderService;
 using B2b.Infrastructure.Service.ProductService;
@@ -34,12 +37,15 @@ namespace B2b.Web
             BrandServiceRegister();
             CategoryServiceRegister();
             AccountServiceRegister();
-            CustomerServiceRegister();
             ProductServiceRegister();
             OrderServiceRegister();
             UnitTypeServiceRegister();
             CurrencyServiceRegister();
             SliderServiceRegister();
+            CommerceServiceRegister();
+            CartServiceRegister();
+            ExchangeServiceRegister();
+            CampaignServiceRegister();
         }
         private static void JWTServiceRegister()
         {
@@ -73,10 +79,6 @@ namespace B2b.Web
         {
             _services.AddScoped<IAccountService, AccountService>(p => { return new AccountService(_serviceProvider.GetService<B2bDbContext>()); });
         }
-        private static void CustomerServiceRegister()
-        {
-            _services.AddScoped<ICustomerService, CustomerService>(p => { return new CustomerService(_serviceProvider.GetService<B2bDbContext>()); });
-        }
         private static void ProductServiceRegister()
         {
             _services.AddScoped<IProductService, ProductService>(p => { return new ProductService(_serviceProvider.GetService<B2bDbContext>()); });
@@ -96,6 +98,23 @@ namespace B2b.Web
         private static void SliderServiceRegister()
         {
             _services.AddScoped<ISliderService, SliderService>(p => { return new SliderService(_serviceProvider.GetService<B2bDbContext>()); });
+        }
+       
+        private static void CommerceServiceRegister()
+        {
+            _services.AddScoped<ICommerceService, CommerceService>(p => { return new CommerceService(_serviceProvider.GetService<B2bDbContext>()); });
+        }
+        private static void CartServiceRegister()
+        {
+            _services.AddScoped<ICartService, CartService>(p => { return new CartService(_serviceProvider.GetService<B2bDbContext>()); });
+        }
+        private static void ExchangeServiceRegister()
+        {
+            _services.AddScoped<IExchangeService, ExchangeService>(p => { return new ExchangeService(_serviceProvider.GetService<B2bDbContext>()); });
+        }
+        private static void CampaignServiceRegister()
+        {
+            _services.AddScoped<ICampaignService, CampaignService>(p => { return new CampaignService(_serviceProvider.GetService<B2bDbContext>()); });
         }
     }
 }

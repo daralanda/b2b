@@ -8,19 +8,13 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <div class="row mb-2">
-                <div class="col-sm-12" style=" text-align: right;">
-                    <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right insert" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="mdi mdi-plus-circle mr-1"></i> Yeni Banner Ekle</a>
-                </div>
-            </div>
-
             <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatables">
                 <thead>
                     <tr>
-                        <th>Resim Adı</th>
-                        <th>Resim</th>
-                        <th>Link</th>
-                        <th>Is Active</th>
+                        <th>Sipariş No</th>
+                        <th>Müşteri Adı</th>
+                        <th>Sipariş Tarihi</th>
+                        <th>Sipariş Durumu</th>
                         <th width="95px"></th>
                     </tr>
                 </thead>
@@ -54,8 +48,8 @@
     <!-- Init js -->
 }
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade bs-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle"></h5>
@@ -63,53 +57,82 @@
 
             </div>
             <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="formrow-inputCity" class="form-label">Sipariş No</label>
+                            <input type="text" class="form-control" id="OrderNo" placeholder="Sipariş No">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="formrow-inputState" class="form-label">Fatura Tarih</label>
+                            <input type="date" class="form-control" id="OrderDate" placeholder="Fatura Tarih">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Sipariş Durumu</label>
+                            <select id="OrderStatus" class="form-control">
+                                <option value="0">Sipariş Onay Bekleniyor</option>
+                                <option value="1">Sipariş Hazırlanıyor</option>
+                                <option value="2">Sipariş Onaylandı</option>
+                                <option value="3">Kargo</option>
+                                <option value="4">Fatura</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="formrow-inputCity" class="form-label">Müşteri Adı</label>
+                            <select id="CustomerId" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="formrow-inputState" class="form-label">Toplam Tutar</label>
+                            <input type="number" class="form-control" id="Total" placeholder="Toplam Tutar">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Ödeme Tipi</label>
+                            <select id="PaymentType" class="form-control">
+                                <option value="1">Kredi Kartı</option>
+                                <option value="2">Havale / EFT</option>
+                                <option value="3">Hesap Bakiye</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label for="formrow-inputCity" class="form-label">Sipariş Notu</label>
+                            <input type="text" class="form-control" id="OrderNote" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-row">
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="name">Banner Adı</label>
-                            <input type="text" class="form-control" id="BannerName" placeholder="Banner Adı">
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="ImgUrl">Resim</label>
-                            <div class="custom-file">
-                                <input type="file" onchange="FileUpload(this)" class="form-control" id="ImgUrl">
-                                <label class="custom-file-label" for="ImgUrl" id="ImageUrl"></label>
-                            </div>
-                            <div id="SilinecekResimler"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="name">Banner Link</label>
-                            <input type="text" class="form-control" id="BannerUrl" placeholder="Banner Link">
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="name">Banner Tipi</label>
-                            <select id="BannerType" class="form-control">
-                                <option value="0">Seçiniz</option>
-                                <option value="1">Anasayfa</option>
-                                <option value="2">Ürün Sayfası</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="name">Sıra No</label>
-                            <input type="text" class="form-control" id="Queno" placeholder="Sıra No">
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="form-group">
-                            <label for="name">Durumu</label>
-                            <select id="IsActive" class="form-control">
-                                <option value="1">Aktif</option>
-                                <option value="0">Pasif</option>
-                            </select>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="details-datatable">
+                            <thead>
+                                <tr>
+                                    <th>Ürün</th>
+                                    <th>Birim</th>
+                                    <th>Adet  </th>
+                                    <th>İndirimli Fiyat </th>
+                                    <th>Normal Fiyat</th>
+                                    <th>Vergi Tutar</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>

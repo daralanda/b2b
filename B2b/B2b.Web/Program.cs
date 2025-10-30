@@ -58,7 +58,7 @@ public class Program
         {
             var _serviceMain = builder.Services.BuildServiceProvider().GetService<IMainService>();
             var url = context.Request.Path.ToString().ToLower();
-            if (!url.Contains("/api/") && !url.Contains(".js") && !url.Contains(".css") && !url.Contains(".jpg") && !url.Contains(".ico") && !url.Contains(".png") && !url.Contains(".xml") && !url.Contains(".txt") && !url.ToLower().Contains("/dashboard"))
+            if (!url.Contains("/api/") && !url.Contains(".js") && !url.Contains(".css") && !url.Contains(".jpg") && !url.Contains(".ico") && !url.Contains(".png") && !url.Contains(".xml") && !url.Contains(".txt") && !url.ToLower().Contains("/dashboard") && !url.ToLower().Contains(".map"))
             {
                 var main = _serviceMain.GetSeo(url);
                 context.Request.Path = "/" + main.ControllerName + "/" + main.ActionName + "/" + main.SeoId;

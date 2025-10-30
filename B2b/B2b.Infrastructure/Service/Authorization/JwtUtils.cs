@@ -61,19 +61,25 @@ public class JwtUtils : IJwtUtils
     }
     public AuthenticateResponse Authenticate(AuthenticateRequest model)
     {
-        var user = _context.Users.SingleOrDefault(x => x.Email == model.Email && x.Password == model.Password && x.IsActive==true &&x.Role.IsActive==true);
-        if (user == null) return new AuthenticateResponse();
-        var token = GenerateJwtToken(user);
-        AuthenticateResponse response = new()
+        AuthenticateResponse response = new();
+        try
         {
-            Token = token,
-            Email = user.Email,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            RoleId = user.RoleId,
-            UserId = user.UserId,
-            Password= user.Password
-        };
+            var user = _context.Users.SingleOrDefault(x => x.Email == model.Email && x.Password == model.Password && x.IsActive == true && x.Role.IsActive == true);
+            if (user == null) return new AuthenticateResponse();
+            var token = GenerateJwtToken(user);
+            response.Token = token;
+            response.Email = user.Email;
+            response.FirstName = user.FirstName;
+            response.LastName = user.LastName;
+            response.RoleId = user.RoleId;
+            response.UserId = user.UserId;
+            response.Password = user.Password;
+        }
+        catch (Exception ex)
+        {
+            string message = ex.Message;    
+        }
         return response;
+
     }
 }

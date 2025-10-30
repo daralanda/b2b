@@ -58,26 +58,33 @@ namespace B2b.Infrastructure.Service.UserService
             var data= _context.Users.ToList();
             return data;
         }
-        public User UserUpdate(User user)
+        public void UserUpdate(User user)
         {
             try
             {
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
-                User data = _context.Users.Where(p => p.UserId == user.UserId).First();
+                var data = _context.Users.Where(p => p.UserId == user.UserId).FirstOrDefault();
                 if (data != null)
                 {
                     data.Password = user.Password;
                     data.FirstName = user.FirstName;
                     data.LastName = user.LastName;
-                    _context.Entry<User>(data).State = EntityState.Modified;
+                    data.Email = user.Email;
+                    data.Phone = user.Phone;
+                    data.CustomerName = user.CustomerName;
+                    data.TaxOffice = user.TaxOffice;
+                    data.TaxNo = user.TaxNo;
+                    data.Address = user.Address;
+                    data.DistrictId = user.DistrictId;
+                    data.CityId = user.CityId;
+                    data.IsIndividual = user.IsIndividual;
+                    data.DiscountRate = user.DiscountRate;
                     _context.SaveChanges();
                     _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                 }
-                return data;
             }
-            catch 
+            catch
             {
-                return null;
             }
         }
         public void Update(User user)
@@ -95,6 +102,14 @@ namespace B2b.Infrastructure.Service.UserService
                     data.IsActive = user.IsActive;
                     data.RoleId = user.RoleId;
                     data.Phone = user.Phone;
+                    data.CustomerName = user.CustomerName;
+                    data.TaxOffice = user.TaxOffice;
+                    data.TaxNo = user.TaxNo;
+                    data.Address = user.Address;
+                    data.DistrictId = user.DistrictId;
+                    data.CityId = user.CityId;
+                    data.IsIndividual = user.IsIndividual;
+                    data.DiscountRate = user.DiscountRate;
                     _context.SaveChanges();
                     _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                 }
@@ -104,5 +119,14 @@ namespace B2b.Infrastructure.Service.UserService
             }
         }
         
+        public List<City> GetCities()
+        {
+            return _context.Cities.ToList();
+        }
+        public List<District> GetDistricts()
+        {
+            return _context.Districts.ToList();
+        }
+
     }
 }

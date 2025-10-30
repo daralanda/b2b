@@ -1,0 +1,210 @@
+﻿@using System.Configuration;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
+}
+
+<div class="checkout-tabs">
+    <div class="row">
+@*         <div class="col-xl-2 col-sm-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-shipping-tab" data-bs-toggle="pill" href="#v-pills-shipping" role="tab" aria-controls="v-pills-shipping" aria-selected="true" tabindex="-1">
+                    <i class="bx bxs-truck d-block check-nav-icon mt-4 mb-2"></i>
+                    <p class="fw-bold mb-4">Kargo Bilgileri</p>
+                </a>
+                <a class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill" href="#v-pills-payment" role="tab" aria-controls="v-pills-payment" aria-selected="false" tabindex="-1">
+                    <i class="bx bx-money d-block check-nav-icon mt-4 mb-2"></i>
+                    <p class="fw-bold mb-4">Ödeme Bilgileri</p>
+                </a>
+                <a class="nav-link " id="v-pills-confir-tab" data-bs-toggle="pill" href="#v-pills-confir" role="tab" aria-controls="v-pills-confir" aria-selected="false">
+                    <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
+                    <p class="fw-bold mb-4">Onay</p>
+                </a>
+            </div>
+        </div> *@
+        <div class="col-xl-12 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade active show" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
+                            <div>
+                                <h4 class="card-title">Kargo Bilgileri</h4>
+                                    <div class="form-group row mb-4">
+                                        <label for="billing-name" class="col-md-2 col-form-label">İsim</label>
+                                        <div class="col-md-10">
+                                        <input type="text" class="form-control" disabled id="billing-name" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                    <label for="billing-email-address" class="col-md-2 col-form-label">Vergi No</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" id="billing-Tax" disabled >
+                                    </div>
+                                </div>
+                                    <div class="form-group row mb-4">
+                                    <label for="billing-email-address" class="col-md-2 col-form-label">Vergi Dairesi</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" id="billing-Tax-Office" disabled >
+                                    </div>
+                                </div>
+                                    <div class="form-group row mb-4">
+                                        <label for="billing-email-address" class="col-md-2 col-form-label">Email</label>
+                                        <div class="col-md-10">
+                                        <input type="email" class="form-control" id="billing-email-address" disabled >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label for="billing-phone" class="col-md-2 col-form-label">Telefon</label>
+                                        <div class="col-md-10">
+                                        <input type="text" class="form-control" id="billing-phone" disabled >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-md-2 col-form-label">Şehir </label>
+                                        <div class="col-md-10">
+                                        <input type="text" class="form-control" id="City" disabled >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-md-2 col-form-label">İlçe</label>
+                                        <div class="col-md-10">
+                                        <input type="text" class="form-control" id="District" disabled >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                    <label for="billing-address" class="col-md-2 col-form-label">Adres</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="billing-address" disabled rows="1" ></textarea>
+                                    </div>
+                                </div>
+                                    <div class="form-group row mb-4">
+                                        <label for="example-textarea" class="col-md-2 col-form-label">Sipariş Notu:</label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control" id="example-textarea" rows="3" placeholder="Sipariş Notunuz"></textarea>
+                                        </div>
+                                    </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+                                        <a href="/sepetim" class="btn text-muted d-none d-sm-inline-block btn-link">
+                                            <i class="mdi mdi-arrow-left me-1"></i> Sepete Geri Dön
+                                        </a>
+                                    </div> <!-- end col -->
+                                    <div class="col-sm-6">
+                                        <div class="text-end">
+                                            <a href="#" class="btn btn-success" onclick="Next('Payment')">
+                                                <i class="mdi mdi-truck-fast me-1"></i> Ödeme Bilgileri
+                                            </a>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab">
+                            <div>
+                                <h4 class="card-title">Ödeme Bilgileri</h4>
+                                <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
+@*                                     <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" onclick="PaymentType(1)" href="#home1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Kredi Kartı</span>
+                                        </a>
+                                    </li> *@
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" onclick="PaymentType(2)" href="#profile1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Havale / EFT</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" onclick="PaymentType(3)" href="#messages1" role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                            <span class="d-none d-sm-block">Bakiye</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content p-3 text-muted">
+@*                                     <div class="tab-pane active" id="home1" role="tabpanel">
+                                        <p class="mb-0">
+                                            kart
+                                        </p>
+                                    </div> *@
+                                    <div class="tab-pane active" id="profile1" role="tabpanel">
+                                        <table class="table align-middle mb-0 table-nowrap">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Logo</th>
+                                                    <th>Banka</th>
+                                                    <th>Hesap Sahibi Adı</th>
+                                                    <th>Hesap Numarası</th>
+                                                    <th>Şube Kodu</th>
+                                                    <th>Para Birimi</th>
+                                                    <th>IBAN</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="AccountInformation"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="messages1" role="tabpanel">
+                                        <p class="mb-0">
+                                            Ödeme tutarınız bakiyenize eklenecektir.
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+                                        <a href="#" onclick="Next('Shipping')" class=" btn  btn-danger">
+                                            <i class="mdi mdi-arrow-left me-1"></i> Geri
+                                        </a>
+                                    </div> <!-- end col -->
+                                    <div class="col-sm-6">
+                                        <div class="text-end">
+                                            <a href="#" class="btn btn-success" onclick="Next('Confirm')">
+                                                <i class="mdi mdi-truck-fast me-1"></i> Siparişi Tamamla
+                                            </a>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade " id="v-pills-confir"  role="tabpanel" aria-labelledby="v-pills-confir-tab">
+                            <div class="card shadow-none border mb-0">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4">Sipariş Özeti</h4>
+
+                                    <div class="table-responsive">
+                                        <table class="table align-middle mb-0 table-nowrap">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th scope="col">Ürün</th>
+                                                    <th scope="col">Ürün Adı</th>
+                                                    <th scope="col">Birim</th>
+                                                    <th scope="col">Adet</th>
+                                                    <th scope="col">Fiyat</th>
+                                                    <th scope="col">Satır Toplam</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="confrmTableContent">
+                                               
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <!-- end row -->
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="@Domain/controllerjs/home/Checkout.js"></script>
+}
+

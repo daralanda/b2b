@@ -8,7 +8,9 @@ namespace B2b.Infrastructure.Service.UserService
         User GetById(int userId);
         void Remove(int userId);
         List<User> GetAll();
-        User UserUpdate(User user);
+        void UserUpdate(User user);
         void Update(User user);
+        List<City> GetCities();
+        List<District> GetDistricts();
     }
 }

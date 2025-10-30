@@ -12,7 +12,14 @@ namespace B2b.Dal.Entity
         public string Phone { get; set; }
         public bool IsActive { get; set; }
         public int RoleId { get; set; }
-        public int? CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string TaxOffice { get; set; }
+        public string TaxNo { get; set; }
+        public string Address { get; set; }
+        public int? DistrictId { get; set; }
+        public int? CityId { get; set; }
+        public bool? IsIndividual { get; set; }
+        public int? DiscountRate { get; set; }
         public Role Role { get; set; }
         public DateTime CreateDate { get; set; }
         public ICollection<UserToken> UserTokens { get; set; }

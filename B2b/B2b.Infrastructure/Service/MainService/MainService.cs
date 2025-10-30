@@ -245,9 +245,23 @@ namespace B2b.Infrastructure.Service.MainService
                 else if (url == "/profile")
                 {
                     result.SeoId = id;
-                    result.ControllerName = "Home";
-                    result.ActionName = "Profile";
+                    result.ControllerName = "Ecommerce";
+                    result.ActionName = "MyProfile";
                     result.Title = "Kullanıcı Bilgilerim";
+                }
+                else if (url == "/sepetim")
+                {
+                    result.SeoId = id;
+                    result.ControllerName = "Ecommerce";
+                    result.ActionName = "MyCart";
+                    result.Title = "Sepetim";
+                }
+                else if (url == "/odeme")
+                {
+                    result.SeoId = id;
+                    result.ControllerName = "Ecommerce";
+                    result.ActionName = "Checkout";
+                    result.Title = "Sepetim";
                 }
             }
             return result;

@@ -6,9 +6,10 @@ namespace B2b.Infrastructure.Service.OrderService
     public interface IOrderService
     {
         ResultDto<Order> Add(Order data);
-        ResultDto<Order> GetById(int id);
+        ResultDto<OrderDto> GetById(int id);
         ResultDto<Order> Remove(int id);
         ResultDto<Order> GetAll();
         ResultDto<Order> Update(Order data);
+        ResultDto<CreateCartFromOrder> CreateOrder(RequestDto.OrderDto dto, int customerId);
     }
 }

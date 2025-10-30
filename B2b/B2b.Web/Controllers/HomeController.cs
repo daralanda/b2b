@@ -21,6 +21,10 @@ namespace B2b.Web.Controllers
 
         #region Tanýmlamalar
 
+        public IActionResult CampaignList()
+        {
+            return View();
+        }
         //ürün
         public IActionResult AccountNumbers()
         {
@@ -35,10 +39,6 @@ namespace B2b.Web.Controllers
             return View();
         }
         public IActionResult CategoryList()
-        {
-            return View();
-        }
-        public IActionResult CustomerList()
         {
             return View();
         }
@@ -66,9 +66,20 @@ namespace B2b.Web.Controllers
         {
             return View();
         }
+        public IActionResult ExchangeList()
+        {
+            return View();
+        }
         #endregion
 
-
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult Recoverpw()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

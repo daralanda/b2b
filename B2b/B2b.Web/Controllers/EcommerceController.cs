@@ -13,11 +13,27 @@ namespace B2b.Web.Controllers
         {
             return View();
         }
-        public IActionResult ProductDetails()
+        public IActionResult CampaignProducts()
         {
             return View();
         }
         public IActionResult OrderTrack()
+        {
+            return View();
+        }
+        public IActionResult MyCart()
+        {
+            return View();
+        }
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+        public IActionResult MyProfile()
+        {
+            return View();
+        }
+        public IActionResult AccountNumbers()
         {
             return View();
         }

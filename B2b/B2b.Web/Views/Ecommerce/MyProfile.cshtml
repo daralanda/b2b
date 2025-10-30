@@ -1,0 +1,105 @@
+﻿@using System.Configuration;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
+}
+
+
+<div class="col-xl-12 col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Ad</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="FirstName">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Soyad</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="LastName">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control"  id="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Password</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="Password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label for="email-address" class="col-md-2 col-form-label">Vergi Dairesi</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="TaxOffice">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="email-address" class="col-md-2 col-form-label">Vergi No</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="TaxNo" >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Firma İsim</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="CustomerName">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="email-address" class="col-md-2 col-form-label">Phone</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="Phone">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Şehir</label>
+                        <div class="col-md-10">
+                           <select class="form-control" id="CityId" onchange="CityChange()"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">İlçe</label>
+                        <div class="col-md-10">
+                            <select class="form-control" id="DistrictId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-md-2 col-form-label">Adres</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="Address">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="email-address" class="col-md-2 col-form-label">Bireysel Müşteri mi</label>
+                        <div class="col-md-10">
+                            <input type="checkbox" id="IsIndividual">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <div class="text-end">
+                        <a href="#" class="btn btn-success" onclick="SaveInfo()">
+                            <i class="mdi mdi-save me-1"></i> Kaydet
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="@Domain/controllerjs/home/MyProfile.js"></script>
+}

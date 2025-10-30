@@ -222,6 +222,138 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "B2b.Web.Controllers.Api.CampaignApiController",
+    "Method": "Add",
+    "RelativePath": "api/CampaignApi/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.Campaign",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CampaignApiController",
+    "Method": "GetAll",
+    "RelativePath": "api/CampaignApi/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CampaignApiController",
+    "Method": "GetById",
+    "RelativePath": "api/CampaignApi/GetById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CampaignApiController",
+    "Method": "Remove",
+    "RelativePath": "api/CampaignApi/Remove",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CampaignApiController",
+    "Method": "Update",
+    "RelativePath": "api/CampaignApi/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.Campaign",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CartApiController",
+    "Method": "Add",
+    "RelativePath": "api/CartApi/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.Cart",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CartApiController",
+    "Method": "GetAll",
+    "RelativePath": "api/CartApi/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CartApiController",
+    "Method": "Remove",
+    "RelativePath": "api/CartApi/Remove",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CartApiController",
+    "Method": "Update",
+    "RelativePath": "api/CartApi/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.Cart",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "B2b.Web.Controllers.Api.CategoryApiController",
     "Method": "Add",
     "RelativePath": "api/CategoryApi/Add",
@@ -293,6 +425,130 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetAllOrder",
+    "RelativePath": "api/CommerceApi/GetAllOrder",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetByOrderId",
+    "RelativePath": "api/CommerceApi/GetByOrderId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetCampaignProductList",
+    "RelativePath": "api/CommerceApi/GetCampaignProductList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetCampaignProducts",
+    "RelativePath": "api/CommerceApi/GetCampaignProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetCategories",
+    "RelativePath": "api/CommerceApi/GetCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetLatestProducts",
+    "RelativePath": "api/CommerceApi/GetLatestProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetProduct",
+    "RelativePath": "api/CommerceApi/GetProduct",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetProductImage",
+    "RelativePath": "api/CommerceApi/GetProductImage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetProductInfo",
+    "RelativePath": "api/CommerceApi/GetProductInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.CommerceApiController",
+    "Method": "GetProducts",
+    "RelativePath": "api/CommerceApi/GetProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -370,25 +626,35 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
     "Method": "Add",
-    "RelativePath": "api/CustomerApi/Add",
+    "RelativePath": "api/ExchangeApi/Add",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "data",
-        "Type": "B2b.Dal.Entity.Customer",
+        "Type": "B2b.Dal.Entity.Exchange",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
+    "Method": "AutoUpdate",
+    "RelativePath": "api/ExchangeApi/AutoUpdate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
     "Method": "GetAll",
-    "RelativePath": "api/CustomerApi/GetAll",
+    "RelativePath": "api/ExchangeApi/GetAll",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -396,29 +662,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
-    "Method": "GetAllCities",
-    "RelativePath": "api/CustomerApi/GetAllCities",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
-    "Method": "GetAllDistricts",
-    "RelativePath": "api/CustomerApi/GetAllDistricts",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
     "Method": "GetById",
-    "RelativePath": "api/CustomerApi/GetById",
+    "RelativePath": "api/ExchangeApi/GetById",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -432,9 +678,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
     "Method": "Remove",
-    "RelativePath": "api/CustomerApi/Remove",
+    "RelativePath": "api/ExchangeApi/Remove",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -448,16 +694,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "B2b.Web.Controllers.Api.CustomerApiController",
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
     "Method": "Update",
-    "RelativePath": "api/CustomerApi/Update",
+    "RelativePath": "api/ExchangeApi/Update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "data",
-        "Type": "B2b.Dal.Entity.Customer",
+        "Type": "B2b.Dal.Entity.Exchange",
         "IsRequired": true
       }
     ],
@@ -487,6 +733,96 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.OrderApiController",
+    "Method": "Add",
+    "RelativePath": "api/OrderApi/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.Order",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.OrderApiController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/OrderApi/CreateOrder",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "B2b.Infrastructure.RequestDto.OrderDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.OrderApiController",
+    "Method": "GetAll",
+    "RelativePath": "api/OrderApi/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.OrderApiController",
+    "Method": "GetById",
+    "RelativePath": "api/OrderApi/GetById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.OrderApiController",
+    "Method": "Remove",
+    "RelativePath": "api/OrderApi/Remove",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.OrderApiController",
+    "Method": "Update",
+    "RelativePath": "api/OrderApi/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.Order",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -847,16 +1183,10 @@
     "ContainingType": "B2b.Web.Controllers.Api.UserApiController",
     "Method": "GetById",
     "RelativePath": "api/UserApi/GetById",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -879,6 +1209,32 @@
     "ContainingType": "B2b.Web.Controllers.Api.UserApiController",
     "Method": "Update",
     "RelativePath": "api/UserApi/Update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "B2b.Dal.Entity.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.UserInfoApiController",
+    "Method": "GetById",
+    "RelativePath": "api/UserInfoApi/GetById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.UserInfoApiController",
+    "Method": "Update",
+    "RelativePath": "api/UserInfoApi/Update",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

@@ -10,13 +10,16 @@
     }
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="shortcut icon" href="@Domain/assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="@Domain/assets/libs/toastr/build/toastr.min.css">
+
     <link href="@Domain/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="@Domain/assets/css/icon-line-pro-style.css" rel="stylesheet" />
     <link href="@Domain/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
@@ -34,19 +37,19 @@
                     <div class="navbar-brand-box">
                         <a href="@Domain/" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="@Domain/assets/images/logo.svg" alt="" height="22">
+                                <img src="https://kareelaletleri.com/wp-content/uploads/2020/05/KARE-6-CM.png" alt="" height="22">
                             </span>
                             <span class="logo-lg">
-                                <img src="@Domain/assets/images/logo-dark.png" alt="" height="17">
+                                <img src="https://kareelaletleri.com/wp-content/uploads/2020/05/KARE-6-CM.png" alt="" height="17">
                             </span>
                         </a>
 
                         <a href="@Domain/" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="@Domain/assets/images/logo-light.svg" alt="" height="22">
+                                <img src="https://kareelaletleri.com/wp-content/uploads/2020/05/KARE-6-CM.png" alt="" height="35">
                             </span>
                             <span class="logo-lg">
-                                <img src="@Domain/assets/images/logo-light.png" alt="" height="19">
+                                <img src="https://kareelaletleri.com/wp-content/uploads/2020/05/KARE-6-CM.png" alt="" height="35">
                             </span>
                         </a>
                     </div>
@@ -55,13 +58,13 @@
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
 
-                    <!-- App Search-->
+ @*                    <!-- App Search-->
                     <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
                             <input type="text" class="form-control" placeholder="Search...">
                             <span class="bx bx-search-alt"></span>
                         </div>
-                    </form>
+                    </form> *@
 
 
                 </div>
@@ -88,7 +91,37 @@
                         </div>
                     </div>
 
-
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-cart-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-cart font-size-24"></i>
+                            <span class="badge bg-danger rounded-pill" id="CartProductCount"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                             aria-labelledby="page-header-cart-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0"> Sepet </h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="/sepetim" class="small"> Tümünü Görüntüle</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 250px;  overflow-y: auto;" id="CartContent">
+                               
+                            </div>
+                            <div class="p-3 border-top d-grid">
+                                <div class="text-end">
+                                    <h6 class="m-0"> Toplam : <span class="text-muted" id="CartTotal"></span></h6>
+                                </div>
+                                <a href="/odeme" class="btn btn-sm btn-primary mt-3">
+                                    <i class="mdi mdi-arrow-right me-1"></i> Ödeme Sayfası
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -103,19 +136,16 @@
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="@Domain/assets/images/users/avatar-1.jpg"
-                                 alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
+            
+                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">
+                                @Context.Session.GetString("FullName")</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
-                            <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My Wallet</span></a>
-                            <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
-                            <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Lock screen</span></a>
+                            <a class="dropdown-item" href="/profile"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Bilgilerim</span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+                            <a class="dropdown-item text-danger" href="/logout"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Güvenli Çıkış</span></a>
                         </div>
                     </div>
 
@@ -167,7 +197,82 @@
         <!-- end main content-->
 
     </div>
+    <!--  Extra Large modal example -->
+    <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="productDetailModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailModal">productName</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-7">
+                                    <div class="product-detai-imgs">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-3 col-4">
+                                                <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 col-sm-9 col-8">
+                                                <div class="tab-content" id="v-pills-tabContent">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="col-xl-5">
+                                    <div class="mt-4 mt-xl-3">
+                                        <h3 class="mt-1 mb-3" id="ProductName">Ürün Adı</h3>
+                                        <h4 class="mt-1 mb-3" id="ProductCode">Ürün Kodu</h4>
+                                        <h6 class="mt-1 mb-3 text-Success" id="Category"></h6>
+                                        <h6 class="mt-1 mb-3 text-primary" id="Brand"></h6>
+                                        <h6 class="text-success text-uppercase" id="DiscountedRate"></h6>
+                                        <h4 class="mb-4">Fiyat : <span class="text-muted me-2"><del id="Price"></del></span> <b id="DiscountedPrice">s</b></h4>
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Birim</th>
+                                                        <th>Fiyat</th>
+                                                        <th>İndirimli Fiyat</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="unitTable">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-auto">
+                                                <input type="number" class="form-control" min="1" max="100" id="Count" placeholder="1">
+                                            </div>
+                                            <div class="col-sm-auto">
+                                                <a class="btn btn-primary waves-effect waves-light" id="DetailProduct" onclick="DetailAddCart()"><i class="bx bx-cart me-2"></i> Sepete Ekle</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end row -->
+
+                            <div class="mt-5">
+                                <h5 class="mb-3">Açıklama :</h5>
+                                <p class="text-muted mb-4" id="Description"></p>
+
+                            </div>
+                            <!-- end Specifications -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <script src="@Domain/assets/libs/jquery/jquery.min.js"></script>
     <script src="@Domain/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="@Domain/assets/libs/metismenu/metisMenu.min.js"></script>
@@ -176,6 +281,8 @@
     <script src="@Domain/assets/libs/apexcharts/apexcharts.min.js"></script>
     <script src="@Domain/assets/libs/sweetalert2/sweetalert2.min.js"></script>
     <script src="@Domain/assets/libs/owl.carousel/owl.carousel.min.js"></script>
+    <script src="@Domain/assets/libs/toastr/build/toastr.min.js"></script>
+
     <script src="@Domain/ControllerJs/Main.js"></script>  
  @if (IsSectionDefined("scripts"))
     {

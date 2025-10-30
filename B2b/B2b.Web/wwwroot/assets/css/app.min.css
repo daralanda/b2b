@@ -170,11 +170,13 @@
 }
 
 body[data-topbar=dark] #page-topbar {
-    background-color: var(--bs-header-dark-bg)
+    background-color: #ffffff;
+    border-bottom: 1px solid #0d0d0d24;
 }
 
 body[data-topbar=dark] .navbar-header .dropdown .show.header-item {
-    background-color: rgba(255,255,255,.05)
+    background-color: rgba(255,255,255,.05);
+    color: black;
 }
 
 body[data-topbar=dark] .navbar-header .waves-effect .waves-ripple {
@@ -182,11 +184,11 @@ body[data-topbar=dark] .navbar-header .waves-effect .waves-ripple {
 }
 
 body[data-topbar=dark] .header-item {
-    color: var(--bs-header-dark-item-color)
+    color: #000000;
 }
 
     body[data-topbar=dark] .header-item:hover {
-        color: var(--bs-header-dark-item-color)
+        color: #000000;
     }
 
 body[data-topbar=dark] .header-profile-user {
@@ -194,7 +196,7 @@ body[data-topbar=dark] .header-profile-user {
 }
 
 body[data-topbar=dark] .noti-icon i {
-    color: var(--bs-header-dark-item-color)
+    color: #000000;
 }
 
 body[data-topbar=dark] .logo-dark {
@@ -940,7 +942,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
         }
 
 .topnav {
-    background: var(--bs-topnav-bg);
+    background: #000000;
     padding: 0 calc(24px * .5);
     -webkit-box-shadow: 0 .75rem 1.5rem rgba(18,38,63,.03);
     box-shadow: 0 .75rem 1.5rem rgba(18,38,63,.03);
@@ -960,7 +962,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
         font-size: 14px;
         position: relative;
         padding: 1rem 1.3rem;
-        color: var(--bs-menu-item-color)
+        color: #ffffff;
     }
 
         .topnav .navbar-nav .nav-link i {
@@ -968,7 +970,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
         }
 
         .topnav .navbar-nav .nav-link:focus, .topnav .navbar-nav .nav-link:hover {
-            color: var(--bs-menu-item-active-color);
+            color: #fbd857;
             background-color: transparent
         }
 
@@ -977,11 +979,11 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
     }
 
         .topnav .navbar-nav .dropdown-item.active, .topnav .navbar-nav .dropdown-item:hover {
-            color: var(--bs-menu-item-active-color)
+            color: #fbd754;
         }
 
     .topnav .navbar-nav .nav-item .nav-link.active {
-        color: var(--bs-menu-item-active-color)
+        color: #fbd754;
     }
 
     .topnav .navbar-nav .dropdown.active > a {
@@ -5266,3 +5268,134 @@ h4.section-title {
         content: "~";
         padding-right: 10px;
     }
+
+
+.product-card {
+    position: relative;
+    z-index: 2;
+    border: 1px solid #a2a2a238;
+}
+
+    .product-card:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
+    }
+
+.product-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+.hover-btn-wrapper {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.product-card:hover .hover-btn-wrapper {
+    bottom: 10px;
+}
+
+
+li.list-group-item.active {
+    color: red;
+    font-weight: 600;
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #e70000 !important;
+}
+
+tr.red-row > td {
+    background-color: red !important;
+    color: white !important;
+}
+
+div#CartContent {
+    padding: 0px 15px;
+}
+
+
+.bootstrap-touchspin .bootstrap-touchspin-vertical-button-wrapper {
+    position: relative;
+    width: 25px;
+    border: none
+}
+
+.bootstrap-touchspin .input-group-btn-vertical {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 11
+}
+
+    .bootstrap-touchspin .input-group-btn-vertical > .btn {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50%;
+        padding: 0;
+        text-align: center;
+        line-height: 1
+    }
+
+.bootstrap-touchspin .input-group-addon .input-group-btn-vertical .bootstrap-touchspin-up {
+    border-radius: 0 4px 0 0;
+    top: 0
+}
+
+.bootstrap-touchspin .input-group-btn-vertical .btn {
+    font-size: 12px;
+    line-height: 1
+}
+
+.rtl .bootstrap-touchspin .input-group-addon .input-group-btn-vertical .bootstrap-touchspin-up {
+    border-radius: 4px 0 0 0
+}
+
+.bootstrap-touchspin .input-group-addon:not(:last-child) .input-group-btn-vertical .bootstrap-touchspin-down, .bootstrap-touchspin .input-group-addon:not(:last-child) .input-group-btn-vertical .bootstrap-touchspin-up, .bootstrap-touchspin .input-group-btn:not(:last-child):not(:first-child) .btn {
+    border-radius: 0
+}
+
+.bootstrap-touchspin .input-group-btn-vertical .bootstrap-touchspin-down {
+    border-radius: 0 0 4px 0;
+    bottom: 0
+}
+
+.rtl .bootstrap-touchspin .input-group-btn-vertical .bootstrap-touchspin-down {
+    border-radius: 0 0 0 4px
+}
+
+.bootstrap-touchspin .input-group-btn-vertical i {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-size: 9px;
+    font-weight: 400
+}
+
+.rtl .bootstrap-touchspin .input-group-btn-vertical i {
+    left: auto;
+    right: 5px
+}
+
+.search-box.me-2 {
+    border: 1px solid #2c2c2c;
+    border-radius: 15px;
+}
