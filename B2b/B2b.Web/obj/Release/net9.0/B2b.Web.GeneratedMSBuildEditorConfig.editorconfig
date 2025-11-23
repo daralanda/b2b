@@ -17,113 +17,125 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = B2b.Web
 build_property.RootNamespace = B2b.Web
-build_property.ProjectDir = C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\
+build_property.ProjectDir = C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web
+build_property.MSBuildProjectDirectory = C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/AccountNumbers.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/AccountNumbers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXEFjY291bnROdW1iZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/Checkout.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/CampaignProducts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXENhbXBhaWduUHJvZHVjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXENoZWNrb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/MyCart.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/MyCart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXE15Q2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/MyProfile.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/MyProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXE15UHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/OrderTrack.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/OrderTrack.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXE9yZGVyVHJhY2suY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/ProductDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXFByb2R1Y3REZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/Products.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Ecommerce/Products.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWNvbW1lcmNlXFByb2R1Y3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/AccountNumbers.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/AccountNumbers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2NvdW50TnVtYmVycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/BannerList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/BannerList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCYW5uZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/BrandList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/BrandList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCcmFuZExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/CategoryList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/CampaignList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYW1wYWlnbkxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/CategoryList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXRlZ29yeUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/CurrencyList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/CurrencyList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDdXJyZW5jeUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/ExchangeList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/ExchangeList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFeGNoYW5nZUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/Index.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/Login.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/OrderList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/OrderList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxPcmRlckxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/ProductList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/ProductList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/RoleList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/Recoverpw.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWNvdmVycHcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/RoleList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSb2xlTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/SliderList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/SliderList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTbGlkZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/UserList.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Home/UserList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVc2VyTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Shared/Error.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/_ViewImports.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/_ViewStart.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Hidir/OneDrive/Desktop/Project/b2b/B2b/B2b.Web/Views/Shared/_Layout.cshtml]
+[C:/Users/Hidir/Desktop/Project/b2b/B2b/B2b.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-k7a76518av

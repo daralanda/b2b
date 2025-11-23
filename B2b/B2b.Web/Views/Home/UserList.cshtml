@@ -58,7 +58,7 @@
 }
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle"></h5>
@@ -66,37 +66,83 @@
 
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="name">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Kullanıcı Adı">
+           <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="Kullanıcı Adı">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Adı</label>
+                            <input type="text" class="form-control" id="firstname" placeholder="Adı">
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Soyadı</label>
+                            <input type="text" class="form-control" id="lastname" placeholder="Soyadı">
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Telefon</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Telefon">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Parola</label>
+                            <input type="text" class="form-control" id="password" placeholder="Parola">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Yetki Tipi</label>
+                            <select id="role" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category"> Aktif Durumu</label>
+                            <select id="isactive" class="form-control">
+                                <option value="0"> Pasif</option>
+                                <option value="1"> Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Firma Adı</label>
+                            <input type="text" class="form-control" id="CustomerName" placeholder="Firma Adı">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Vergi Dairesi</label>
+                            <input type="text" class="form-control" id="TaxOffice" placeholder="Vergi Dairesi">
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Vergi No</label>
+                            <input type="text" class="form-control" id="TaxNo" placeholder="Vergi No">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Şehir</label>
+                            <select id="CityId" onchange="CityChange()" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">İlçe</label>
+                            <select id="DistrictId" class="form-control"></select>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="category">İndirim Oranı</label>
+                            <input type="number" class="form-control" id="discountRate" placeholder="İndirim Oranı">
+                        </div>
+                   
+                        <div class="form-group">
+                            <label for="category"> Müşteri Tipi</label>
+                            <select id="IsIndividual" class="form-control">
+                                <option value="0"> Bireysel</option>
+                                <option value="1"> Firma</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="category">Adres</label>
+                            <input type="text" class="form-control" id="Address" placeholder="Adres">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Adı</label>
-                    <input type="text" class="form-control" id="firstname" placeholder="Adı">
-                </div>
-                <div class="form-group">
-                    <label for="position">Soyadı</label>
-                    <input type="text" class="form-control" id="lastname" placeholder="Soyadı">
-                </div>
-                <div class="form-group">
-                    <label for="position">Telefon</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Telefon">
-                </div>
-                <div class="form-group">
-                    <label for="category">Parola</label>
-                    <input type="text" class="form-control" id="password" placeholder="Parola">
-                </div>
-                <div class="form-group">
-                    <label for="category">Yetki Tipi</label>
-                    <select id="role" class="form-control"></select>
-                </div>
-                <div class="form-group">
-                    <label for="category"> Aktif Durumu</label>
-                    <select id="isactive" class="form-control">
-                        <option value="0"> Pasif</option>
-                        <option value="1"> Aktif</option>
-                    </select>
-                </div>
+            
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>

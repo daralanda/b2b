@@ -21,3 +21,5 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\refint\B2b.Plugin.dll
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.pdb
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\ref\B2b.Plugin.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.sourcelink.json
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Plugin\obj\Release\net9.0\B2b.Plugin.csproj.AssemblyReference.cache

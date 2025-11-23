@@ -15,6 +15,7 @@ namespace B2b.Dal.Context
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Exchange> Exchanges { get; set; }
+        public virtual DbSet<MailSetting> MailSettings { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }

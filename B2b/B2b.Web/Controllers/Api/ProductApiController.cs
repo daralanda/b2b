@@ -50,5 +50,17 @@ namespace B2b.Web.Controllers.Api
         {
             return Ok(_service.GetPrice(id));
         }
+        [HttpPost]
+        public IActionResult ProductAllSet(IFormFile file)
+        {
+            //var stream = file.OpenReadStream();
+
+            using var ms = new MemoryStream();
+            file.CopyTo(ms);
+            ms.Position = 0; // 
+            var result = _service.ProductAllSet(ms);
+
+            return Ok(result);
+        }
     }
 }

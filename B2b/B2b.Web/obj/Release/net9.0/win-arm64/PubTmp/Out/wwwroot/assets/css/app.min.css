@@ -979,7 +979,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li 
     }
 
         .topnav .navbar-nav .dropdown-item.active, .topnav .navbar-nav .dropdown-item:hover {
-            color: var(--bs-menu-item-active-color)
+            color: #fbd754;
         }
 
     .topnav .navbar-nav .nav-item .nav-link.active {

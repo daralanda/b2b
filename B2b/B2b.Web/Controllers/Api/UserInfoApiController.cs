@@ -3,6 +3,7 @@ using B2b.Infrastructure.Service;
 using Microsoft.AspNetCore.Mvc;
 using B2b.Web.Middleware.JwtAuth;
 using B2b.Dal.Entity;
+using B2b.Infrastructure.RequestDto;
 
 namespace B2b.Web.Controllers.Api
 {
@@ -34,6 +35,17 @@ namespace B2b.Web.Controllers.Api
             HttpContext.Session.SetString("FullName", data.FirstName + " " + data.LastName);
             _service.UserUpdate(data);
             return Ok(new { state = true });
+        }
+
+        [HttpPost]
+        public IActionResult RecorveryPassword(string email)
+        {
+            return Ok(_service.RecorveryPassword(email));
+        }
+        [HttpPost]
+        public IActionResult UserRegister(UserDto user)
+        {
+            return Ok(_service.UserRegister(user));
         }
     }
 }

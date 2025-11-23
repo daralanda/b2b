@@ -901,6 +901,22 @@
   },
   {
     "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
+    "Method": "ProductAllSet",
+    "RelativePath": "api/ProductApi/ProductAllSet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
     "Method": "Remove",
     "RelativePath": "api/ProductApi/Remove",
     "HttpMethod": "GET",
@@ -1191,6 +1207,16 @@
   },
   {
     "ContainingType": "B2b.Web.Controllers.Api.UserApiController",
+    "Method": "GetCities",
+    "RelativePath": "api/UserApi/GetCities",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.UserApiController",
     "Method": "Remove",
     "RelativePath": "api/UserApi/Remove",
     "HttpMethod": "POST",
@@ -1233,6 +1259,22 @@
   },
   {
     "ContainingType": "B2b.Web.Controllers.Api.UserInfoApiController",
+    "Method": "RecorveryPassword",
+    "RelativePath": "api/UserInfoApi/RecorveryPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.UserInfoApiController",
     "Method": "Update",
     "RelativePath": "api/UserInfoApi/Update",
     "HttpMethod": "POST",
@@ -1242,6 +1284,22 @@
       {
         "Name": "data",
         "Type": "B2b.Dal.Entity.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.UserInfoApiController",
+    "Method": "UserRegister",
+    "RelativePath": "api/UserInfoApi/UserRegister",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "B2b.Infrastructure.RequestDto.UserDto",
         "IsRequired": true
       }
     ],

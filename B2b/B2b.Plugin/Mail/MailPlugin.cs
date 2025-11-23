@@ -3,9 +3,9 @@ using System.Net;
 
 namespace B2b.Plugin.Mail
 {
-    public  class MailPlugin
+    public static class MailPlugin
     {
-        public bool MailPost(string host, int port, string email, string password, bool ssl, string receiverEmail, string subject, string body)
+        public static bool MailPost(string host, int port, string email, string password, bool ssl, string receiverEmail, string subject, string body)
         {
             try
             {

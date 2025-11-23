@@ -8,7 +8,21 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
+            <div class="row align-items-center">
+                
+                <div class="col-auto">
+                    <input type="file" id="fileInput" class="form-control" name="file" accept=".xlsx" required />
+                </div>
+                <div class="col-auto">
+                    <a href="#" onclick="uploadExcel()" id="uploadLink" class="btn btn-primary"> Yükle</a>
+                </div>
+                <div class="col-auto"><a href="/uploads/Stok.xlsx"  class="btn btn-success">Şablon İndir</a></div>
+            </div>
             <div class="row mb-2">
+                <div id="uploadResult" class="mt-3"></div>
+            </div>
+            <div class="row mb-2">
+
                 <div class="col-sm-12" style=" text-align: right;">
                     <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right insert" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="mdi mdi-plus-circle mr-1"></i> Yeni Ürün Ekle</a>
                 </div>
@@ -247,6 +261,28 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
                 <button type="button" onclick="PostData(this)" class="btn btn-primary" id="btnSumbit">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalLabel">
+    <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Uyarı ve Hatalar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="logtables">
+                       
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
             </div>
         </div>
     </div>

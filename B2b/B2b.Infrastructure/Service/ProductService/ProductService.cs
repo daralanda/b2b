@@ -1,6 +1,7 @@
 ﻿using B2b.Dal.Context;
 using B2b.Dal.Entity;
 using B2b.Infrastructure.ResponseDto;
+using B2b.Plugin.EPPlus;
 using Microsoft.EntityFrameworkCore;
 
 namespace B2b.Infrastructure.Service.ProductService
@@ -185,5 +186,110 @@ namespace B2b.Infrastructure.Service.ProductService
             return result;
         }
 
+        public ResultDto<string> ProductAllSet(Stream stream)
+        {
+            var result = new ResultDto<string>();
+            EPPLusPlugin ePPLusPlugin = new EPPLusPlugin();
+            stream.Position = 0;
+            var data= ePPLusPlugin.ExcelUpload(stream);
+            int i = 1;
+            List<Brand> brands = _context.Brands.ToList();
+            List<Category> categories = _context.Categories.ToList();
+            List<UnitType> unitTypes = _context.UnitTypes.ToList();    
+            List<Currency> currencies = _context.Currencies.ToList();
+            List<Product> Products = _context.Products.ToList();
+            List<ProductPrice> productPrices = _context.ProductPrices.ToList();
+            var list= new List<string>();
+            foreach (var item in data)
+            {
+
+                if (item.Result.State!=false)
+                {
+                    var findProduct= Products.Where(p => p.ProductCode == item.ProductCode).FirstOrDefault();
+                    var currency = currencies.Where(c => c.CurrencyCode == item.CurrencyName).FirstOrDefault();
+                    if (currency == null)
+                    {
+                        _context.Currencies.Add(new Currency { CurrencyCode = item.CurrencyName , CurrencyName=item.CurrencyName});
+                        _context.SaveChanges();
+                        currencies = _context.Currencies.ToList();
+                    }
+                    var unittype = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault();
+                    if (unittype == null)
+                    {
+                        _context.UnitTypes.Add(new UnitType { UnitTypeName = item.UnitTypeName });
+                        _context.SaveChanges();
+                        unitTypes = _context.UnitTypes.ToList();
+                    }
+                    var category = categories.Where(c => c.CategoryName == item.CategoryName).FirstOrDefault();
+                    if (category == null)
+                    {
+                        _context.Categories.Add(new Category { CategoryName = item.CategoryName, IsActive=true, MainCategoryId=0 });
+                        _context.SaveChanges();
+                        categories = _context.Categories.ToList();
+                    }
+                    var brand = brands.Where(c => c.BrandName == item.BrandName).FirstOrDefault();   
+                    if (brand == null)
+                    {
+                        _context.Brands.Add(new Brand { BrandName = item.BrandName , Queno=1, ImageUrl=""});
+                        _context.SaveChanges();
+                        brands = _context.Brands.ToList();
+                    }
+                    if (findProduct==null)
+                    {
+                        Product product = new()
+                        {
+                            ProductCode = item.ProductCode,
+                            ProductName = item.ProductName,
+                            BrandId = brands.Where(c => c.BrandName == item.BrandName).FirstOrDefault().BrandId,
+                            CategoryId= categories.Where(c => c.CategoryName == item.CategoryName).FirstOrDefault().CategoryId,
+                            CurrencyId= currencies.Where(c=>c.CurrencyCode == item.CurrencyName).FirstOrDefault().CurrencyId,
+                            Description = item.Description,
+                            Vat = item.Vat,
+                            IsActive = true,
+                            StockQuantity= item.StockQuantity
+                        };
+                        _context.Products.Add(product);
+                        _context.SaveChanges();
+                        ProductPrice productPrice = new()
+                        {
+                            ProductId = product.ProductId,
+                            Price = item.Price,
+                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
+                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false
+                        };
+                        _context.ProductPrices.Add(productPrice);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        ProductPrice productPrice = new()
+                        {
+                            ProductId = findProduct.ProductId,
+                            Price = item.Price,
+                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
+                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false
+                        };
+                        var price = _context.ProductPrices.Where(p => p.ProductId == findProduct.ProductId && p.UnitTypeId == productPrice.UnitTypeId).FirstOrDefault();
+                        if (price == null)
+                        {
+                            _context.ProductPrices.Add(productPrice);
+                        }
+                        else
+                        {
+                            price.Price = item.Price;
+                        }
+                        _context.SaveChanges();
+
+                    }
+                }
+                else
+                {
+                    list.Add("Satır " + i + " : " + item.Result.Message);
+                }
+                    i++;
+            }
+            result.List = list;
+            return result;
+        }
     }
 }

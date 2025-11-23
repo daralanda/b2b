@@ -49,6 +49,10 @@ namespace B2b.Web.Controllers.Api
             _service.Update(data);
             return Ok(new { state = true });
         }
-
+        [HttpGet]
+        public IActionResult GetCities()
+        {
+            return Ok(new { Cities = _service.GetCities(), Districts = _service.GetDistricts(), state = true });
+        }
     }
 }

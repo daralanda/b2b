@@ -1,8 +1,26 @@
 {
   "version": 2,
-  "dgSpecHash": "w9GKQgn4aBU=",
+  "dgSpecHash": "kER33EFRQOo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hidir\\OneDrive\\Desktop\\Project\\b2b\\B2b\\B2b.Plugin\\B2b.Plugin.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Plugin\\B2b.Plugin.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Hidir\\.nuget\\packages\\epplus\\7.7.3\\epplus.7.7.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\epplus.interfaces\\7.7.0\\epplus.interfaces.7.7.0.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\epplus.system.drawing\\7.7.0\\epplus.system.drawing.7.7.0.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.3\\microsoft.extensions.configuration.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.3\\microsoft.extensions.configuration.abstractions.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\9.0.3\\microsoft.extensions.configuration.fileextensions.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.configuration.json\\9.0.3\\microsoft.extensions.configuration.json.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\9.0.3\\microsoft.extensions.fileproviders.abstractions.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\9.0.3\\microsoft.extensions.fileproviders.physical.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\9.0.3\\microsoft.extensions.filesystemglobbing.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.3\\microsoft.extensions.primitives.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.1\\microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.1\\microsoft.win32.systemevents.9.0.1.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\system.drawing.common\\9.0.1\\system.drawing.common.9.0.1.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.3\\system.security.cryptography.pkcs.9.0.3.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\system.text.encoding.codepages\\9.0.3\\system.text.encoding.codepages.9.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

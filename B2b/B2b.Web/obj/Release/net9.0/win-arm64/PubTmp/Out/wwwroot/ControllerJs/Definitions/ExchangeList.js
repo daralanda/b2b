@@ -154,3 +154,19 @@ function GetCurrency() {
         async: false
     });
 }
+
+function AutoUpdate() {
+    $.ajax({
+        url: '/api/ExchangeApi/AutoUpdate',
+        type: 'Get',
+        dataType: 'Json',
+        headers: { 'Authorization': localStorage.getItem("token") },
+        contentType: 'application/json',
+        success: function (data) {
+            console.clear();
+            console.log(data);
+        },
+        error: function (data) { },
+        async: false
+    });
+}

@@ -9,7 +9,6 @@ namespace B2b.Infrastructure.Service.MainService
     public class MainService : IMainService
     {
         private readonly B2bDbContext _dbContext;
-        private readonly MailPlugin mailPlugin = new MailPlugin();
         public MainService(B2bDbContext dbContext)
         {
             _dbContext = dbContext;
