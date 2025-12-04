@@ -265,5 +265,25 @@ namespace B2b.Infrastructure.Service.MainService
             }
             return result;
         }      
+        public string GetBanners()
+        {
+            var data=_dbContext.Banners.Where(p => p.IsActive).OrderByDescending(p => p.BannerId).ToList();
+            string result = "";
+            foreach (var item in data)
+            {
+                result += "<div class='col-md-6'><img src='" + item.ImageUrl + "' alt='" + item.BannerName + "' class='home-banner'/></div>";
+            }
+            return result;
+        }
+        public string GetSliders()
+        {
+            var data = _dbContext.Sliders.OrderDescending().ToList();
+            string result = "";
+            foreach (var item in data)
+            {
+                result += "<div class='item'><a href='#'><img src='" + item.SliderUrl + "' alt='" + item.SliderName + "' class='d-block w-100'/></a></div>";
+            }
+            return result;
+        }
     }
 }

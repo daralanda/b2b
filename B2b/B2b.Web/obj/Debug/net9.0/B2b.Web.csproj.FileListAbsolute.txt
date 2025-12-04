@@ -1085,3 +1085,4 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\ru\Microsoft.Cod
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

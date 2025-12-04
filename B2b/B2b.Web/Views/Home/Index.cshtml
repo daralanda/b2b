@@ -1,4 +1,7 @@
 ﻿@using System.Configuration;
+@using B2b.Infrastructure.Service.MainService
+@inject IMainService _service;
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
@@ -7,21 +10,7 @@
 <div class="row">
     <div class="col-md-12">
             <div id="mainSlider" class="owl-carousel owl-theme">
-                <div class="item">
-                    <a href="#target1">
-                        <img src="@Domain/uploads/slider.jpg" class="d-block w-100" alt="1">
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="#target1">
-                        <img src="@Domain/uploads/slider2.jpg" class="d-block w-100" alt="1">
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="#target1">
-                        <img src="@Domain/uploads/slider3.jpg" class="d-block w-100" alt="1">
-                    </a>
-                </div>
+            @Html.Raw(_service.GetSliders())
             </div>
     </div>
 </div>
@@ -38,12 +27,8 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-        <img src="@Domain/uploads/banner1.png" class="home-banner"/>
-    </div>
-    <div class="col-md-6">
-        <img src="@Domain/uploads/banner2.jpg" class="home-banner" />
-    </div>
+    @Html.Raw(_service.GetBanners())
+   
 </div>
 
 <div class="row">

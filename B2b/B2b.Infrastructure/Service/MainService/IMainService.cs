@@ -16,5 +16,7 @@ namespace B2b.Infrastructure.Service.MainService
         string GetViewTitle(string url);
         User GetUserById(int UserId);
         SeoResponseDto GetSeo(string url);
+        string GetSliders();
+        string GetBanners();
     }
 }
