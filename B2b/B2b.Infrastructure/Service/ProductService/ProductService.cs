@@ -116,7 +116,8 @@ namespace B2b.Infrastructure.Service.ProductService
                 var price=_context.ProductPrices.Where(p => p.ProductId == data.ProductId).ToList();
                  _context.ProductImages.RemoveRange(img);
                 _context.ProductPrices.RemoveRange(price);
-               
+                _context.SaveChanges();
+
                 foreach (var item in data.ProductImages)
                 {
                     _context.ProductImages.Add(new ProductImage
@@ -197,11 +198,12 @@ namespace B2b.Infrastructure.Service.ProductService
             List<Category> categories = _context.Categories.ToList();
             List<UnitType> unitTypes = _context.UnitTypes.ToList();    
             List<Currency> currencies = _context.Currencies.ToList();
-            List<Product> Products = _context.Products.ToList();
-            List<ProductPrice> productPrices = _context.ProductPrices.ToList();
+    
             var list= new List<string>();
             foreach (var item in data)
             {
+                List<Product> Products = _context.Products.ToList();
+                List<ProductPrice> productPrices = _context.ProductPrices.ToList();
 
                 if (item.Result.State!=false)
                 {

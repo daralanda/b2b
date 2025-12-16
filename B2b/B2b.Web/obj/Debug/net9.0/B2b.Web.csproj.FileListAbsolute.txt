@@ -1066,7 +1066,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.pdb
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.genruntimeconfig.cache
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\ref\B2b.Web.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\puhw8fjv9s-wsv2616wy8.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\tbhlmzfrtr-va6nl9yssj.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jcj6wspbe7-edknwwq3wa.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\Microsoft.Build.Locator.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
@@ -1086,3 +1085,4 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\tr\Microsoft.Cod
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\tbhlmzfrtr-ftwqgre871.gz
