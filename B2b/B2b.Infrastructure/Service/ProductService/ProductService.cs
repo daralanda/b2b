@@ -293,5 +293,21 @@ namespace B2b.Infrastructure.Service.ProductService
             result.List = list;
             return result;
         }
+        public ResultDto<ProductImage> GetImages()
+        {
+            var result = new ResultDto<ProductImage>();
+            try
+            {
+                result.List = _context.ProductImages.Distinct().ToList();
+                state = true;
+                message = "product retrieved successfully.";
+            }
+            catch (Exception ex)
+            {
+                state = false;
+                message = ex.Message;
+            }
+            return result;
+        }
     }
 }

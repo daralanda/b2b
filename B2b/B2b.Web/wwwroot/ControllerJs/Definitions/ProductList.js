@@ -18,7 +18,7 @@ var dataImageList = [];
 var UnitTypeList = [];
 var Categories = [];
 var Brands = [];
-
+var ImageList = []; 
 $(document).ready(function () {
     PageLoad();
 });
@@ -26,6 +26,7 @@ function PageLoad() {
     GetUnitTypes();
     GetCategories();
     GetBrands();
+    GetImages();
     $.ajax({
         url: '/api/ProductApi/GetAll',
         type: 'Get',
@@ -37,6 +38,13 @@ function PageLoad() {
             console.clear();
             console.log(data);
             var columns = [
+                {
+                    "data": "ProductId",
+                    render: function (data) {
+                        var res = (ImageList.find(x => x.ProductId == data) != null) ? ImageList.find(x => x.ProductId == data).ImageUrl :"/uploads/default.jpg";
+                        return "<img src='" + res + "' width='50' height='auto' >";
+                    }
+                },
                 { "data": "ProductCode" },
                 { "data": "ProductName" },
                 {
@@ -88,7 +96,7 @@ function GetImageTable(data) {
 function NewRowPrice() {
     var newData = {
         UnitTypeId: parseInt(document.getElementById("unitType").value),
-        Price:parseInt(document.getElementById("Price").value),
+        Price: parseFloat(document.getElementById("Price").value),
         IsDefault:parseInt(document.getElementById("IsDefault").value),
         ProductPriceId:0
     }
@@ -252,7 +260,25 @@ function PostData() {
     }
   
 }
+function GetImages() {
 
+
+    $.ajax({
+        url: '/api/ProductApi/GetImages',
+        type: 'Get',
+        dataType: 'Json',
+        headers: { 'Authorization': localStorage.getItem("token") },
+        contentType: 'application/json',
+        success: function (data) {
+            ImageList = data.List;
+        },
+        error: function (xhr, status, error) {
+            console.clear();
+            console.log(xhr.responseText);
+        },
+        async: false
+    });
+}
 function GetImage(id) {
   
     
@@ -272,11 +298,6 @@ function GetImage(id) {
         },
         async: false
     });
- 
-
-
-
-
 }
 function GetPrice(id) {
     $.ajax({

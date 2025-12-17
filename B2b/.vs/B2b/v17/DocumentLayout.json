@@ -3,12 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\wwwroot\\controllerjs\\home\\product.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\wwwroot\\controllerjs\\home\\product.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\wwwroot\\controllerjs\\definitions\\productlist.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\wwwroot\\controllerjs\\definitions\\productlist.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\views\\home\\productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\views\\home\\productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A77881E-304F-4EA5-89CF-4421E4C20DF3}|B2b.Infrastructure\\B2b.Infrastructure.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.infrastructure\\service\\mainservice\\mainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A77881E-304F-4EA5-89CF-4421E4C20DF3}|B2b.Infrastructure\\B2b.Infrastructure.csproj|solutionrelative:b2b.infrastructure\\service\\mainservice\\mainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0A77881E-304F-4EA5-89CF-4421E4C20DF3}|B2b.Infrastructure\\B2b.Infrastructure.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.infrastructure\\service\\productservice\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0A77881E-304F-4EA5-89CF-4421E4C20DF3}|B2b.Infrastructure\\B2b.Infrastructure.csproj|solutionrelative:b2b.infrastructure\\service\\productservice\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A77881E-304F-4EA5-89CF-4421E4C20DF3}|B2b.Infrastructure\\B2b.Infrastructure.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.infrastructure\\service\\productservice\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A77881E-304F-4EA5-89CF-4421E4C20DF3}|B2b.Infrastructure\\B2b.Infrastructure.csproj|solutionrelative:b2b.infrastructure\\service\\productservice\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\controllers\\api\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\controllers\\api\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\wwwroot\\assets\\css\\app.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\wwwroot\\assets\\css\\app.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,27 +55,116 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Product.js",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\wwwroot\\ControllerJs\\Home\\Product.js",
+              "RelativeDocumentMoniker": "B2b.Web\\wwwroot\\ControllerJs\\Home\\Product.js",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\wwwroot\\ControllerJs\\Home\\Product.js",
+              "RelativeToolTip": "B2b.Web\\wwwroot\\ControllerJs\\Home\\Product.js",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAiwLkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-12-17T11:47:09.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IProductService.cs",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\Service\\ProductService\\IProductService.cs",
+              "RelativeDocumentMoniker": "B2b.Infrastructure\\Service\\ProductService\\IProductService.cs",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\Service\\ProductService\\IProductService.cs",
+              "RelativeToolTip": "B2b.Infrastructure\\Service\\ProductService\\IProductService.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIA4wA8AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T11:17:14.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "app.min.css",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\wwwroot\\assets\\css\\app.min.css",
+              "RelativeDocumentMoniker": "B2b.Web\\wwwroot\\assets\\css\\app.min.css",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\wwwroot\\assets\\css\\app.min.css",
+              "RelativeToolTip": "B2b.Web\\wwwroot\\assets\\css\\app.min.css",
+              "ViewState": "AgIAAAoVAAAAAAAAAAAAABoVAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-17T07:56:39.453Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainService.cs",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\Service\\MainService\\MainService.cs",
+              "RelativeDocumentMoniker": "B2b.Infrastructure\\Service\\MainService\\MainService.cs",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\Service\\MainService\\MainService.cs",
+              "RelativeToolTip": "B2b.Infrastructure\\Service\\MainService\\MainService.cs",
+              "ViewState": "AgIAAP0AAAAAAAAAAAAUwBEBAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T07:54:21.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "B2b.Web\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "B2b.Web\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-17T07:54:09.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ProductList.js",
               "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\wwwroot\\ControllerJs\\Definitions\\ProductList.js",
               "RelativeDocumentMoniker": "B2b.Web\\wwwroot\\ControllerJs\\Definitions\\ProductList.js",
               "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\wwwroot\\ControllerJs\\Definitions\\ProductList.js",
               "RelativeToolTip": "B2b.Web\\wwwroot\\ControllerJs\\Definitions\\ProductList.js",
-              "ViewState": "AgIAAHYAAAAAAAAAAAAcwIcAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAMwGIAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-12-16T16:07:54.68Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "ProductService.cs",
               "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\Service\\ProductService\\ProductService.cs",
               "RelativeDocumentMoniker": "B2b.Infrastructure\\Service\\ProductService\\ProductService.cs",
               "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\Service\\ProductService\\ProductService.cs",
               "RelativeToolTip": "B2b.Infrastructure\\Service\\ProductService\\ProductService.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAAAGUAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAgwCwBAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T15:36:51.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductList.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Views\\Home\\ProductList.cshtml",
+              "RelativeDocumentMoniker": "B2b.Web\\Views\\Home\\ProductList.cshtml",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Views\\Home\\ProductList.cshtml",
+              "RelativeToolTip": "B2b.Web\\Views\\Home\\ProductList.cshtml",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAAALEAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-17T11:21:41.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductApiController.cs",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Controllers\\Api\\ProductApiController.cs",
+              "RelativeDocumentMoniker": "B2b.Web\\Controllers\\Api\\ProductApiController.cs",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Controllers\\Api\\ProductApiController.cs",
+              "RelativeToolTip": "B2b.Web\\Controllers\\Api\\ProductApiController.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAIwDIAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T11:17:31.016Z",
               "EditorCaption": ""
             }
           ]

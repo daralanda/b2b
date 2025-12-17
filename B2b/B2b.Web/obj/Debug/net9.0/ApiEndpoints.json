@@ -885,6 +885,16 @@
   },
   {
     "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
+    "Method": "GetImages",
+    "RelativePath": "api/ProductApi/GetImages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
     "Method": "GetPrice",
     "RelativePath": "api/ProductApi/GetPrice",
     "HttpMethod": "GET",

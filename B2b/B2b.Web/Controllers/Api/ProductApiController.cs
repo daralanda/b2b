@@ -46,6 +46,11 @@ namespace B2b.Web.Controllers.Api
             return Ok(_service.GetImage(id));
         }
         [HttpGet]
+        public IActionResult GetImages()
+        {
+            return Ok(_service.GetImages());
+        }
+        [HttpGet]
         public IActionResult GetPrice(int id)
         {
             return Ok(_service.GetPrice(id));

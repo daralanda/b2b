@@ -1064,7 +1064,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\Microsoft.Win3
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\System.Drawing.Common.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\System.Private.Windows.Core.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\runtimes\win\lib\net9.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\tbhlmzfrtr-va6nl9yssj.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\puhw8fjv9s-wsv2616wy8.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\jcj6wspbe7-edknwwq3wa.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\Microsoft.Build.Locator.dll
@@ -1084,3 +1083,4 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\ru\Microsoft.C
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\tbhlmzfrtr-ftwqgre871.gz

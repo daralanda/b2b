@@ -820,7 +820,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\scopedcss\bundle
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\scopedcss\projectbundle\B2b.Web.bundle.scp.css
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\j2d4rlnuf3-ktaq4dgqi7.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\sz2tfc1ax2-z9u5ioo24y.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\tefm4ylun7-3jqqtm2dju.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\q25qcpoouf-xcmlx6xxmx.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\ibwmxw9mck-4wxrqgcjgt.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\q1u7z5mc9x-e72zfh4477.gz
@@ -1085,4 +1084,5 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\tr\Microsoft.Cod
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\tbhlmzfrtr-ftwqgre871.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\tefm4ylun7-y0u2jjbv5w.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\tbhlmzfrtr-bdav6rmjw9.gz

@@ -109,11 +109,14 @@ function FormClean() {
     document.getElementById("CategoryId").value = 0;
     document.getElementById("CurrencyId").value = 0;
     document.getElementById("Vat").value = 0;
-    document.getElementById("StockQuantity").value = s0;
+    document.getElementById("StockQuantity").value = 0;
     document.getElementById("BrandId").value = 0;
     document.getElementById("Description").value = "";
     $('#priceTable').DataTable().clear().draw();
     $('#imageTable').DataTable().clear().draw();
+    document.getElementById("SilinecekResimler").innerHTML = "";
+    document.getElementById("ImgUrl").value = "";
+    document.getElementById("Queue").value = 0;
 }
 
 function btnClick(obj) {
@@ -121,13 +124,19 @@ function btnClick(obj) {
         document.getElementById("modalTitle").innerHTML = "Ürün Ekle";
         document.getElementById("btnSumbit").innerHTML = "Yeni Ürün Kaydet";
         FormClean();
+
         Data.ProductId = 0;
 
     }
     else if (obj.className.includes("edit")) {
         document.getElementById("modalTitle").innerHTML = "Ürün Güncelleme";
         document.getElementById("btnSumbit").innerHTML = "Ürün Güncelle";
+        document.getElementById("SilinecekResimler").innerHTML = "";
+        document.getElementById("ImgUrl").value = "";
+        document.getElementById("Queue").value = 0;
         Data.ProductId = obj.id;
+        $('#priceTable').DataTable().clear().draw();
+        $('#imageTable').DataTable().clear().draw();
         GetImage(obj.id);
         GetPrice(obj.id);
         var subdata = DataList.find(x => x.ProductId == obj.id);
@@ -198,8 +207,9 @@ function PostData() {
                         title: "Ürün Ekleme",
                         text: "Ürün başarıyla eklenmiştir.",
                         icon: "success",
+                    }).then(() => {
+                        PageLoad();
                     });
-                    PageLoad();  
                 }
                 else {
                     Swal.fire({
@@ -225,8 +235,9 @@ function PostData() {
                         title: "Ürün Güncelleme",
                         text: "Ürün başarıyla güncellenmiştir.",
                         icon: "success",
+                    }).then(() => {
+                        PageLoad();
                     });
-                    PageLoad();  
                 }
                 else {
                     Swal.fire({
