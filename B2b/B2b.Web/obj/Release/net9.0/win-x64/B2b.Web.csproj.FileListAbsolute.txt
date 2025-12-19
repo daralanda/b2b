@@ -268,7 +268,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\scoped
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\scopedcss\projectbundle\B2b.Web.bundle.scp.css
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\j2d4rlnuf3-ktaq4dgqi7.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\sz2tfc1ax2-z9u5ioo24y.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tefm4ylun7-3jqqtm2dju.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\q25qcpoouf-xcmlx6xxmx.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\ibwmxw9mck-4wxrqgcjgt.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\q1u7z5mc9x-e72zfh4477.gz
@@ -496,7 +495,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compre
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\yx48qncvx6-vu9xxosiqc.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\ozw0yxq7jc-yuav9tcu84.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tdqvvkyzjh-isa4okzwxc.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\fii7c5xm62-4rbc0q46b3.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\0bnh5bv9qg-f0cc5stkot.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\p9y5yxogyn-rudzl347uw.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\9phz6sr4oh-eivvdwkotk.gz
@@ -852,4 +850,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\ru\Mic
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tbhlmzfrtr-ftwqgre871.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tefm4ylun7-y0u2jjbv5w.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tbhlmzfrtr-0u3nr8wzyq.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\fii7c5xm62-ma3qwkjla9.gz
