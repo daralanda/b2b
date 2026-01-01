@@ -269,7 +269,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\scoped
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\j2d4rlnuf3-ktaq4dgqi7.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\sz2tfc1ax2-z9u5ioo24y.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\q25qcpoouf-xcmlx6xxmx.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\ibwmxw9mck-4wxrqgcjgt.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\q1u7z5mc9x-e72zfh4477.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\f5n6xnno6u-hbv53eamsj.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\n5ya78l04t-kv53f895t1.gz
@@ -850,6 +849,7 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\ru\Mic
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tefm4ylun7-y0u2jjbv5w.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tbhlmzfrtr-0u3nr8wzyq.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\fii7c5xm62-ma3qwkjla9.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\tefm4ylun7-ul4g62l806.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\ibwmxw9mck-36k2o1gupu.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\fii7c5xm62-yrtmfsgmm1.gz

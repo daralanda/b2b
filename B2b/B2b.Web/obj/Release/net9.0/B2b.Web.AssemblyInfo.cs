@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("B2b.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16b5c6c8cefaf9567a98f54e20b92a73dc028af1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea06d66ab2d34397c652f73973858f5882710707")]
 [assembly: System.Reflection.AssemblyProductAttribute("B2b.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("B2b.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
