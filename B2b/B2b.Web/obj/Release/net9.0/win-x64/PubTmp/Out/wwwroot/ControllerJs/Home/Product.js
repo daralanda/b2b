@@ -117,31 +117,26 @@ $(document).ready(function () {
                         : `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
 
                     html += `
-                    <div class="col col-lg-3 col-xxsm-6 mb-4">
-                        <div class="card product-card h-100 shadow-sm">
-                            <div class="card-body">
-                                <div class="product-img position-relative text-center">
-                                    <div class="position-absolute top-0 start-0">
-                                        <span class="badge bg-success font-size-10 d-block mb-1">${item.BrandName}</span>
-                                        <span class="badge bg-info font-size-10 d-block">${item.CategoryName}</span>
-                                    </div>
-                                    <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
-                                 
-                                </div>
-                                <div class="mt-3 text-center">
-                                    <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
-                                    ${pricesHTML}
-                                    <button class="btn btn-primary btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
-                                        <i class="bx bx-cart me-1"></i> Sepete Ekle
-                                    </button>
-                                     <button type="button" onclick="GetProduct(${item.ProductId})" 
-                                            class="btn btn-success btn-sm mt-2 w-100" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">
-                                            Detayı Gör
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
+                    <div class="col col-lg-3 col-xsm-6 mb-4">
+      <div class="card product-card h-100 shadow-sm">
+          <div class="card-body">
+              <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
+                  <div class="position-absolute top-0 start-0">
+                      <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
+                      <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
+                  </div>
+                  <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+              </div>
+              <div class="mt-3 text-center">
+                  <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
+                  ${pricesHTML}
+                  <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
+                      <i class="bx bx-cart me-1"></i> Sepete Ekle
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>`;
                 });
                 $('#product-list').html(html || '<div class="col-12 text-center py-5"><h5>Eşleşen ürün bulunamadı.</h5></div>');
             }

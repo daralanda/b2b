@@ -8,6 +8,23 @@
 <div class="container-fluid mt-4">
     <div class="row">
 
+        <div class="col-lg-3 mt-3"></div>
+        <div class="col-lg-9 mt-3">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <input type="text" id="searchInput" class="form-control  mb-3 " placeholder="Ürün veya kod ara...">
+                </div>
+                <div class="col-md-4 offset-md-4">
+                    <select id="sortSelect" class="form-select  mb-3 ">
+                        <option value="">Sıralama Seçiniz</option>
+                        <option value="priceAsc">Fiyat: Düşükten Yükseğe</option>
+                        <option value="priceDesc">Fiyat: Yüksekten Düşüğe</option>
+                        <option value="nameAsc">Ad: A'dan Z'ye</option>
+                        <option value="nameDesc">Ad: Z'den A'ya</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-3  mt-3">
 
             <div id="clearFiltersArea" class="mb-3 d-none">
@@ -22,7 +39,7 @@
                             Kategoriler
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul class="list-group list-group-flush" id="category-list">
                             </ul>
@@ -66,20 +83,7 @@
         </div>
 
         <div class="col-lg-9  mt-3">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <input type="text" id="searchInput" class="form-control  mb-3 " placeholder="Ürün veya kod ara...">
-                </div>
-                <div class="col-md-4 offset-md-4">
-                    <select id="sortSelect" class="form-select  mb-3 ">
-                        <option value="">Sıralama Seçiniz</option>
-                        <option value="priceAsc">Fiyat: Düşükten Yükseğe</option>
-                        <option value="priceDesc">Fiyat: Yüksekten Düşüğe</option>
-                        <option value="nameAsc">Ad: A'dan Z'ye</option>
-                        <option value="nameDesc">Ad: Z'den A'ya</option>
-                    </select>
-                </div>
-            </div>
+           
 
             <div id="product-list" class="row"></div>
 

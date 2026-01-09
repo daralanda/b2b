@@ -549,6 +549,7 @@ wwwroot\assets\libs\tui-date-picker\tui-date-picker.min.js
 wwwroot\assets\libs\tui-dom\tui-dom.min.js
 wwwroot\assets\libs\tui-time-picker\tui-time-picker.min.css
 wwwroot\assets\libs\tui-time-picker\tui-time-picker.min.js
+wwwroot\ControllerJs\ControllerJs.rar
 wwwroot\ControllerJs\Definitions\AccountNumbers.js
 wwwroot\ControllerJs\Definitions\BannerList.js
 wwwroot\ControllerJs\Definitions\BrandList.js

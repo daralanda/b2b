@@ -5992,8 +5992,8 @@ textarea.form-control-lg {
     .list-group-item.active {
         z-index: 2;
         color: var(--bs-list-group-active-color);
-        background-color: var(--bs-list-group-active-bg);
-        border-color: var(--bs-list-group-active-border-color)
+        background-color: #000000;
+        border-color: #000000;
     }
 
     .list-group-item + .list-group-item {

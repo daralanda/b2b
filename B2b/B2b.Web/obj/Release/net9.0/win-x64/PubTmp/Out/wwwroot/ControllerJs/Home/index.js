@@ -38,24 +38,20 @@ function LastProducts() {
                 items += `
                                      <div class="card product-card">
                                          <div class="card-body">
-                                             <div class="product-img position-relative">
-                                                 <div class="badge bg-success font-size-11">${item.BrandName}</div>
-                                                 <div class="badge bg-danger font-size-11">${item.CategoryName}</div>
-                                                 ${discountBadge}
-                                                 <img src="${item.ProductImage}" alt="${item.ProductName}" class="img-fluid mx-auto d-block">
-                                                 <div class="hover-btn-wrapper">
-                                                     <button type="button" onclick="GetProduct(${item.ProductId})" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">
-                                                         Detayı Gör
-                                                     </button>
-                                                 </div>
-                                             </div>
-                                             <div class="mt-2 text-center">
-                                                 <h5 class="mb-3 text-truncate"><a href="javascript: void(0);" class="text-dark">${item.ProductName} </a></h5>
-                                                 ${pricesHTML}
-                                                 <a class="btn btn-primary waves-effect waves-light mt-2 me-1" onclick="AddCart(${item.ProductId},1)">
-                                                     <i class="bx bx-cart me-2"></i> Sepete Ekle
-                                                 </a>
-                                             </div>
+                                             <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
+                                                <div class="position-absolute col-12 top-0 start-0">
+                                                    <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
+                                                    <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
+                                                </div>
+                                                <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+                                            </div>
+                                            <div class="mt-3 text-center">
+                                                <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
+                                                ${pricesHTML}
+                                                <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
+                                                    <i class="bx bx-cart me-1"></i> Sepete Ekle
+                                                </button>
+                                            </div>
                                          </div>
                                      </div>`;
             });
@@ -65,7 +61,7 @@ function LastProducts() {
             // Owl Carousel'i başlat
             owl.owlCarousel({
                 loop: false,
-                nav: false,
+                nav: true,
                 dots: false,
                 margin: 10,
                 responsiveClass: true,
@@ -107,7 +103,7 @@ function CampaignProducts() {
 
                 // ISCampaign veya Price != DiscountedPrice ise indirim rozeti ve fiyatları göster
                 if (item.IsCampaign === 1 || item.Price !== item.DiscountedPrice) {
-                    discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-primary font-size-11">-% ${item.TotalDiscountRate}</span></div>`;
+                    discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">-% ${item.TotalDiscountRate}</span></div>`;
                     pricesHTML = `<h5 class="my-0"><span class="text-muted me-2"><del>${formatPrice(item.Price)}</del></span><b>${formatPrice(item.DiscountedPrice)}</b></h5>`;
                 } else {
                     // İndirim yoksa sadece normal fiyatı göster
@@ -116,24 +112,21 @@ function CampaignProducts() {
                 items += `
                                      <div class="card product-card">
                                          <div class="card-body">
-                                             <div class="product-img position-relative">
-                                                 <div class="badge bg-success font-size-11">${item.BrandName}</div>
-                                                 <div class="badge bg-danger font-size-11">${item.CategoryName}</div>
-                                                 ${discountBadge}
-                                                 <img src="${item.ProductImage}" alt="${item.ProductName}" class="img-fluid mx-auto d-block">
-                                                 <div class="hover-btn-wrapper">
-                                                     <button type="button" onclick="GetProduct(${item.ProductId})" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">
-                                                         Detayı Gör
-                                                     </button>
-                                                 </div>
-                                             </div>
-                                             <div class="mt-2 text-center">
-                                                 <h5 class="mb-3 text-truncate"><a href="javascript: void(0);" class="text-dark">${item.ProductName} </a></h5>
-                                                 ${pricesHTML}
-                                                 <a class="btn btn-primary waves-effect waves-light mt-2 me-1" onclick="AddCart(${item.ProductId},1)>
-                                                     <i class="bx bx-cart me-2"></i> Sepete Ekle
-                                                 </a>
-                                             </div>
+                                              <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
+                                                <div class="position-absolute col-12 top-0 start-0">
+                                                    <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
+                                                    <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
+                                                      ${discountBadge}
+                                                </div>
+                                                <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+                                            </div>
+                                            <div class="mt-3 text-center">
+                                                <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
+                                                ${pricesHTML}
+                                                <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
+                                                    <i class="bx bx-cart me-1"></i> Sepete Ekle
+                                                </button>
+                                            </div>
                                          </div>
                                      </div>`;
             });
@@ -143,7 +136,7 @@ function CampaignProducts() {
             // Owl Carousel'i başlat
             owl.owlCarousel({
                 loop: false,
-                nav: false,
+                nav: true,
                 dots: false,
                 margin: 10,
                 responsiveClass: true,

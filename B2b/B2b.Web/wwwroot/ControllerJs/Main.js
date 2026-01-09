@@ -403,7 +403,7 @@ function recover(domain) {
 $('#mainSlider').owlCarousel({
     loop: true,
     margin: 10,
-    nav: true,
+    nav: false,
     dots: false,
     autoHeight:false,
     autoplay:true,
