@@ -594,6 +594,7 @@ wwwroot\uploads\859fd5ca-cdcc-4ee5-a149-d572f8f62066-kare-logo.png
 wwwroot\uploads\86f2b0a2-0c40-439a-8f23-3d76f78960af-11.png
 wwwroot\uploads\97806730-0d95-468e-949f-2b8e67f7dfc3-11.png
 wwwroot\uploads\9de09836-6667-4e17-93f8-cdf20fc25e43-kare-logo.png
+wwwroot\uploads\a8728998-6e69-40d4-aacd-c6ceec7ea950-11.png
 wwwroot\uploads\b26ee1ee-869e-48a5-812e-033fc3f85a65-1687936032968.jpg
 wwwroot\uploads\banner1.jpg
 wwwroot\uploads\banner1.png
@@ -605,3 +606,4 @@ wwwroot\uploads\slider.jpg
 wwwroot\uploads\slider2.jpg
 wwwroot\uploads\slider3.jpg
 wwwroot\uploads\Stok.xlsx
+wwwroot\uploads\UrunFiyatGuncelleme.xlsx

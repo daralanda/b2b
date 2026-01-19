@@ -10,6 +10,7 @@ namespace B2b.Dal.Entity
         public decimal Price { get; set; }
         public int UnitTypeId { get; set; }
         public bool IsDefault { get; set; }
+        public int Count { get; set; }
         public virtual Product Product { get; set; }
         public virtual UnitType UnitType { get; set; }
     }

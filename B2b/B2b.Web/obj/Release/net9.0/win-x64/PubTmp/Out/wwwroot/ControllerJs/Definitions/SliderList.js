@@ -1,4 +1,5 @@
-﻿var DataList = [];
+﻿/// <reference path="../home/checkout.js" />
+var DataList = [];
 var Data = {
     SliderId: 0,
     SliderName: '',
@@ -31,7 +32,7 @@ function PageLoad() {
                 {
                     "data": "SliderId",
                     render: function (data) {
-                        return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a> ";
+                        return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a>  | <a onclick='Delete(this)' class='btn btn-xs btn-danger mr-1 text-white delete'  id='" + data + "' ><i class='fas fa-trash'></i> Sil</a>";
                     }
                 }
             ];
@@ -142,4 +143,40 @@ function PostData() {
 
     }
   
+}
+function Delete(obj) {
+    Swal.fire({
+        title: "Silmek istediğinize emin misiniz?",
+        text: "Silme işlemi gerçekleştikten sonra geri alınamaz!",
+        type: "warning",
+        showCancelButton: !0,
+        confirmButtonColor: "#34c38f",
+        cancelButtonColor: "#f46a6a",
+        confirmButtonText: "Sil"
+    }).then(function (t) {
+        if (t.value) {
+            $.ajax({
+                url: '/api/SliderApi/Remove?id=' + obj.id,
+                type: 'Get',
+                dataType: 'Json',
+                contentType: 'application/json',
+                headers: { 'Authorization': localStorage.getItem("token") },
+                success: function (data) {
+                    if (data) {
+                        Swal.fire("Silme İşlemi!", "Silme işlemi başarılı bir şekilde gerçekleşmiştir.", "success");
+                        PageLoad();
+                    }
+                    else {
+                        Swal.fire("Silme İşlemi!", "Silme işlemi başarısız olmuştur.", "warning");
+                    }
+                },
+                error: function () {
+                    Swal.fire("Silme İşlemi!", "Beklenmedik bir hata ile karşılaşıldı.", "error");
+                }
+
+            })
+
+        }
+
+    })
 }

@@ -570,14 +570,14 @@ function GetProduct(id) {
             response.List.forEach(function (item) {
                 if (item.IsDefault) {
                     content.innerHTML += `<tr class="red-row">
-                    <td>${item.UnitTypeName}</td>
+                    <td>${item.UnitTypeName} için ${item.Count} adet </td>
                     <td>${item.Price.toFixed(2)} TL</td>
                     <td>${item.DiscountedPrice.toFixed(2)} TL</td>
                 </tr>`;
                 }
                 else {
                     content.innerHTML += `<tr>
-                    <td>${item.UnitTypeName}</td>
+                    <td>${item.UnitTypeName} için ${item.Count} adet </td>
                     <td>${item.Price.toFixed(2)} TL</td>
                     <td>${item.DiscountedPrice.toFixed(2)} TL</td>
                 </tr>`;

@@ -121,7 +121,7 @@ $(document).ready(function () {
       <div class="card product-card h-100 shadow-sm">
           <div class="card-body">
               <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
-                  <div class="position-absolute top-0 start-0">
+                  <div class="position-absolute col-12 top-0 start-0">
                       <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
                       <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
                   </div>

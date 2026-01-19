@@ -8,5 +8,6 @@
         public decimal Price { get; set; }
         public decimal DiscountedPrice { get; set; }
         public bool IsDefault { get; set; }
+        public int Count { get; set; }
     }
 }

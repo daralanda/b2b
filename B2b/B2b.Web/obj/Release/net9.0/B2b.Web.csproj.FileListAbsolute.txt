@@ -1020,7 +1020,6 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\5or
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\6arruf7oia-c1i44b3gag.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\8ecey8hkon-4wbztpihkz.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\xu3ijy9ngy-9n2msefww4.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\s8y0u41yvp-jrb7630s8y.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\q63veijfpq-b6819pvgrj.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\854u9cdbms-x6kkk7cwmy.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\ku4gx4de3r-f0eie5sb7p.gz
@@ -1075,12 +1074,13 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\ru\Microsoft.C
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\tbhlmzfrtr-0u3nr8wzyq.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\tefm4ylun7-9v7lzi66bt.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\ibwmxw9mck-1vfqipeo51.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\ydxdoicram-qmwnw42an7.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\sg74b94opi-zs0s9h8x94.gz
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\6citxnlvag-ikkwfzuvub.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\yx48qncvx6-lku50w3pnz.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\fii7c5xm62-gqcw5oufhp.gz
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\puhw8fjv9s-e5pvmdwfm8.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\yx48qncvx6-9owc3f7jyb.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\fii7c5xm62-wsgld1wh43.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\tbhlmzfrtr-lax14fd0pv.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\s8y0u41yvp-n3jebhodtc.gz
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\puhw8fjv9s-aljpon570w.gz

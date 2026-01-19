@@ -14,5 +14,7 @@ namespace B2b.Infrastructure.Service.ProductService
         ResultDto<ProductImage> GetImage(int id);
         ResultDto<string> ProductAllSet(Stream stream);
         ResultDto<ProductImage> GetImages();
+        ResultDto<string> GetTemplate(string Url);
+        ResultDto<string> ProductPriceUpdateAll(Stream stream);
     }
 }

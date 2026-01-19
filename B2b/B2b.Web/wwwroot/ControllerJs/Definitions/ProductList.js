@@ -96,6 +96,7 @@ function GetImageTable(data) {
 function NewRowPrice() {
     var newData = {
         UnitTypeId: parseInt(document.getElementById("unitType").value),
+        Count: parseInt(document.getElementById("Count").value),
         Price: parseFloat(document.getElementById("Price").value),
         IsDefault:parseInt(document.getElementById("IsDefault").value),
         ProductPriceId:0
@@ -134,7 +135,7 @@ function btnClick(obj) {
         FormClean();
 
         Data.ProductId = 0;
-
+        document.getElementById("btnCopy").style.display = "none";
     }
     else if (obj.className.includes("edit")) {
         document.getElementById("modalTitle").innerHTML = "Ürün Güncelleme";
@@ -163,9 +164,12 @@ function btnClick(obj) {
         else {
             document.getElementById("IsActive").value = 0;
         }
+        document.getElementById("btnCopy").style.display = "inline-block";
+        IsCopy = false;
     }
     
 }
+var IsCopy = false;
 function PostData() {
     var state = true;
     Data.ProductName = document.getElementById("ProductName").value;
@@ -181,26 +185,51 @@ function PostData() {
     var pris = Array.from(table2.rows().data());
     Data.ProductImages = [];
     Data.ProductPrices = [];
-    imgs.forEach(function (x) {
-        Data.ProductImages.push({
-            ProductImageId: x.ProductImageId,
-            ImageUrl: x.ImageUrl,
-            ProductId: Data.ProductId,
-            Queue: x.Queue
+    if (!IsCopy) {
+
+        imgs.forEach(function (x) {
+            Data.ProductImages.push({
+                ProductImageId: x.ProductImageId,
+                ImageUrl: x.ImageUrl,
+                ProductId: Data.ProductId,
+                Queue: x.Queue
+            })
         })
-    })
-    pris.forEach(function (x) {
-        Data.ProductPrices.push({
-            ProductPriceId: x.ProductPriceId,
-            ProductId: Data.ProductId,
-            Price: x.Price,
-            UnitTypeId: x.UnitTypeId,
-            IsDefault: x.IsDefault,
+        pris.forEach(function (x) {
+            Data.ProductPrices.push({
+                ProductPriceId: x.ProductPriceId,
+                ProductId: Data.ProductId,
+                Price: x.Price,
+                Count: x.Count,
+                UnitTypeId: x.UnitTypeId,
+                IsDefault: x.IsDefault,
+            })
         })
-    })
+    }
+    else {
+
+        imgs.forEach(function (x) {
+            Data.ProductImages.push({
+                ProductImageId:0,
+                ImageUrl: x.ImageUrl,
+                ProductId: Data.ProductId,
+                Queue: x.Queue
+            })
+        })
+        pris.forEach(function (x) {
+            Data.ProductPrices.push({
+                ProductPriceId: 0,
+                ProductId: Data.ProductId,
+                Price: x.Price,
+                Count: x.Count,
+                UnitTypeId: x.UnitTypeId,
+                IsDefault: x.IsDefault,
+            })
+        })
+    }
     console.clear();
     console.log(Data);
-    if (Data.ProductId == 0 && state==true)
+    if (Data.ProductId == 0 && state==true )
     {
         $.ajax({
             url: '/api/ProductApi/Add',
@@ -434,6 +463,7 @@ const table2 = new DataTable('#priceTable', {
                 return UnitTypeList.find(y => y.id == x).text;
             },
         },
+        { "data": "Count" },
         { "data": "Price" },
         {
             "data": "IsDefault",
@@ -532,5 +562,85 @@ function uploadExcel() {
             console.error("Hata:", error);
             resultDiv.html("<div class='text-danger'>❌ Hata oluştu: " + xhr.responseText + "</div>");
         }
+    });
+}
+function CopyProduct() {
+    Data.ProductId = 0;
+    IsCopy = true;
+    PostData();
+
+}
+
+function uploadExcel2() {
+    var fileInput = $("#fileInput2")[0];
+    var resultDiv = $("#uploadResult");
+
+    if (fileInput.files.length === 0) {
+        resultDiv.html("<div class='text-danger'>⚠️ Lütfen bir dosya seçin!</div>");
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    // jQuery AJAX
+    $.ajax({
+        url: "/api/ProductApi/ProductPriceUpdateAll",
+        type: "POST",
+        data: formData,
+        processData: false,
+        headers: { 'Authorization': localStorage.getItem("token") },
+        contentType: false,
+        beforeSend: function () {
+            resultDiv.html("<div class='text-info'>⏳ Yükleniyor...</div>");
+        },
+        success: function (response) {
+            if (response.State) {
+                resultDiv.html("<div class='text-success'>✅ Dosya başarıyla yüklendi!</div>");
+                return;
+            }
+            else {
+                var myModal = new bootstrap.Modal(document.getElementById('logModal'));
+                console.log(response.List);
+                var columns = [
+                    { title: "Mesaj", data: null, render: x => x }
+                ];
+                DatatablesLoad("logtables", response.List, columns);
+                myModal.show();
+                resultDiv.html("<div class='text-warning'>Hatalı kayıtlar var!</div>");
+                PageLoad();
+                return;
+            }
+
+        },
+        error: function (xhr, status, error) {
+            console.error("Hata:", error);
+            resultDiv.html("<div class='text-danger'>❌ Hata oluştu: " + xhr.responseText + "</div>");
+        }
+    });
+}
+
+function GetProductPriceTemplate() {
+    $.ajax({
+        url: "/api/ProductApi/GetTemplate",
+        type: "Get",
+        processData: false,
+        headers: { 'Authorization': localStorage.getItem("token") },
+        contentType: false,
+        success: function (response) {
+            if (response.State) {
+                var link = document.createElement('a');
+                link.href = "/uploads/UrunFiyatGuncelleme.xlsx";
+                link.download ="UrunFiyatGuncelleme"; 
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.clear();
+            console.log(error);
+        },
+        async: false
     });
 }

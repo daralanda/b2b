@@ -9,6 +9,8 @@ namespace B2b.Infrastructure.Service.ProductService
     public class ProductService(B2bDbContext context):IProductService
     {
         private readonly B2bDbContext _context = context;
+        EPPLusPlugin ePPLusPlugin = new EPPLusPlugin();
+
         bool state = false;
         string message = string.Empty;
         List<Product> products = new();
@@ -17,10 +19,24 @@ namespace B2b.Infrastructure.Service.ProductService
         {
             try
             {
-                _context.Products.Add(data);
-                _context.SaveChanges();
-                state = true;
-                message = "Product added successfully.";
+                var product=_context.Products.Where(p => p.ProductCode == data.ProductCode).FirstOrDefault();
+                if (product== null)
+                {
+                    _context.Products.Add(data);
+                    _context.SaveChanges();
+                    state = true;
+                    message = "Product added successfully.";
+                }
+                else
+                {
+                    return new ResultDto<Product>
+                    {
+                        State = false,
+                        Message = "Bu ürün kodu kullanılıyor."
+                    };
+                }
+              
+                
             }
             catch (Exception ex)
             {
@@ -135,7 +151,9 @@ namespace B2b.Infrastructure.Service.ProductService
                         Price = item.Price,
                         UnitTypeId = item.UnitTypeId,
                         ProductId = upd.ProductId,
-                        IsDefault = item.IsDefault
+                        IsDefault = item.IsDefault,
+                        Count = item.Count
+                        
                     });
                     _context.SaveChanges();
                 }
@@ -190,7 +208,6 @@ namespace B2b.Infrastructure.Service.ProductService
         public ResultDto<string> ProductAllSet(Stream stream)
         {
             var result = new ResultDto<string>();
-            EPPLusPlugin ePPLusPlugin = new EPPLusPlugin();
             stream.Position = 0;
             var data= ePPLusPlugin.ExcelUpload(stream);
             int i = 1;
@@ -257,7 +274,9 @@ namespace B2b.Infrastructure.Service.ProductService
                             ProductId = product.ProductId,
                             Price = item.Price,
                             UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
-                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false
+                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
+                            Count= 1
+
                         };
                         _context.ProductPrices.Add(productPrice);
                         _context.SaveChanges();
@@ -307,6 +326,52 @@ namespace B2b.Infrastructure.Service.ProductService
                 state = false;
                 message = ex.Message;
             }
+            return result;
+        }
+
+        public ResultDto<string> GetTemplate(string Url) {
+            var result = new ResultDto<string>();
+            try
+            {
+                FormattableString data = $"Exec ProductPriceUpdateTemplate";
+                var source = _context.Database.SqlQuery<ProductPriceTemplate>(data);
+                bool IsState = ePPLusPlugin.CreateTemplate(source.ToList(), "UrunFiyatGuncelleme", Url);
+
+                result.State = IsState;
+            }
+            catch (Exception ex)
+            {
+                result.State = false;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public ResultDto<string> ProductPriceUpdateAll(Stream stream)
+        {
+            var result = new ResultDto<string>();
+            var data = ePPLusPlugin.ReadData<ProductPriceTemplate>(stream);
+
+            foreach (var item in data)
+            {
+                int productId=_context.Products.Where(p=>p.ProductCode== item.ProductCode).Select(p=>p.ProductId).FirstOrDefault();
+                if (productId>0)
+                {
+                    int unitTypeId = _context.UnitTypes.Where(u => u.UnitTypeName == item.UnitTypeName).Select(u => u.UnitTypeId).FirstOrDefault();
+                    if (unitTypeId>0)
+                    {
+                        var price = _context.ProductPrices.Where(p => p.ProductId == productId && p.UnitTypeId == unitTypeId).FirstOrDefault();
+                        if (price!=null)
+                        {
+                            price.Price = item.Price;
+                            price.Count = item.Count;
+                            _context.SaveChanges();
+                        }
+                    }
+                }
+            }
+
+
             return result;
         }
     }

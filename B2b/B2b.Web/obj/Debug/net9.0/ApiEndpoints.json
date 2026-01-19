@@ -911,8 +911,34 @@
   },
   {
     "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
+    "Method": "GetTemplate",
+    "RelativePath": "api/ProductApi/GetTemplate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
     "Method": "ProductAllSet",
     "RelativePath": "api/ProductApi/ProductAllSet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ProductApiController",
+    "Method": "ProductPriceUpdateAll",
+    "RelativePath": "api/ProductApi/ProductPriceUpdateAll",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
