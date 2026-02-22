@@ -13,7 +13,8 @@
         public int Vat { get; set; }
         public string IsDefault { get; set; }
         public int StockQuantity { get; set; }
-
+        public int UnitTypeCount { get; set; }
+        public string ImageUrl { get; set; }
         public ResultDto Result { get; set; }
     }
     public class ResultDto

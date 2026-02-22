@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|c:\\users\\hidir\\desktop\\project\\b2b\\b2b\\b2b.web\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9461D750-03CA-4BC8-9D49-6242AE62E6AD}|B2b.Web\\B2b.Web.csproj|solutionrelative:b2b.web\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "B2b.Web\\Views\\Home\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "B2b.Web\\Views\\Home\\Login.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-22T18:27:06.405Z",
+              "EditorCaption": ""
             }
           ]
         }

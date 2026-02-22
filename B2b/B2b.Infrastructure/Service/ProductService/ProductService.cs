@@ -275,10 +275,18 @@ namespace B2b.Infrastructure.Service.ProductService
                             Price = item.Price,
                             UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
                             IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
-                            Count= 1
+                            Count= item.UnitTypeCount
 
                         };
                         _context.ProductPrices.Add(productPrice);
+                        _context.SaveChanges();
+                        ProductImage productImage = new()
+                        {
+                            ProductId = product.ProductId,
+                            ImageUrl = item.ImageUrl,
+                            Queue = 1
+                        };
+                        _context.ProductImages.Add(productImage);
                         _context.SaveChanges();
                     }
                     else
@@ -288,7 +296,8 @@ namespace B2b.Infrastructure.Service.ProductService
                             ProductId = findProduct.ProductId,
                             Price = item.Price,
                             UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
-                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false
+                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
+                            Count = item.UnitTypeCount
                         };
                         var price = _context.ProductPrices.Where(p => p.ProductId == findProduct.ProductId && p.UnitTypeId == productPrice.UnitTypeId).FirstOrDefault();
                         if (price == null)
@@ -298,8 +307,30 @@ namespace B2b.Infrastructure.Service.ProductService
                         else
                         {
                             price.Price = item.Price;
+                            price.IsDefault = productPrice.IsDefault;
+                            price.Count = item.UnitTypeCount;
                         }
                         _context.SaveChanges();
+                        ProductImage productImage = new()
+                        {
+                            ProductId = findProduct.ProductId,
+                            ImageUrl = item.ImageUrl,
+                            Queue = 1
+                        };
+                        var image = _context.ProductImages.Where(p => p.ProductId == findProduct.ProductId && p.ImageUrl == productImage.ImageUrl).FirstOrDefault();
+                        if (image == null)
+                        {
+                            _context.ProductImages.Add(productImage);
+                            _context.SaveChanges();
+                        }
+                        else
+                        {
+                            image.ImageUrl = item.ImageUrl;
+                            image.Queue = 1;
+                            _context.SaveChanges();
+                        }
+
+
 
                     }
                 }

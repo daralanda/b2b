@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("B2b.Dal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75069ddc208e3a266930059867624ceb030cfc98")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2df0fabb48190902ab7e8a4c1c4fddd70ca376da")]
 [assembly: System.Reflection.AssemblyProductAttribute("B2b.Dal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("B2b.Dal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

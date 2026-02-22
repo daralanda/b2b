@@ -66,11 +66,14 @@ namespace B2b.Plugin.EPPlus
                                 BrandName = worksheet.Cells[row, 4].Value?.ToString(),
                                 Description = worksheet.Cells[row, 5].Value?.ToString(),
                                 UnitTypeName = worksheet.Cells[row, 6].Value?.ToString(),
-                                Price = Convert.ToDecimal(worksheet.Cells[row, 7].Value?.ToString()),
+                                Price = Convert.ToDecimal(worksheet.Cells[row, 7].Value?.ToString() ?? "0"),
                                 CurrencyName = worksheet.Cells[row, 8].Value?.ToString(),
-                                Vat = int.Parse(worksheet.Cells[row, 9].Value?.ToString()),
-                                StockQuantity = int.Parse(worksheet.Cells[row, 10].Value?.ToString()),
+                                Vat = int.Parse(worksheet.Cells[row, 9].Value?.ToString() ?? "0"),
+                                StockQuantity = int.Parse(worksheet.Cells[row, 10].Value?.ToString() ?? "0"),
                                 IsDefault = worksheet.Cells[row, 11].Value?.ToString(),
+                                UnitTypeCount = int.Parse(worksheet.Cells[row, 12].Value?.ToString() ?? "0"),
+                                ImageUrl = worksheet.Cells[row, 13].Value?.ToString(),
+
                                 Result = new ResultDto
                                 {
                                     State = string.IsNullOrEmpty(message),
