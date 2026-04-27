@@ -24,21 +24,30 @@ namespace B2b.Infrastructure.Service.CartService
                                              .ToList();
                 data.Price = price.FirstOrDefault() != null ? price.FirstOrDefault().DiscountedPrice : 0;
                 data.UnitTypeId = price.FirstOrDefault().UnitTypeId;
-                if (row == null)
+               
+
+                if (data.Quantity != 0 && data.UserId != 0)
                 {
-                    _context.Carts.Add(data);
-                    _context.SaveChanges();
+                    if (row == null)
+                    {
+                        _context.Carts.Add(data);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+                        row.Quantity += data.Quantity;
+                        row.Price = data.Price;
+                        _context.SaveChanges();
+                        _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                    }
+                    state = true;
+                    message = "Cart added successfully.";
                 }
-                else
-                {
-                    _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
-                    row.Quantity += data.Quantity;
-                    row.Price = data.Price;
-                    _context.SaveChanges();
-                    _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                else {
+                    state = false;
+                    message = "Sepete Eklenmemiştir.Adet bilgisi gibi zorunlu bilgi bulunamadı";
                 }
-                state = true;
-                message = "Cart added successfully.";
             }
             catch (Exception ex)
             {
@@ -103,7 +112,6 @@ namespace B2b.Infrastructure.Service.CartService
             {
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
                 var upd = _context.Carts.Where(p => p.CartId == data.CartId).First();
-                upd.Price = data.Price;
                 upd.Quantity = data.Quantity;
                 upd.CreatedDate = DateTime.Now;
                 _context.SaveChanges();
@@ -121,6 +129,12 @@ namespace B2b.Infrastructure.Service.CartService
                 State = state,
                 Message = message
             };
+        }
+
+        public int FindPaymentIdUser(string PaymentId)
+        {
+            var data = _context.Carts.Where(p => p.MerchantPaymentId == PaymentId).Select(p => p.UserId).FirstOrDefault();
+            return data;
         }
     }
 }

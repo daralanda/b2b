@@ -89,7 +89,9 @@
                             </div>
                             <div class="p-3 border-top d-grid">
                                 <div class="text-end">
-                                    <h6 class="m-0"> Toplam : <span class="text-muted" id="CartTotal"></span></h6>
+                                    <h6 class="m-0">Alt Toplam : <span class="text-muted" id="CartSubTotal"></span></h6>
+                                    <h6 class="m-0">KDV : <span class="text-muted" id="CartVatTotal"></span></h6>
+                                    <h6 class="m-0">Genel Toplam : <span class="text-muted" id="CartTotal"></span></h6>
                                 </div>
                                 <a href="/odeme" class="btn btn-sm btn-primary mt-3">
                                     <i class="mdi mdi-arrow-right me-1"></i> Ödeme Sayfası
@@ -219,7 +221,7 @@
                                         <hr />
                                         <div class="row">
                                             <div class="col-sm-auto">
-                                                <input type="number" class="form-control" min="1" max="100" id="Count" placeholder="1">
+                                                <input type="number" class="form-control" min="1" max="100" id="Count" value="1" >
                                             </div>
                                             <div class="col-sm-auto">
                                                 <a class="btn btn-primary waves-effect waves-light" id="DetailProduct" onclick="DetailAddCart()"><i class="bx bx-cart me-2"></i> Sepete Ekle</a>

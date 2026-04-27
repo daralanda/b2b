@@ -10,6 +10,7 @@ C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\refint\B2b.Dal.dll
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.pdb
 C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\ref\B2b.Dal.dll
+C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.sourcelink.json
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.deps.json
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.dll
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.pdb
@@ -23,4 +24,16 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.D
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\refint\B2b.Dal.dll
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.pdb
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\ref\B2b.Dal.dll
-C:\Users\Hidir\Desktop\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.sourcelink.json
+C:\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.deps.json
+C:\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.dll
+C:\Project\b2b\B2b\B2b.Dal\bin\Release\net9.0\B2b.Dal.pdb
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.csproj.AssemblyReference.cache
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.AssemblyInfoInputs.cache
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.AssemblyInfo.cs
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.csproj.CoreCompileInputs.cache
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.sourcelink.json
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.dll
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\refint\B2b.Dal.dll
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\B2b.Dal.pdb
+C:\Project\b2b\B2b\B2b.Dal\obj\Release\net9.0\ref\B2b.Dal.dll

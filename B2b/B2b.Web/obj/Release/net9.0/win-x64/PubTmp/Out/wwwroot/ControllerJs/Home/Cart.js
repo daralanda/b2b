@@ -116,16 +116,18 @@ function UpdateCart(obj) {
 
 function CartInfoUpdate() {
     var subtotal = 0;
-    var discount = 0;
+    let discount = 0;
     var tax = 0;
     var total = 0;
+    console.clear();
     Carts.forEach(function (x) {
         subtotal += x.TotalPrice;
-        discount += x.Price;
-        tax += (x.VatPrice * x.Quantity);
+        discount += (x.Price - x.DiscountedPrice) * x.Quantity;
+        tax += (x.VatPrice);
+        
+        console.log(x);
     });
-    discount = discount - subtotal;
-    total = subtotal + tax;
+    total = tax + subtotal;
     document.getElementById("cart-subtotal").innerHTML = formatPrice(subtotal);
     document.getElementById("cart-discount").innerHTML = formatPrice(discount);
     document.getElementById("cart-tax").innerHTML = formatPrice(tax);

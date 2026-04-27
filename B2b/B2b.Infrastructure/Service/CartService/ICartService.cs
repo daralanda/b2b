@@ -9,5 +9,6 @@ namespace B2b.Infrastructure.Service.CartService
         ResultDto<Cart> Remove(int id);
         ResultDto<CartResponseDto> GetAll(int UserId);
         ResultDto<Cart> Update(Cart data);
+        int FindPaymentIdUser(string PaymentId);
     }
 }

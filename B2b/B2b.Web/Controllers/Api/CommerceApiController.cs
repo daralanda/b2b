@@ -1,10 +1,5 @@
-﻿using Azure;
-using B2b.Dal.Entity;
-using B2b.Infrastructure.ResponseDto;
-using B2b.Infrastructure.Service.BannerService;
-using B2b.Infrastructure.Service.CommerceService;
+﻿using B2b.Infrastructure.Service.CommerceService;
 using B2b.Web.Middleware.JwtAuth;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace B2b.Web.Controllers.Api

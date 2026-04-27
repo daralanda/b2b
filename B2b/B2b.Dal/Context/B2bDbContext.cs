@@ -18,6 +18,8 @@ namespace B2b.Dal.Context
         public virtual DbSet<MailSetting> MailSettings { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<PaymentSetting> PaymentSettings { get; set; }
+        public virtual DbSet<PaymentHistory> PaymentHistories { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ProductPrice> ProductPrices { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -28,7 +30,7 @@ namespace B2b.Dal.Context
         public virtual DbSet<UnitType> UnitTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserToken> UserTokens { get; set; }
-
+       
 
     }
 }

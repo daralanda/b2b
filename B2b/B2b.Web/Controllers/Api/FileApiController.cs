@@ -8,7 +8,6 @@ namespace B2b.Web.Controllers.Api
     [Authorize]
     public class FileApiController : ControllerBase
     {
-        private readonly IWebHostEnvironment _env;
 
         [Route("upload/upload-file")]
         [HttpPost, DisableRequestSizeLimit]

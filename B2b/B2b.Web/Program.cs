@@ -1,8 +1,9 @@
 using B2b.Dal.Context;
+using B2b.Infrastructure.Service.MainService;
+using B2b.Infrastructure.Service.PaymentService;
+using B2b.Web.Middleware.JwtAuth;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using B2b.Web.Middleware.JwtAuth;
-using B2b.Infrastructure.Service.MainService;
 
 namespace B2b.Web;
 
@@ -27,6 +28,19 @@ public class Program
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });
+        builder.Services.ConfigureApplicationCookie(options =>
+        {
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SameSite = SameSiteMode.Lax; // Veya çok gerekirse None
+            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS zorunludur
+        });
+
+        builder.Services.AddSession(options =>
+        {
+            options.Cookie.HttpOnly = true;
+            options.Cookie.SameSite = SameSiteMode.Lax;
+            options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        });
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddControllersWithViews()
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
@@ -36,7 +50,6 @@ public class Program
         var app = builder.Build();
         if (!app.Environment.IsDevelopment())
         {
-            //app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
         }
 
@@ -46,7 +59,6 @@ public class Program
                .AllowAnyHeader()
                .AllowCredentials());
         app.UseMiddleware<JwtMiddleware>();
-        app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();

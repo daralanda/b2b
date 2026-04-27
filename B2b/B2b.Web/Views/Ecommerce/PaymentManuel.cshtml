@@ -1,0 +1,68 @@
+﻿@using System.Configuration;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6 ">
+                    <div class="input-group">
+                        <input type="number"
+                               id="Amount"
+                               step="0.01"
+                               class="form-control"
+                               placeholder="Ödenecek Tutar (₺)"
+                               required>
+            
+                        <a class="btn btn-primary" onclick="ManuelPos()"> Güvenli Ödeme Yap </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (Context.Request.Method == "Post")
+                    {
+                        <div id="state"> @ViewBag.CustomMessage </div>
+                    }
+
+                </div>
+           </div>
+            <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatables">
+                <thead>
+                    <tr>
+                        <th>Ödeme No</th>
+                        <th>Ödeme Tarihi</th>
+                        <th>Tutar</th>
+                        <th>Ödeme Durumu</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+</div> <!-- end col -->
+@section scripts {
+    <!-- JsGrid js -->
+    <link href="@Domain/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Domain/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="@Domain/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="@Domain/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="@Domain/assets/libs/jszip/jszip.min.js"></script>
+    <script src="@Domain/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="@Domain/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="@Domain/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="@Domain/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="@Domain/ControllerJs/Home/PaymentManuel.js"></script>
+    <!-- Init js -->
+}

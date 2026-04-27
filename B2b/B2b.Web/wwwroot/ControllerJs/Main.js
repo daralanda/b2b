@@ -470,6 +470,7 @@ function GetAllCart() {
         success: function (x) {
             var Total = 0;
             var CartCount = 0;
+            var VatTotal = 0;
             var content = document.getElementById("CartContent");
             content.innerHTML = "";
             x.List.forEach(function (item) {
@@ -494,10 +495,17 @@ function GetAllCart() {
                                                         `;
                 CartCount += item.Quantity;
                 Total += item.TotalPrice;
+                VatTotal += item.VatPrice;
 
             })
+            const myDiv = document.querySelector('#CheckOutTotalPrice');
+            if (myDiv) {
+                myDiv.textContent = "Ödenecek Tutar  : " + formatPrice(Total + VatTotal);
+            }
             document.getElementById("CartProductCount").innerHTML = CartCount;
-            document.getElementById("CartTotal").innerHTML = formatPrice(Total);
+            document.getElementById("CartSubTotal").innerHTML = formatPrice(Total);
+            document.getElementById("CartVatTotal").innerHTML = formatPrice(VatTotal);
+            document.getElementById("CartTotal").innerHTML = formatPrice(Total + VatTotal);
         },
         error: function (x) { console.log(x) },
         async: false

@@ -3,25 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
 }
-
 <div class="checkout-tabs">
     <div class="row">
-@*         <div class="col-xl-2 col-sm-3">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-shipping-tab" data-bs-toggle="pill" href="#v-pills-shipping" role="tab" aria-controls="v-pills-shipping" aria-selected="true" tabindex="-1">
-                    <i class="bx bxs-truck d-block check-nav-icon mt-4 mb-2"></i>
-                    <p class="fw-bold mb-4">Kargo Bilgileri</p>
-                </a>
-                <a class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill" href="#v-pills-payment" role="tab" aria-controls="v-pills-payment" aria-selected="false" tabindex="-1">
-                    <i class="bx bx-money d-block check-nav-icon mt-4 mb-2"></i>
-                    <p class="fw-bold mb-4">Ödeme Bilgileri</p>
-                </a>
-                <a class="nav-link " id="v-pills-confir-tab" data-bs-toggle="pill" href="#v-pills-confir" role="tab" aria-controls="v-pills-confir" aria-selected="false">
-                    <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
-                    <p class="fw-bold mb-4">Onay</p>
-                </a>
-            </div>
-        </div> *@
         <div class="col-xl-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -102,15 +85,16 @@
                         <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab">
                             <div>
                                 <h4 class="card-title">Ödeme Bilgileri</h4>
+                                <h6 id="CheckOutTotalPrice">Ödenecek Tutar  :  </h6>
                                 <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
-@*                                     <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" onclick="PaymentType(1)" href="#home1" role="tab">
                                             <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                             <span class="d-none d-sm-block">Kredi Kartı</span>
                                         </a>
-                                    </li> *@
+                                    </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" onclick="PaymentType(2)" href="#profile1" role="tab">
+                                        <a class="nav-link" data-bs-toggle="tab" onclick="PaymentType(2)" href="#profile1" role="tab">
                                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                             <span class="d-none d-sm-block">Havale / EFT</span>
                                         </a>
@@ -126,12 +110,12 @@
 
                                 <!-- Tab panes -->
                                 <div class="tab-content p-3 text-muted">
-@*                                     <div class="tab-pane active" id="home1" role="tabpanel">
-                                        <p class="mb-0">
-                                            kart
-                                        </p>
-                                    </div> *@
-                                    <div class="tab-pane active" id="profile1" role="tabpanel">
+                                    <div class="tab-pane active" id="home1" role="tabpanel">
+                                       <div class="col-md-4">
+                                            <a href="#" onclick="payWithModal()" class="btn btn-danger">Güvenli Ödeme Yap</a>
+                                       </div>
+                                    </div>
+                                    <div class="tab-pane" id="profile1" role="tabpanel">
                                         <table class="table align-middle mb-0 table-nowrap">
                                             <thead class="table-light">
                                                 <tr>
@@ -200,6 +184,20 @@
                 </div>
             </div>
          <!-- end row -->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Güvenli Ödeme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <iframe id="paymentFrame" src="" style="width:100%; height:600px; border:none;"></iframe>
+            </div>
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VMb5CoOHzJw=",
+  "dgSpecHash": "5MgjsljAowI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hidir\\Desktop\\Project\\b2b\\B2b\\B2b.Web\\B2b.Web.csproj",
+  "projectFilePath": "C:\\Project\\b2b\\B2b\\B2b.Web\\B2b.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hidir\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\Hidir\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

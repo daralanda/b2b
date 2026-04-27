@@ -1,0 +1,112 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IFormCollection
+
+@{
+    Layout = null;
+    string responseCode = Model["ResponseCode"];
+    string responseMsg = Model["responseMsg"] ;
+    string orderId = Model["OrderId"];
+    bool isSuccess = responseCode == "00";
+    string targetUrl=string.Empty;
+    // Yönlendirme adreslerini belirleyelim
+    if (ViewBag.UserId!=0)
+    {
+        targetUrl = isSuccess ? "/siparis-takibi" : "/odeme";
+    }
+    else
+    {
+        targetUrl = "/online-odeme";
+    }
+    string targetText = isSuccess ? "Sipariş Takibine Gidiliyor..." : "Ödeme Sayfasına Dönülüyor...";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İşlem Sonucu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { background-color: #f4f7f9; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        .payment-card { max-width: 450px; margin: 100px auto; border: none; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); background: #fff; }
+        .status-icon { font-size: 70px; margin-bottom: 15px; }
+        .success-color { color: #198754; }
+        .danger-color { color: #dc3545; }
+        .order-info { background: #f8f9fa; border-radius: 12px; padding: 15px; margin: 20px 0; font-size: 0.9rem; }
+        .timer-bar { height: 4px; background: #eee; border-radius: 2px; overflow: hidden; margin-top: 20px; }
+        .timer-progress { height: 100%; width: 100%; transition: width 5s linear; }
+        .bg-success-progress { background: #198754; }
+        .bg-danger-progress { background: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card payment-card text-center p-4">
+            <div class="card-body">
+                
+                @if (isSuccess)
+                {
+                    <div class="status-icon success-color">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3 class="fw-bold">Ödeme Onaylandı</h3>
+                    <p class="text-muted small">Siparişiniz başarıyla sisteme alındı.</p>
+                }
+                else
+                {
+                    <div class="status-icon danger-color">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="fw-bold">Ödeme Tamamlanamadı</h3>
+                    <p class="text-muted small">Kartınızdan tahsilat yapılamadı.</p>
+                    <div class="order-info border">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">Mesaj:</span>
+                            <span class="fw-medium text-end">@ViewBag.CustomMessage</span>
+                        </div>
+                    </div>
+                }
+
+ 
+
+                <div class="mt-4">
+                    <a href="@targetUrl" class="btn @(isSuccess ? "btn-success" : "btn-danger") w-100 py-2 fw-bold">
+                        Hemen Git <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="mt-3 small text-muted">
+                    <span id="countdown">5</span> saniye içinde otomatik yönlendirileceksiniz.
+                    <div class="timer-bar">
+                        <div id="progress" class="timer-progress @(isSuccess ? "bg-success-progress" : "bg-danger-progress")"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sayfa yüklendiğinde ilerleme çubuğunu sıfıra düşür
+        window.onload = function() {
+            document.getElementById('progress').style.width = '0%';
+            
+            var seconds = 5;
+            var countdownElement = document.getElementById('countdown');
+            
+            var interval = setInterval(function() {
+                seconds--;
+                countdownElement.innerText = seconds;
+                if (seconds <= 0) {
+                    clearInterval(interval);
+                    window.location.href = "@targetUrl";
+                }
+            }, 1000);
+        };
+    </script>
+</body>
+</html>

@@ -7,6 +7,8 @@ $(document).ready(function () {
     };
     GetCarts();
     GetAllCheckNumber();
+    GetAllCart();
+
     confirm.style.display = "none";
     payment.style.display = "none";
     shipping.style.display = "block";
@@ -177,4 +179,28 @@ function GetOrder(obj) {
         async: false
     });
 
+}
+
+function payWithModal() {
+
+    $.ajax({
+        url: '/api/PaymentApi/GetToken',
+        type: 'Get',
+        contentType: 'application/json',
+        dataType: 'json',
+        headers: { 'Authorization': localStorage.getItem("token") },
+        success: function (data) {
+            if (data.SessionToken != null) {
+                var hppUrl = "https://pos.vakifpays.com.tr/payment/" + data.SessionToken;
+                window.location.href=hppUrl;
+            }
+            
+        },
+        error: function (x) {
+            console.clear();
+            console.log(x);
+        },
+        async: false
+    });
+   
 }

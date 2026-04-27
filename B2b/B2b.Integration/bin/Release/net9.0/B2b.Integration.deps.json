@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "B2b.Integration/1.0.0": {
+        "runtime": {
+          "B2b.Integration.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "B2b.Integration/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

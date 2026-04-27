@@ -12,6 +12,7 @@ using B2b.Infrastructure.Service.CurrencyService;
 using B2b.Infrastructure.Service.ExchangeService;
 using B2b.Infrastructure.Service.MainService;
 using B2b.Infrastructure.Service.OrderService;
+using B2b.Infrastructure.Service.PaymentService;
 using B2b.Infrastructure.Service.ProductService;
 using B2b.Infrastructure.Service.RoleService;
 using B2b.Infrastructure.Service.SliderService;
@@ -46,6 +47,7 @@ namespace B2b.Web
             CartServiceRegister();
             ExchangeServiceRegister();
             CampaignServiceRegister();
+            PaymentManagerServiceRegister();
         }
         private static void JWTServiceRegister()
         {
@@ -115,6 +117,10 @@ namespace B2b.Web
         private static void CampaignServiceRegister()
         {
             _services.AddScoped<ICampaignService, CampaignService>(p => { return new CampaignService(_serviceProvider.GetService<B2bDbContext>()); });
+        }
+        private static void PaymentManagerServiceRegister()
+        {
+            _services.AddScoped<IPaymentManager, PaymentManager>(p => { return new PaymentManager(_serviceProvider.GetService<B2bDbContext>()); });
         }
     }
 }

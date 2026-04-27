@@ -5590,3 +5590,17 @@ div#CartContent {
     .owl-carousel .owl-nav .owl-next {
         right: 0;
     }
+
+.accordion-body {
+    padding-left: 0;
+    padding-right: 0;
+}
+.btn-primary, .btn-success {
+    background-color: black;
+    border-block-color: black;
+}
+    .btn-primary:hover, .btn-success:hover {
+        background-color: rgb(251 215 84) !important;
+        border-block-color: rgb(251 215 84) !important;
+        color: black !important;
+    }

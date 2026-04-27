@@ -70,6 +70,11 @@ namespace B2b.Web.Controllers
         {
             return View();
         }
+        public IActionResult PaymentSettings()
+        {
+            return View();
+        }
+        
         #endregion
 
         public IActionResult Register()
