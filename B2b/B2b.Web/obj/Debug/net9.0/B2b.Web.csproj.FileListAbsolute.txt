@@ -1088,11 +1088,8 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compres
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\5hq0e2w07k-{0}-lax14fd0pv-lax14fd0pv.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\du3c03sy1a-{0}-n3jebhodtc-n3jebhodtc.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\lrxsgjs301-{0}-b6819pvgrj-b6819pvgrj.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\leqxpzbeo6-{0}-ikkwfzuvub-ikkwfzuvub.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\j7o1m0n4wo-{0}-9owc3f7jyb-9owc3f7jyb.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\x6cfsec8j7-{0}-yuav9tcu84-yuav9tcu84.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\qaneki62kb-{0}-isa4okzwxc-isa4okzwxc.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\xgu3t9evbd-{0}-wsgld1wh43-wsgld1wh43.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\bf32moi6d7-{0}-f0cc5stkot-f0cc5stkot.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\m654rjppmq-{0}-rudzl347uw-rudzl347uw.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\gfl0qixzku-{0}-eivvdwkotk-eivvdwkotk.gz
@@ -1113,11 +1110,7 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\ref\B2b.Web.dll
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jzg8fdf1io-{0}-uaozjohprv-uaozjohprv.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\0dz26y9ih8-{0}-52hukk2xnt-52hukk2xnt.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\wl4j35pfyz-{0}-i6iqokuh20-i6iqokuh20.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\ftnu87ba12-{0}-flrg71weuz-flrg71weuz.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\rxn31cev7z-{0}-n5taoflv10-n5taoflv10.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\ljicp4ukpu-{0}-3eqfuvrhqs-3eqfuvrhqs.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jqfbd6u9ew-{0}-ljzbp97uxp-ljzbp97uxp.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\appsettings.Development.json
 C:\Project\b2b\B2b\B2b.Web\bin\Debug\net9.0\appsettings.json
@@ -1680,3 +1673,10 @@ C:\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.pdb
 C:\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.genruntimeconfig.cache
 C:\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\ref\B2b.Web.dll
 C:\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jqfbd6u9ew-{0}-if3j5sckra-if3j5sckra.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jqfbd6u9ew-{0}-0impcjceyh-0impcjceyh.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\ftnu87ba12-{0}-z79g80lcqm-z79g80lcqm.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\leqxpzbeo6-{0}-vqif4v6n5o-vqif4v6n5o.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\j7o1m0n4wo-{0}-kvk3s5311t-kvk3s5311t.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\wl4j35pfyz-{0}-puxzbxv7yr-puxzbxv7yr.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\rxn31cev7z-{0}-42rnyh4d0d-42rnyh4d0d.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\xgu3t9evbd-{0}-dhg1pcxz66-dhg1pcxz66.gz

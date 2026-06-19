@@ -867,9 +867,7 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\scope
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\scopedcss\projectbundle\B2b.Web.bundle.scp.css
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\uwj974vnom-{0}-ktaq4dgqi7-ktaq4dgqi7.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\upwwi4selz-{0}-z9u5ioo24y-z9u5ioo24y.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\wl4j35pfyz-{0}-i6iqokuh20-i6iqokuh20.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\zwsz6wetap-{0}-xcmlx6xxmx-xcmlx6xxmx.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\ftnu87ba12-{0}-flrg71weuz-flrg71weuz.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\xiqo1lgpva-{0}-e72zfh4477-e72zfh4477.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\q6iq4mcmue-{0}-hbv53eamsj-hbv53eamsj.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\t8yeoh5g4b-{0}-kv53f895t1-kv53f895t1.gz
@@ -1091,13 +1089,10 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compr
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\5hq0e2w07k-{0}-lax14fd0pv-lax14fd0pv.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\du3c03sy1a-{0}-n3jebhodtc-n3jebhodtc.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\lrxsgjs301-{0}-b6819pvgrj-b6819pvgrj.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\leqxpzbeo6-{0}-ikkwfzuvub-ikkwfzuvub.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\jzg8fdf1io-{0}-uaozjohprv-uaozjohprv.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\j7o1m0n4wo-{0}-9owc3f7jyb-9owc3f7jyb.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\x6cfsec8j7-{0}-yuav9tcu84-yuav9tcu84.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\qaneki62kb-{0}-isa4okzwxc-isa4okzwxc.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\ljicp4ukpu-{0}-3eqfuvrhqs-3eqfuvrhqs.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\xgu3t9evbd-{0}-wsgld1wh43-wsgld1wh43.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\bf32moi6d7-{0}-f0cc5stkot-f0cc5stkot.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\m654rjppmq-{0}-rudzl347uw-rudzl347uw.gz
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\gfl0qixzku-{0}-eivvdwkotk-eivvdwkotk.gz
@@ -1117,8 +1112,6 @@ C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\refin
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.pdb
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.genruntimeconfig.cache
 C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\ref\B2b.Web.dll
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\rxn31cev7z-{0}-n5taoflv10-n5taoflv10.gz
-C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\jqfbd6u9ew-{0}-ljzbp97uxp-ljzbp97uxp.gz
 C:\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\appsettings.Development.json
 C:\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\appsettings.json
 C:\Project\b2b\B2b\B2b.Web\bin\Release\net9.0\B2b.Web.staticwebassets.runtime.json
@@ -1680,3 +1673,10 @@ C:\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\refint\B2b.Web.dll
 C:\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.pdb
 C:\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\B2b.Web.genruntimeconfig.cache
 C:\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\ref\B2b.Web.dll
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\wl4j35pfyz-{0}-puxzbxv7yr-puxzbxv7yr.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\ftnu87ba12-{0}-z79g80lcqm-z79g80lcqm.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\leqxpzbeo6-{0}-vqif4v6n5o-vqif4v6n5o.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\rxn31cev7z-{0}-42rnyh4d0d-42rnyh4d0d.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\j7o1m0n4wo-{0}-kvk3s5311t-kvk3s5311t.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\xgu3t9evbd-{0}-dhg1pcxz66-dhg1pcxz66.gz
+C:\Users\Hidir\OneDrive\Desktop\Project\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\jqfbd6u9ew-{0}-0impcjceyh-0impcjceyh.gz

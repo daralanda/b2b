@@ -50,7 +50,7 @@ $(document).ready(function () {
 
                     // ISCampaign veya Price != DiscountedPrice ise indirim rozeti ve fiyatları göster
                     if (item.IsCampaign === 1 || item.Price !== item.DiscountedPrice) {
-                        discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">-% ${item.TotalDiscountRate}</span></div>`;
+                        discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">-% ${item.DiscountTxt}</span></div>`;
                         pricesHTML = `<h5 class="my-0"><span class="text-muted me-2"><del>${formatPrice(item.Price)}</del></span><b>${formatPrice(item.DiscountedPrice)}</b></h5>`;
                     } else {
                         // İndirim yoksa sadece normal fiyatı göster

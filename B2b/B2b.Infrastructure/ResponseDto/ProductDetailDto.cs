@@ -18,6 +18,7 @@
         public decimal DiscountedPrice { get; set; }
         public int IsCampaign { get; set; }
         public decimal TotalDiscountRate { get; set; }
+        public string DiscountTxt { get; set; }
 
     }
 }

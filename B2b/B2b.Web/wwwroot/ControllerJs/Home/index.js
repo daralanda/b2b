@@ -30,7 +30,12 @@ function LastProducts() {
                 // ISCampaign veya Price != DiscountedPrice ise indirim rozeti ve fiyatları göster
                 if (item.IsCampaign === 1 || item.Price !== item.DiscountedPrice) {
                     discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-primary font-size-11">-% ${item.TotalDiscountRate}</span></div>`;
-                    pricesHTML = `<h5 class="my-0"><span class="text-muted me-2"><del>${formatPrice(item.Price)}</del></span><b>${formatPrice(item.DiscountedPrice)}</b></h5>`;
+                    pricesHTML = `<h5 class="my-0 d-flex flex-column flex-sm-row align-items-sm-center">
+    <span class="text-muted me-2 mb-1 mb-sm-0 ">
+        <del>${formatPrice(item.Price)}</del>
+    </span>
+    <b>${formatPrice(item.DiscountedPrice)}</b>
+</h5>`;
                 } else {
                     // İndirim yoksa sadece normal fiyatı göster
                     pricesHTML = `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
@@ -67,7 +72,7 @@ function LastProducts() {
                 responsiveClass: true,
                 responsive: {
                     0: {
-                        items: 2,
+                        items: 3,
                     },
                     600: {
                         items: 3,
@@ -103,8 +108,13 @@ function CampaignProducts() {
 
                 // ISCampaign veya Price != DiscountedPrice ise indirim rozeti ve fiyatları göster
                 if (item.IsCampaign === 1 || item.Price !== item.DiscountedPrice) {
-                    discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">-% ${item.TotalDiscountRate}</span></div>`;
-                    pricesHTML = `<h5 class="my-0"><span class="text-muted me-2"><del>${formatPrice(item.Price)}</del></span><b>${formatPrice(item.DiscountedPrice)}</b></h5>`;
+                    discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">% ${item.DiscountTxt}</span></div>`;
+                    pricesHTML = `<h5 class="my-0 d-flex flex-column flex-sm-row align-items-sm-center">
+    <span class="text-muted me-2 mb-1 mb-sm-0">
+        <del>${formatPrice(item.Price)}</del>
+    </span>
+    <b>${formatPrice(item.DiscountedPrice)}</b>
+</h5>`;
                 } else {
                     // İndirim yoksa sadece normal fiyatı göster
                     pricesHTML = `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
@@ -142,7 +152,7 @@ function CampaignProducts() {
                 responsiveClass: true,
                 responsive: {
                     0: {
-                        items: 2,
+                        items: 3,
                     },
                     600: {
                         items: 3,

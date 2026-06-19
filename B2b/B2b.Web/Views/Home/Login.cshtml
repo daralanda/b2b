@@ -14,7 +14,6 @@
     <link href="@Domain/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
@@ -27,7 +26,6 @@
                                     <div class="text-black p-4">
                                         <h4 class="text-black">Kare El Aletleri</h4>
                                         <h5 class="text-black">Kullanıcı Girişi</h5>
-
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -57,7 +55,7 @@
                                 <div class="form-horizontal">
 
                                     <div class="mb-3">
-                                        <label for="username" class="form-label">E mail</label>
+                                        <label for="email" class="form-label">E-mail</label>
                                         <input type="text" class="form-control" id="email" placeholder="Email">
                                     </div>
 
@@ -69,8 +67,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="remember-me">
+                                        <label class="form-check-label text-black" for="remember-me">
+                                            Beni Hatırla
+                                        </label>
+                                    </div>
+
                                     <div class="mt-3 col-md-12 win-log-btn">
-                                        <a class="btn btn-logo-2 waves-effect waves-light" onclick="Login('@Domain')">Giriş Yap</a>
+                                        <a class="btn btn-logo-2 waves-effect waves-light" onclick="ExecuteLogin('@Domain')">Giriş Yap</a>
                                         <a class="btn btn-logo-1 waves-effect waves-light text-black" href="/register">Kayıt Ol</a>
                                     </div>
 
@@ -87,8 +92,6 @@
             </div>
         </div>
     </div>
-    <!-- end account-pages -->
-    <!-- JAVASCRIPT -->
     <script src="@Domain/assets/libs/jquery/jquery.min.js"></script>
     <script src="@Domain/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="@Domain/assets/libs/metismenu/metisMenu.min.js"></script>
@@ -97,7 +100,35 @@
     <script src="@Domain/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
     <script src="@Domain/assets/controllerjs/main.js"></script>
-    <!-- App js -->
     <script src="@Domain/assets/js/app.js"></script>
+
+    <script>
+        $(document).ready(function () {
+        // Sayfa açıldığında tarayıcıda kayıtlı email var mı kontrol et
+        if (localStorage.getItem("rememberMe") === "true") {
+        $("#email").val(localStorage.getItem("savedEmail"));
+        $("#remember-me").prop("checked", true);
+        }
+        });
+
+        // Giriş butonuna basıldığında çalışan ara fonksiyon
+        function ExecuteLogin(domain) {
+        var rememberMeChecked = $("#remember-me").is(":checked");
+        var emailValue = $("#email").val();
+
+        if (rememberMeChecked && emailValue !== "") {
+        // Bilgileri tarayıcı hafızasına kaydet
+        localStorage.setItem("savedEmail", emailValue);
+        localStorage.setItem("rememberMe", "true");
+        } else {
+        // İşaret kaldırıldıysa hafızadan temizle
+        localStorage.removeItem("savedEmail");
+        localStorage.setItem("rememberMe", "false");
+        }
+
+        // main.js içindeki orjinal Giriş fonksiyonunuzu tetikle
+        Login(domain);
+        }
+    </script>
 </body>
 </html>

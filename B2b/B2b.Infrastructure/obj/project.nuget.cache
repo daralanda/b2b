@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RNzGRM6RJZM=",
+  "dgSpecHash": "LnlFy6b4bWM=",
   "success": true,
-  "projectFilePath": "C:\\Project\\b2b\\B2b\\B2b.Infrastructure\\B2b.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Hidir\\OneDrive\\Desktop\\Project\\b2b\\B2b\\B2b.Infrastructure\\B2b.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hidir\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\Hidir\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

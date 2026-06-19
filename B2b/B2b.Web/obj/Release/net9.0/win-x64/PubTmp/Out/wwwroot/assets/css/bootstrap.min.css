@@ -8721,7 +8721,8 @@ textarea.form-control-lg {
 .d-flex {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
-    display: flex !important
+    display: flex !important;
+    justify-content: space-around;
 }
 
 .d-inline-flex {

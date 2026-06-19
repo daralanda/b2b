@@ -10,8 +10,8 @@ $(document).ready(function () {
     GetAllCart();
 
     confirm.style.display = "none";
-    payment.style.display = "none";
-    shipping.style.display = "block";
+    payment.style.display = "block";
+//    shipping.style.display = "block";
 });
 function GetCarts() {
     $.ajax({
@@ -21,14 +21,14 @@ function GetCarts() {
         dataType: 'json',
         headers: { 'Authorization': localStorage.getItem("token") },
         success: function (data) {
-            document.getElementById("billing-name").value = data.data.CustomerName;
-            document.getElementById("billing-Tax").value = data.data.TaxNo;
-            document.getElementById("billing-Tax-Office").value = data.data.TaxOffice;
-            document.getElementById("billing-email-address").value = data.data.Email;
-            document.getElementById("billing-phone").value = data.data.Phone;
-            document.getElementById("City").value = data.Cities.find(x=>x.CityId=data.data.CityId).CityName;
-            document.getElementById("District").value = data.Districts.find(x => x.DistrictId = data.data.DistrictId).DistrictName;
-            document.getElementById("billing-address").value = data.data.Address;
+            //document.getElementById("billing-name").value = data.data.CustomerName;
+            //document.getElementById("billing-Tax").value = data.data.TaxNo;
+            //document.getElementById("billing-Tax-Office").value = data.data.TaxOffice;
+            //document.getElementById("billing-email-address").value = data.data.Email;
+            //document.getElementById("billing-phone").value = data.data.Phone;
+            //document.getElementById("City").value = data.Cities.find(x=>x.CityId=data.data.CityId).CityName;
+            //document.getElementById("District").value = data.Districts.find(x => x.DistrictId = data.data.DistrictId).DistrictName;
+            //document.getElementById("billing-address").value = data.data.Address;
         },
         error: function (x) { },
         async: false

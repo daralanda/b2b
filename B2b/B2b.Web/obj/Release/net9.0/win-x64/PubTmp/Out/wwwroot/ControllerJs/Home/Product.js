@@ -1,10 +1,10 @@
 ﻿/* ==========================================================================
-   PRODUCT.JS - FULL ENTEGRE (CSS VE 401 DÜZELTMELİ)
+   PRODUCT.JS - FULL ENTEGRE (TABLOYA MİKTAR GİRİŞİ EKLEDİ)
    ========================================================================== */
-
 let allProductsData = [];
 let filteredProducts = [];
 let selectedBrands = [];
+let currentView = 'grid'; // Varsayılan görünüm: 'grid' veya 'list'
 
 $(document).ready(function () {
     GetCategories();
@@ -110,35 +110,109 @@ $(document).ready(function () {
             pageSize: 36,
             callback: function (pageData) {
                 let html = '';
-                pageData.forEach(item => {
-                    const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
-                    let pricesHTML = hasDiscount
-                        ? `<h5 class="my-0"><del class="text-muted me-2 small">${formatPrice(item.Price)}</del><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></h5>`
-                        : `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
+
+                if (currentView === 'grid') {
+                    // ================= GRID (IZGARA) GÖRÜNÜMÜ =================
+                    pageData.forEach(item => {
+                        const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
+                        let pricesHTML = hasDiscount
+                            ? `<h5 class="my-0 d-flex flex-column flex-sm-row align-items-sm-center"><del class="text-muted me-2 small">${formatPrice(item.Price)}</del><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></h5>`
+                            : `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
+
+                        html += `
+                        <div class="col col-lg-3 col-xsm-4 mb-4">
+                            <div class="card product-card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
+                                        <div class="position-absolute col-12 top-0 start-0">
+                                            <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
+                                            <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
+                                        </div>
+                                        <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+                                    </div>
+                                    <div class="mt-3 text-center">
+                                        <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
+                                        ${pricesHTML}
+                                        <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
+                                            <i class="bx bx-cart me-1"></i> Sepete Ekle
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+
+                    $('#product-list').html(html || '<div class="col-12 text-center py-5"><h5>Eşleşen ürün bulunamadı.</h5></div>');
+
+                } else {
+                    // ================= LIST (TABLO) GÖRÜNÜMÜ =================
+                    if (pageData.length === 0) {
+                        $('#product-list').html('<div class="col-12 text-center py-5"><h5>Eşleşen ürün bulunamadı.</h5></div>');
+                        return;
+                    }
+
+                    // Tablo Başlıkları
+                    html += `
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle bg-white shadow-sm">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 80px;" class="text-center">Görsel</th>
+                                        <th>Ürün Kodu</th>
+                                        <th>Ürün Adı</th>
+                                        <th>Marka</th>
+                                        <th>Kategori</th>
+                                        <th class="text-center" style="width: 90px;">Birim</th>
+                                        <th class="text-end" style="width: 140px;">Fiyat</th>
+                                        <th class="text-center" style="width: 180px;">Miktar / İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+
+                    // Tablo Satırları
+                    pageData.forEach(item => {
+                        const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
+                        let pricesHTML = hasDiscount
+                            ? `<div class="text-end"><del class="text-muted small d-block">${formatPrice(item.Price)}</del><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></div>`
+                            : `<div class="text-end"><b>${formatPrice(item.Price)}</b></div>`;
+
+                        const productUnit = item.UnitName || item.Unit || '-';
+
+                        html += `
+                        <tr>
+                            <td class="text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
+                                <img src="${item.ProductImage}" style="max-height: 40px; max-width: 40px; object-fit: contain;">
+                            </td>
+                            <td><small class="text-muted">${item.ProductCode || '-'}</small></td>
+                            <td>
+                                <span class="fw-medium text-dark mb-0 d-block" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
+                                    ${item.ProductName}
+                                </span>
+                            </td>
+                            <td><span class="badge bg-logo-1 text-black">${item.BrandName}</span></td>
+                            <td><span class="badge bg-logo-2">${item.CategoryName}</span></td>
+                            <td class="text-center"><span class="text-secondary small fw-bold">${productUnit}</span></td>
+                            <td>${pricesHTML}</td>
+                            <td>
+                                <div class="input-group input-group-sm">
+                                    <input type="number" id="qty_${item.ProductId}" class="form-control text-center" value="1" min="1" style="max-width: 70px;">
+                                    <button class="btn btn-logo-2" type="button" onclick="const qty = parseInt($('#qty_${item.ProductId}').val()) || 1; AddCart(${item.ProductId}, qty);">
+                                        <i class="bx bx-cart"></i> Ekle
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>`;
+                    });
 
                     html += `
-                    <div class="col col-lg-3 col-xsm-6 mb-4">
-      <div class="card product-card h-100 shadow-sm">
-          <div class="card-body">
-              <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
-                  <div class="position-absolute col-12 top-0 start-0">
-                      <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
-                      <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
-                  </div>
-                  <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
-              </div>
-              <div class="mt-3 text-center">
-                  <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
-                  ${pricesHTML}
-                  <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
-                      <i class="bx bx-cart me-1"></i> Sepete Ekle
-                  </button>
-              </div>
-          </div>
-      </div>
-  </div>`;
-                });
-                $('#product-list').html(html || '<div class="col-12 text-center py-5"><h5>Eşleşen ürün bulunamadı.</h5></div>');
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>`;
+
+                    $('#product-list').html(html);
+                }
             }
         });
     }
@@ -157,6 +231,23 @@ $(document).ready(function () {
     $('#minPrice, #maxPrice').on('input', applyFilters);
     $('#sortSelect').on('change', applySorting);
     $('#btnClearFilters').on('click', resetFilters);
+
+    // Görünüm Değiştirme Dinamik Dinleyicileri (Delegate Sistemi)
+    $(document).on('click', '#btn-grid', function (e) {
+        e.preventDefault();
+        currentView = 'grid';
+        $('#btn-list').removeClass('active');
+        $(this).addClass('active');
+        applyFilters();
+    });
+
+    $(document).on('click', '#btn-list', function (e) {
+        e.preventDefault();
+        currentView = 'list';
+        $('#btn-grid').removeClass('active');
+        $(this).addClass('active');
+        applyFilters();
+    });
 
     function buildBrandFilter() {
         const brandMap = new Map();

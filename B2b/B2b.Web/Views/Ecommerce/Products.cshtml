@@ -11,10 +11,7 @@
         <div class="col-lg-2 mt-3"></div>
         <div class="col-lg-10 mt-3">
             <div class="row align-items-center">
-                <div class="col-md-4">
-                    <input type="text" id="searchInput" class="form-control  mb-3 " placeholder="Ürün veya kod ara...">
-                </div>
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-3">
                     <select id="sortSelect" class="form-select  mb-3 ">
                         <option value="">Sıralama Seçiniz</option>
                         <option value="priceAsc">Fiyat: Düşükten Yükseğe</option>
@@ -22,6 +19,20 @@
                         <option value="nameAsc">Ad: A'dan Z'ye</option>
                         <option value="nameDesc">Ad: Z'den A'ya</option>
                     </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="btn-group btn-group mb-3" role="group" aria-label="Görünüm Seçimi">
+                        <button type="button" id="btn-grid" class="btn btn-outline-secondary active">
+                            <i class="bx bx-grid-alt"></i>
+                        </button>
+                        <button type="button" id="btn-list" class="btn btn-outline-secondary">
+                            <i class="bx bx-list-ul"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-7">
+                    <input type="text" id="searchInput" class="form-control  mb-3 " placeholder="Ürün veya kod ara...">
                 </div>
             </div>
         </div>
@@ -53,7 +64,7 @@
                         </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div class="accordion-body" id="brand-filter">
+                        <div class="accordion-body spc-padding" id="brand-filter">
                            
                         </div>
                     </div>
@@ -65,7 +76,7 @@
                         </button>
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
+                        <div class="accordion-body spc-padding">
                             <div class="row g-2">
                                 <div class="col-6">
                                     <input type="number" min="0" id="minPrice" class="form-control" placeholder="Min">
@@ -82,7 +93,7 @@
    
         </div>
         <div class="col-lg-10  mt-3">
-           
+
 
             <div id="product-list" class="row"></div>
 

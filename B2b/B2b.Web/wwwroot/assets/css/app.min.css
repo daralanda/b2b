@@ -5604,3 +5604,28 @@ div#CartContent {
         border-block-color: rgb(251 215 84) !important;
         color: black !important;
     }
+.product-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* En fazla kaç satır görüneceğini belirler */
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* Taşan metni gizler */
+    text-overflow: ellipsis; /* Sona üç nokta (...) koyar */
+    /* İsteğe bağlı: Satır yüksekliği ayarı (tasarımınızın bozulmaması için) */
+    line-height: 1.4em;
+    height: 2.8em; /* line-height * satır sayısı (1.4 x 2) */
+}
+
+
+
+@media (max-width: 5000px) {
+    .card-body > div > h5 {
+        font-size: 0.8rem !important;
+    }
+    button.btn.btn-logo-2.btn-sm.mt-2.w-100 {
+        font-size: 0.675em;
+    }
+}
+.spc-padding{
+    padding-left:15px;
+    padding-right:15px;
+}
