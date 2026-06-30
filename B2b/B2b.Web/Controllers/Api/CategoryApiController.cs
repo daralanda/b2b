@@ -31,9 +31,9 @@ namespace B2b.Web.Controllers.Api
             return Ok(_service.Add(data));
         }
         [HttpGet]
-        public IActionResult Remove(int id)
+        public IActionResult Remove(int id, int transferId)
         {
-            return Ok(_service.Remove(id));
+            return Ok(_service.Remove(id,transferId));
         }
         [HttpPut]
         public IActionResult Update(Category data)

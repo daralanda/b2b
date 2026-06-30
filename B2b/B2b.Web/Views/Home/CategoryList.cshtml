@@ -93,3 +93,35 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Silinecek Olan</label>
+                            <input type="text" class="form-control" id="SourceName">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="name">Aktarılacak Olan</label>
+                            <select id="Transfer" class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" onclick="Delete(this)" class="btn btn-primary" id="btnSumbit">Sil</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,13 +31,15 @@ function PageLoad() {
                 {
                     "data": "BrandId",
                     render: function (data) {
-                        return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a> ";
+                        return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a> "
+                            +
+                            "<a onclick='btnDeleteClick(this)' class='btn btn-xs btn-danger mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#deleteModal'><i class='fas fa-trash-alt'></i></a> ";
                     }
                 }
             ];
             DatatablesLoad("datatables", DataList, columns)
             $('#exampleModal').modal('hide');
-
+            $('#deleteModal').modal('hide');
 
         }
     });
@@ -142,4 +144,51 @@ function PostData() {
 
     }
   
+}
+var brandId = 0;
+function btnDeleteClick(obj) {
+    console.clear();
+    var subdata = DataList.find(x => x.BrandId == obj.id);
+    brandId = obj.id;
+    document.getElementById("SourceName").value = subdata.BrandName;
+
+    const selectKutusu = document.getElementById("Transfer");
+
+    // 2. Yeni bir option nesnesi oluşturuyoruz: Option("Görünecek Metin", "Arka Plandaki Değeri")
+    
+    DataList.forEach(function (eleman, indeks, dizininKendisi) {
+        if (eleman.BrandId != obj.id) {
+            const yeniSecenek = new Option(eleman.BrandName, eleman.BrandId);
+            selectKutusu.add(yeniSecenek);
+        }
+    });
+}
+
+function Delete() {
+    
+    $.ajax({
+        url: '/api/BrandApi/Remove?id=' + brandId + '&transferId=' + document.getElementById("Transfer").value,
+        type: 'Get',
+        dataType: 'Json',
+        headers: { 'Authorization': localStorage.getItem("token") },
+        data: JSON.stringify(Data),
+        contentType: 'application/json',
+        success: function (data) {
+            if (data.State) {
+                Swal.fire({
+                    title: "Marka Silme",
+                    text: "Marka başarıyla eklenmiştir.",
+                    icon: "success",
+                });
+                PageLoad();
+            }
+            else {
+                Swal.fire({
+                    title: "Marka Silme",
+                    text: "Marka eklenirken beklenmedik bir sorun ile karşılaşıldı.",
+                    icon: "warning",
+                });
+            }
+        }
+    });
 }

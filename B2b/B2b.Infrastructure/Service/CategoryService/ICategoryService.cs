@@ -7,7 +7,7 @@ namespace B2b.Infrastructure.Service.CategoryService
     {
         ResultDto<Category> Add(Category data);
         ResultDto<Category> GetById(int id);
-        ResultDto<Category> Remove(int id);
+        ResultDto<Category> Remove(int id,int transferId);
         ResultDto<Category> GetAll();
         ResultDto<Category> Update(Category data);
     }

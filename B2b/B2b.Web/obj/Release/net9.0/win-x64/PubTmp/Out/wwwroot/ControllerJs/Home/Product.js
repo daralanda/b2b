@@ -1,9 +1,9 @@
 ﻿/* ==========================================================================
-   PRODUCT.JS - FULL ENTEGRE (TABLOYA MİKTAR GİRİŞİ EKLEDİ)
+   PRODUCT.JS - YENİ YATAY FİLTRE VE SELECT YAPISINA UYARLANMIŞ VERSİYON
    ========================================================================== */
 let allProductsData = [];
 let filteredProducts = [];
-let selectedBrands = [];
+let selectedBrandId = ''; // Tekli select seçimi için tutulan değişken
 let currentView = 'grid'; // Varsayılan görünüm: 'grid' veya 'list'
 
 $(document).ready(function () {
@@ -49,14 +49,11 @@ $(document).ready(function () {
 
     function applyFilters() {
         const searchTerm = normalizeTR($('#searchInput').val().trim());
-        const categoryId = $('#category-list li.active').data('category-id') || 'all';
-        const minVal = $('#minPrice').val();
-        const maxVal = $('#maxPrice').val();
-        const minPrice = minVal !== "" ? parseFloat(minVal) : 0;
-        const maxPrice = maxVal !== "" ? parseFloat(maxVal) : Infinity;
+        const categoryId = $('#category-list').val() || ''; // select elementinden değer alıyoruz
+        const brandId = $('#brand-filter').val() || ''; // select elementinden değer alıyoruz
 
-        // Filtre temizle butonu görünürlüğü
-        if (searchTerm !== "" || categoryId !== 'all' || selectedBrands.length > 0 || minVal !== "" || maxVal !== "") {
+        // Filtre temizle butonu görünürlüğü (Arama veya filtrelerden biri aktifse görünür)
+        if (searchTerm !== "" || categoryId !== "" || brandId !== "") {
             $('#clearFiltersArea').removeClass('d-none');
         } else {
             $('#clearFiltersArea').addClass('d-none');
@@ -66,11 +63,11 @@ $(document).ready(function () {
             const matchesSearch = searchTerm.length < 2 ||
                 normalizeTR(item.ProductName).includes(searchTerm) ||
                 normalizeTR(item.ProductCode).includes(searchTerm);
-            const matchesCategory = (categoryId === 'all' || item.CategoryId == categoryId);
-            const matchesBrand = (selectedBrands.length === 0 || selectedBrands.includes(item.BrandId.toString()));
-            const currentPrice = item.DiscountedPrice > 0 ? item.DiscountedPrice : item.Price;
-            const matchesPrice = (currentPrice >= minPrice && currentPrice <= maxPrice);
-            return matchesSearch && matchesCategory && matchesBrand && matchesPrice;
+
+            const matchesCategory = (categoryId === "" || item.CategoryId == categoryId);
+            const matchesBrand = (brandId === "" || item.BrandId == brandId);
+
+            return matchesSearch && matchesCategory && matchesBrand;
         });
 
         applySorting();
@@ -79,11 +76,13 @@ $(document).ready(function () {
     function applySorting() {
         const sortType = $('#sortSelect').val();
         filteredProducts.sort((a, b) => {
+            // İndirimli fiyat varsa onu, yoksa normal fiyatı baz alarak sıralar
             const priceA = a.DiscountedPrice > 0 ? a.DiscountedPrice : a.Price;
             const priceB = b.DiscountedPrice > 0 ? b.DiscountedPrice : b.Price;
+
             switch (sortType) {
-                case 'priceAsc': return priceA - priceB;
-                case 'priceDesc': return priceB - priceA;
+                case 'priceAsc': return priceA - priceB;   // Fiyat: Düşükten Yükseğe
+                case 'priceDesc': return priceB - priceA;  // Fiyat: Yüksekten Düşüğe
                 case 'nameAsc': return a.ProductName.localeCompare(b.ProductName, 'tr');
                 case 'nameDesc': return b.ProductName.localeCompare(a.ProductName, 'tr');
                 default: return 0;
@@ -94,13 +93,9 @@ $(document).ready(function () {
 
     function resetFilters() {
         $('#searchInput').val('');
-        $('#minPrice').val('');
-        $('#maxPrice').val('');
         $('#sortSelect').val('');
-        $('#category-list li').removeClass('active');
-        $('#category-list li[data-category-id="all"]').addClass('active');
-        $('.brand-checkbox').prop('checked', false);
-        selectedBrands = [];
+        $('#category-list').val(''); // Select elementini sıfırla (Tüm Kategoriler)
+        $('#brand-filter').val('');  // Select elementini sıfırla (Tüm Markalar)
         applyFilters();
     }
 
@@ -120,15 +115,11 @@ $(document).ready(function () {
                             : `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
 
                         html += `
-                        <div class="col col-lg-3 col-xsm-4 mb-4">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="card product-card h-100 shadow-sm">
                                 <div class="card-body">
                                     <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
-                                        <div class="position-absolute col-12 top-0 start-0">
-                                            <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
-                                            <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
-                                        </div>
-                                        <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+                                        <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
                                     </div>
                                     <div class="mt-3 text-center">
                                         <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
@@ -151,7 +142,6 @@ $(document).ready(function () {
                         return;
                     }
 
-                    // Tablo Başlıkları
                     html += `
                     <div class="col-12">
                         <div class="table-responsive">
@@ -159,10 +149,8 @@ $(document).ready(function () {
                                 <thead class="table-light">
                                     <tr>
                                         <th style="width: 80px;" class="text-center">Görsel</th>
-                                        <th>Ürün Kodu</th>
+                                        <th class="mobil-gizle">Ürün Kodu</th>
                                         <th>Ürün Adı</th>
-                                        <th>Marka</th>
-                                        <th>Kategori</th>
                                         <th class="text-center" style="width: 90px;">Birim</th>
                                         <th class="text-end" style="width: 140px;">Fiyat</th>
                                         <th class="text-center" style="width: 180px;">Miktar / İşlem</th>
@@ -170,7 +158,6 @@ $(document).ready(function () {
                                 </thead>
                                 <tbody>`;
 
-                    // Tablo Satırları
                     pageData.forEach(item => {
                         const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
                         let pricesHTML = hasDiscount
@@ -184,14 +171,12 @@ $(document).ready(function () {
                             <td class="text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
                                 <img src="${item.ProductImage}" style="max-height: 40px; max-width: 40px; object-fit: contain;">
                             </td>
-                            <td><small class="text-muted">${item.ProductCode || '-'}</small></td>
+                            <td class="mobil-gizle"><small class="text-muted">${item.ProductCode || '-'}</small></td>
                             <td>
                                 <span class="fw-medium text-dark mb-0 d-block" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
                                     ${item.ProductName}
                                 </span>
                             </td>
-                            <td><span class="badge bg-logo-1 text-black">${item.BrandName}</span></td>
-                            <td><span class="badge bg-logo-2">${item.CategoryName}</span></td>
                             <td class="text-center"><span class="text-secondary small fw-bold">${productUnit}</span></td>
                             <td>${pricesHTML}</td>
                             <td>
@@ -205,34 +190,21 @@ $(document).ready(function () {
                         </tr>`;
                     });
 
-                    html += `
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>`;
-
+                    html += `</tbody></table></div></div>`;
                     $('#product-list').html(html);
                 }
             }
         });
     }
 
-    // Event Listeners
+    // Event Listeners (Select Elemanlarının Değişimini Dinler)
     $('#searchInput').on('keyup', applyFilters);
-    $('#category-list').on('click', 'li', function () {
-        $('#category-list li').removeClass('active');
-        $(this).addClass('active');
-        applyFilters();
-    });
-    $(document).on('change', '.brand-checkbox', function () {
-        selectedBrands = $('.brand-checkbox:checked').map(function () { return this.value; }).get();
-        applyFilters();
-    });
-    $('#minPrice, #maxPrice').on('input', applyFilters);
+    $('#category-list').on('change', applyFilters);
+    $('#brand-filter').on('change', applyFilters);
     $('#sortSelect').on('change', applySorting);
     $('#btnClearFilters').on('click', resetFilters);
 
-    // Görünüm Değiştirme Dinamik Dinleyicileri (Delegate Sistemi)
+    // Görünüm Değiştirme Dinamik Dinleyicileri (Grid / List)
     $(document).on('click', '#btn-grid', function (e) {
         e.preventDefault();
         currentView = 'grid';
@@ -251,20 +223,27 @@ $(document).ready(function () {
 
     function buildBrandFilter() {
         const brandMap = new Map();
-        allProductsData.forEach(p => { if (!brandMap.has(p.BrandId)) brandMap.set(p.BrandId, p.BrandName); });
-        let html = '';
-        Array.from(brandMap.entries()).sort((a, b) => a[1].localeCompare(b[1], 'tr')).forEach(([id, name]) => {
-            html += `<div class="form-check mb-1"><input class="form-check-input brand-checkbox" type="checkbox" value="${id}" id="brand_${id}"><label class="form-check-label" for="brand_${id}" style="cursor:pointer">${name}</label></div>`;
+        allProductsData.forEach(p => {
+            if (p.BrandId && !brandMap.has(p.BrandId)) brandMap.set(p.BrandId, p.BrandName);
         });
-        $('#brand-filter').html(html || 'Marka bulunamadı.');
+
+        let html = '<option value="">Tüm Markalar</option>';
+        Array.from(brandMap.entries())
+            .sort((a, b) => a[1].localeCompare(b[1], 'tr'))
+            .forEach(([id, name]) => {
+                html += `<option value="${id}">${name}</option>`;
+            });
+        $('#brand-filter').html(html);
     }
 
     function updateCategoryCounts() {
-        $('#category-list li').each(function () {
-            const id = $(this).data('category-id');
-            if (id !== 'all') {
+        // Seçenek metinlerinin yanına adet bilgisini (12) formatında yazar
+        $('#category-list option').each(function () {
+            const id = $(this).val();
+            if (id !== "") {
                 const count = allProductsData.filter(p => p.CategoryId == id).length;
-                $(this).find('.badge').text(count);
+                const originalText = $(this).text().replace(/\s\(\d+\)/g, ''); // Varsa eski sayıyı siler
+                $(this).text(`${originalText} (${count})`);
             }
         });
     }
@@ -272,7 +251,7 @@ $(document).ready(function () {
 
 function GetCategories() {
     const cat = $('#category-list');
-    cat.html(`<li class="list-group-item active d-flex justify-content-between align-items-center" data-category-id="all" style="cursor:pointer"><span>Tüm Kategoriler</span><span class="badge bg-dark rounded-pill">*</span></li>`);
+    cat.html(`<option value="">Tüm Kategoriler</option>`);
     $.ajax({
         url: '/api/CommerceApi/GetCategories',
         type: 'GET',
@@ -280,8 +259,19 @@ function GetCategories() {
         success: function (res) {
             if (res.List) {
                 res.List.forEach(item => {
-                    cat.append(`<li class="list-group-item d-flex justify-content-between align-items-center" data-category-id="${item.CategoryId}" style="cursor:pointer"><span>${item.CategoryName}</span><span class="badge bg-primary rounded-pill">0</span></li>`);
+                    cat.append(`<option value="${item.CategoryId}">${item.CategoryName}</option>`);
                 });
+
+                // Kategoriler API'den geç gelirse adetleri senkronize etmek için ek kontrol
+                if (allProductsData.length > 0) {
+                    $('#category-list option').each(function () {
+                        const id = $(this).val();
+                        if (id !== "") {
+                            const count = allProductsData.filter(p => p.CategoryId == id).length;
+                            $(this).text(`${$(this).text()} (${count})`);
+                        }
+                    });
+                }
             }
         }
     });

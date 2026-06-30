@@ -73,15 +73,23 @@ namespace B2b.Infrastructure.Service.CategoryService
                 Data = category
             };
         }
-        public ResultDto<Category> Remove(int id)
+        public ResultDto<Category> Remove(int id,int transferId)
         {
             try
             {
-                var del = _context.Categories.Where(p => p.CategoryId == id).ToList();
-                _context.Categories.RemoveRange(del);
-                _context.SaveChanges();
-                state = true;
-                message = "Category removed successfully.";
+
+                int etkilenenUrunSayisi = context.Products
+                .Where(u => u.CategoryId == id)
+                .ExecuteUpdate(s => s.SetProperty(u => u.CategoryId, transferId));
+                if (etkilenenUrunSayisi != -1)
+                {
+                    var del = _context.Categories.Where(p => p.CategoryId == id).ToList();
+                    _context.Categories.RemoveRange(del);
+                    _context.SaveChanges();
+                    state = true;
+                    message = "Category removed successfully.";
+                }
+
             }
             catch (Exception ex)
             {

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("B2b.Plugin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8223f49d4dac60a5948faa351666cbce1014e78")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c793feaa6a4a9a9f0e6cb60688768b5b17a7a68a")]
 [assembly: System.Reflection.AssemblyProductAttribute("B2b.Plugin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("B2b.Plugin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -201,6 +201,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "transferId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -405,6 +410,11 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "transferId",
         "Type": "System.Int32",
         "IsRequired": false
       }

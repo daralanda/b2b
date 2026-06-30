@@ -7,7 +7,7 @@ namespace B2b.Infrastructure.Service.BrandService
     {
         ResultDto<Brand> Add(Brand data);
         ResultDto<Brand> GetById(int id);
-        ResultDto<Brand> Remove(int id);
+        ResultDto<Brand> Remove(int id,int transferId);
         ResultDto<Brand> GetAll();
         ResultDto<Brand> Update(Brand data);
     }

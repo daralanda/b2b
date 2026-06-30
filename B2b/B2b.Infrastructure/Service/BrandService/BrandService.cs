@@ -72,14 +72,22 @@ namespace B2b.Infrastructure.Service.BrandService
                 Data = brand
             };
         }
-        public ResultDto<Brand> Remove(int id)
+        public ResultDto<Brand> Remove(int id, int transferId)
         {
             try
             {
-                _context.Brands.RemoveRange(_context.Brands.Where(p => p.BrandId == id).ToList());
-                _context.SaveChanges();
-                state = true;
-                message = "Brand removed successfully.";
+
+                int etkilenenUrunSayisi = context.Products
+                .Where(u => u.BrandId == id)
+                .ExecuteUpdate(s => s.SetProperty(u => u.BrandId, transferId));
+                if (etkilenenUrunSayisi!=-1)
+                {
+                    _context.Brands.RemoveRange(_context.Brands.Where(p => p.BrandId == id).ToList());
+                    _context.SaveChanges();
+                    state = true;
+                    message = "Brand removed successfully.";
+                }
+
             }
             catch (Exception ex)
             {

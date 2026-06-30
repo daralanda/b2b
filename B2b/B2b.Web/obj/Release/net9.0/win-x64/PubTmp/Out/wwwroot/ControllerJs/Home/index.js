@@ -44,11 +44,8 @@ function LastProducts() {
                                      <div class="card product-card">
                                          <div class="card-body">
                                              <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
-                                                <div class="position-absolute col-12 top-0 start-0">
-                                                    <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
-                                                    <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
-                                                </div>
-                                                <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+                                                
+                                                <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
                                             </div>
                                             <div class="mt-3 text-center">
                                                 <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
@@ -72,10 +69,10 @@ function LastProducts() {
                 responsiveClass: true,
                 responsive: {
                     0: {
-                        items: 3,
+                        items: 2,
                     },
                     600: {
-                        items: 3,
+                        items: 2,
                     },
                     1000: {
                         items: 5,
@@ -123,12 +120,8 @@ function CampaignProducts() {
                                      <div class="card product-card">
                                          <div class="card-body">
                                               <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
-                                                <div class="position-absolute col-12 top-0 start-0">
-                                                    <span class="badge bg-logo-1 font-size-10 d-block text-black mb-1">${item.BrandName}</span>
-                                                    <span class="badge bg-logo-2 font-size-10 d-block">${item.CategoryName}</span>
-                                                      ${discountBadge}
-                                                </div>
-                                                <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-5" style="max-height:150px; object-fit:contain;">
+                 
+                                                <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
                                             </div>
                                             <div class="mt-3 text-center">
                                                 <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
@@ -152,10 +145,10 @@ function CampaignProducts() {
                 responsiveClass: true,
                 responsive: {
                     0: {
-                        items: 3,
+                        items: 2,
                     },
                     600: {
-                        items: 3,
+                        items: 2,
                     },
                     1000: {
                         items: 5,

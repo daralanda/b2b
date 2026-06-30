@@ -5629,3 +5629,16 @@ div#CartContent {
     padding-left:15px;
     padding-right:15px;
 }
+
+@media (max-width: 768px) {
+    .mobil-gizle {
+        display: none !important;
+    }
+}
+
+img.checkout-icon {
+    height: 50px;
+}
+img.checkout-icon-sm {
+    height: 27px;
+}
