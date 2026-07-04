@@ -350,8 +350,11 @@ wwwroot\assets\images\flags\italy.jpg
 wwwroot\assets\images\flags\russia.jpg
 wwwroot\assets\images\flags\spain.jpg
 wwwroot\assets\images\flags\us.jpg
+wwwroot\assets\images\icon\bakiye-sm.jpg
 wwwroot\assets\images\icon\bakiye.jpg
+wwwroot\assets\images\icon\havale-sm.jpg
 wwwroot\assets\images\icon\havale.jpg
+wwwroot\assets\images\icon\kredikart-sm.jpg
 wwwroot\assets\images\icon\kredikart.jpg
 wwwroot\assets\images\jobs.png
 wwwroot\assets\images\layouts\layout-1.jpg

@@ -47,7 +47,7 @@ namespace B2b.Infrastructure.Service.ExchangeService
         {
             try
             {
-                list = _context.Exchanges.ToList();
+                list = _context.Exchanges.OrderByDescending(p=>p.TransactionDate).ToList();
                 state = true;
                 message = "Exchange retrieved successfully.";
             }

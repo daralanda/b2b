@@ -2,6 +2,7 @@ using B2b.Dal.Context;
 using B2b.Infrastructure.Service.MainService;
 using B2b.Infrastructure.Service.PaymentService;
 using B2b.Web.Middleware.JwtAuth;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -23,12 +24,16 @@ public class Program
         builder.Services.AddCors();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddDistributedMemoryCache();
-        builder.Services.AddSession(options =>
-        {
-            options.IdleTimeout = TimeSpan.FromMinutes(60);
-            options.Cookie.HttpOnly = true;
-            options.Cookie.IsEssential = true;
-        });
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(600); // 3 Saat oturum süresi
+        options.SlidingExpiration = true; // Kullanıcı sitede gezdikçe süre sıfırlanır
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        options.Cookie.Name = "B2B_Auth_Cookie";
+    });
         builder.Services.ConfigureApplicationCookie(options =>
         {
             options.Cookie.HttpOnly = true;
@@ -38,7 +43,9 @@ public class Program
 
         builder.Services.AddSession(options =>
         {
+            options.IdleTimeout = TimeSpan.FromMinutes(600);
             options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
             options.Cookie.SameSite = SameSiteMode.Lax;
             options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
         });

@@ -26,6 +26,29 @@ function DatatablesLoad(tableName, data, columns) {
     table.buttons().container()
         .appendTo($('.col-sm-12 .col-md-6:eq(0)', table.table().container()));
 }
+function DatatablesLoadOrder(tableName, data, columns, order) {
+    var table = $('#' + tableName).DataTable({
+        "order": order,
+        "data": data,
+        "destroy": true,
+        "columns": columns,
+        "processing": false,
+        "serverSide": false,
+        "responsive": true,
+        "dom": 'Bfrtip',
+        "lengthChange": !1,
+        "buttons": ["excel", "colvis"],
+        "language": {
+            "url": '/ControllerJs/language/tr.json',
+            "paginate": {
+                "previous": "<i class='mdi mdi-chevron-left'>",
+                "next": "<i class='mdi mdi-chevron-right'>"
+            }
+        }
+    });
+    table.buttons().container()
+        .appendTo($('.col-sm-12 .col-md-6:eq(0)', table.table().container()));
+}
 function DatatablesLoadMainOffer(tableName, data, columns) {
     var table = $('#' + tableName).DataTable({
         "data": data,
@@ -73,6 +96,7 @@ function Chekbox(checked, disable) {
 
 function TarihFormat(date) {
     if (date != null) {
+        moment.locale('tr');
         return moment(date).format('L');
     }
     else {
@@ -415,6 +439,24 @@ $('#mainSlider').owlCarousel({
 })
 $(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
 $(".owl-next").html('<i class="fa fa-chevron-right"></i>');
+$('#brandSlider').owlCarousel({
+    loop: true,
+    margin: 20,
+    nav: false,
+    dots: false,
+    autoHeight: false,
+    autoplay: true,
+    responsive: {
+        0: {
+            items: 1
+        },
+        1000: {
+            items:8
+        }
+    }
+})
+$(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
+$(".owl-next").html('<i class="fa fa-chevron-right"></i>');
 
 toastr.options = {
     "closeButton": false,
@@ -558,7 +600,7 @@ function GetProduct(id) {
     var content = document.getElementById("unitTable");
     var tabContent = document.getElementById("v-pills-tabContent");
     var tab = document.getElementById("v-pills-tab");
-    document.getElementById("ProductName").innerText = "Ürün Adı : " + row.ProductName;
+    document.getElementById("ProductName").innerText = row.ProductName;
     document.getElementById("productDetailModal").innerText = row.ProductName;
     document.getElementById("ProductCode").innerText = "Ürün Kodu : " + row.ProductCode;
     document.getElementById("Category").innerText = "Kategori : " + row.CategoryName;
@@ -605,6 +647,7 @@ function GetProduct(id) {
             tabContent.innerHTML = '';
             tab.innerHTML = '';
             response.List.forEach(function (item, index) {
+                item.ImageUrl = (item.ImageUrl == null) ? '/uploads/default.jpg' : item.ImageUrl;
                 if (index == 0) {
                     tab.innerHTML += `<a class="nav-link active" id="${item.ProductImageId}-tab" data-bs-toggle="pill" href="#${item.ProductImageId}" role="tab" aria-controls="${item.ProductImageId}" aria-selected="true">
                                                     <img src="${item.ImageUrl}" alt="" class="img-fluid mx-auto d-block rounded">

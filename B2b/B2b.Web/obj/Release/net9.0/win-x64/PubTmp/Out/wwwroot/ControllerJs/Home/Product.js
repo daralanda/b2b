@@ -115,7 +115,7 @@ $(document).ready(function () {
                             : `<h5 class="my-0"><b>${formatPrice(item.Price)}</b></h5>`;
 
                         html += `
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="col-xsm-6 col-md-3 col-lg-2 mb-4">
                             <div class="card product-card h-100 shadow-sm">
                                 <div class="card-body">
                                     <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
@@ -125,7 +125,7 @@ $(document).ready(function () {
                                         <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
                                         ${pricesHTML}
                                         <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
-                                            <i class="bx bx-cart me-1"></i> Sepete Ekle
+                                            <i class="bx bx-cart me-1"></i> Ekle
                                         </button>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@ $(document).ready(function () {
                             ? `<div class="text-end"><del class="text-muted small d-block">${formatPrice(item.Price)}</del><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></div>`
                             : `<div class="text-end"><b>${formatPrice(item.Price)}</b></div>`;
 
-                        const productUnit = item.UnitName || item.Unit || '-';
+                        const productUnit = item.UnitTypeName || item.Unit || '-';
 
                         html += `
                         <tr>

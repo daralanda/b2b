@@ -271,7 +271,7 @@ namespace B2b.Infrastructure.Service.MainService
             string result = "";
             foreach (var item in data)
             {
-                result += "<div class='col-md-6 mt2'><img src='" + item.ImageUrl + "' alt='" + item.BannerName + "' class='home-banner'/></div>";
+                result += "<div class='col-md-6 mt2'><a href='"+item.BannerUrl+"' target='_blank'><img src='" + item.ImageUrl + "' alt='" + item.BannerName + "' class='home-banner'/></a></div>";
             }
             return result;
         }
@@ -281,7 +281,17 @@ namespace B2b.Infrastructure.Service.MainService
             string result = "";
             foreach (var item in data)
             {
-                result += "<div class='item'><a href='#'><img src='" + item.SliderUrl + "' alt='" + item.SliderName + "' class='d-block w-100'/></a></div>";
+                result += "<div class='item'><a href='"+item.TargetLink+ "' target='_blank'><img src='" + item.SliderUrl + "' alt='" + item.SliderName + "' class='d-block w-100'/></a></div>";
+            }
+            return result;
+        }
+        public string GetBrands()
+        {
+            var data = _dbContext.Brands.OrderDescending().ToList();
+            string result = "";
+            foreach (var item in data)
+            {
+                result += " <div class='item'><img src='" + item.ImageUrl + "' alt='" + item.BrandName + "' class='home-banner'/></div>";
             }
             return result;
         }

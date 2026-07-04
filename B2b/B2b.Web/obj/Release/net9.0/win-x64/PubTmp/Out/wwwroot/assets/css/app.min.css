@@ -5595,15 +5595,18 @@ div#CartContent {
     padding-left: 0;
     padding-right: 0;
 }
+
 .btn-primary, .btn-success {
     background-color: black;
     border-block-color: black;
 }
+
     .btn-primary:hover, .btn-success:hover {
         background-color: rgb(251 215 84) !important;
         border-block-color: rgb(251 215 84) !important;
         color: black !important;
     }
+
 .product-title {
     display: -webkit-box;
     -webkit-line-clamp: 2; /* En fazla kaç satır görüneceğini belirler */
@@ -5621,13 +5624,15 @@ div#CartContent {
     .card-body > div > h5 {
         font-size: 0.8rem !important;
     }
+
     button.btn.btn-logo-2.btn-sm.mt-2.w-100 {
-        font-size: 0.675em;
+        font-size: 1.1em;
     }
 }
-.spc-padding{
-    padding-left:15px;
-    padding-right:15px;
+
+.spc-padding {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 @media (max-width: 768px) {
@@ -5639,6 +5644,7 @@ div#CartContent {
 img.checkout-icon {
     height: 50px;
 }
+
 img.checkout-icon-sm {
     height: 27px;
 }

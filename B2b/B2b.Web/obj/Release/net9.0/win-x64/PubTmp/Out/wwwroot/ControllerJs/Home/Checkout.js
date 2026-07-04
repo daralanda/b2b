@@ -1,5 +1,4 @@
 ﻿var confirm = document.getElementById("v-pills-confir");
-var shipping = document.getElementById("v-pills-shipping");
 var payment = document.getElementById("v-pills-payment");
 $(document).ready(function () {
     formatPrice = (price) => {
@@ -21,14 +20,7 @@ function GetCarts() {
         dataType: 'json',
         headers: { 'Authorization': localStorage.getItem("token") },
         success: function (data) {
-            //document.getElementById("billing-name").value = data.data.CustomerName;
-            //document.getElementById("billing-Tax").value = data.data.TaxNo;
-            //document.getElementById("billing-Tax-Office").value = data.data.TaxOffice;
-            //document.getElementById("billing-email-address").value = data.data.Email;
-            //document.getElementById("billing-phone").value = data.data.Phone;
-            //document.getElementById("City").value = data.Cities.find(x=>x.CityId=data.data.CityId).CityName;
-            //document.getElementById("District").value = data.Districts.find(x => x.DistrictId = data.data.DistrictId).DistrictName;
-            //document.getElementById("billing-address").value = data.data.Address;
+
         },
         error: function (x) { },
         async: false
@@ -62,21 +54,13 @@ function GetAllCheckNumber() {
 function Next(obj) {
     var defaultCss = "tab-pane fade";
     if (obj=="Payment") {
-        shipping.style.display = "none";
-        shipping.className = defaultCss;
+
         payment.style.display = "block";
         payment.className += "active show";
         confirm.style.display = "none";
         confirm.className = defaultCss;
     }
-    else if (obj == "Shipping") {
-        shipping.style.display = "block";
-        shipping.className += "active show";
-        payment.style.display = "none";
-        payment.className = defaultCss;
-        confirm.style.display = "none";
-        confirm.className = defaultCss;
-    }
+
     else if (obj == "Confirm") {
         if (!IsCreditCart && PaymentTypeId ==1) {
             Swal.fire({
@@ -88,8 +72,10 @@ function Next(obj) {
         else {
             var data = {
                 "PaymentType": PaymentTypeId,
-                "OrderNote": document.getElementById("example-textarea").value
+                "OrderNote": document.getElementById("textarea").value
             }
+            console.clear();
+            console.log(data);
             $.ajax({
                 url: '/api/OrderApi/CreateOrder',
                 type: 'Post',
@@ -103,8 +89,7 @@ function Next(obj) {
                         confirm.className += "active show";
                         payment.style.display = "none";
                         payment.className = defaultCss;
-                        shipping.style.display = "none";
-                        shipping.className = defaultCss;
+
                         GetAllCart();
                         GetOrder(x.Data.OrderId);
                         Swal.fire({

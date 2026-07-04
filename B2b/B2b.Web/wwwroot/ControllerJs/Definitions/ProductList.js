@@ -433,8 +433,8 @@ function GetCurrency() {
         headers: { 'Authorization': localStorage.getItem("token") },
         contentType: 'application/json',
         success: function (data) {
-            Brands = data.List;
-            Brands.forEach(function (x) {
+            Currency = data.List;
+            Currency.forEach(function (x) {
                 var opt = document.createElement('option');
                 opt.value = x.CurrencyId;
                 opt.innerHTML = x.CurrencyName;

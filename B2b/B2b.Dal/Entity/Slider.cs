@@ -14,6 +14,7 @@ namespace B2b.Dal.Entity
         public string SliderName { get; set; }
         public string SliderUrl { get; set; }
         public int Queno { get; set; }
+        public string TargetLink { get; set; }
 
     }
 }

@@ -170,7 +170,7 @@ namespace B2b.Infrastructure.Service.OrderService
             try
             {
                 //Exec CreateOrderFromCart 1,'',2
-                FormattableString query = $"EXEC CreateOrderFromCart  @UserId={customerId}, @OrderNote='{dto.OrderNote}' , @PaymentType={dto.PaymentType}";
+                FormattableString query = $"EXEC CreateOrderFromCart  @UserId={customerId}, @OrderNote={dto.OrderNote}, @PaymentType={dto.PaymentType}";
                 var res = _context.Database
                                              .SqlQuery<CreateCartFromOrder>(query)
                                              .ToList().FirstOrDefault();

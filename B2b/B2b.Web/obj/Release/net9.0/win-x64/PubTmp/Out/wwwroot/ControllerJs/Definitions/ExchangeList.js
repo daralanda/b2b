@@ -31,7 +31,12 @@ function PageLoad() {
                 },
                 { "data": "Buying" },
                 { "data": "Selling" },
-                { "data": "TransactionDate" },
+                {
+                    "data": "TransactionDate",
+                    "render": function (data) {
+                        return TarihFormat(data);
+                    }
+                },
                 {
                     "data": "ExchangeId",
                     render: function (data) {
@@ -39,7 +44,7 @@ function PageLoad() {
                     }
                 }
             ];
-            DatatablesLoad("datatables", DataList, columns)
+            DatatablesLoadOrder("datatables", DataList, columns, [[3, "desc"]])
             $('#exampleModal').modal('hide');
 
 
@@ -163,8 +168,21 @@ function AutoUpdate() {
         headers: { 'Authorization': localStorage.getItem("token") },
         contentType: 'application/json',
         success: function (data) {
-            console.clear();
-            console.log(data);
+            if (data.State) {
+                Swal.fire({
+                    title: "Döviz Kuru ",
+                    text: "Döviz Kuru başarıyla çekilmiştir.",
+                    icon: "success",
+                });
+                PageLoad();
+            }
+            else {
+                Swal.fire({
+                    title: "Döviz Kuru",
+                    text: "Döviz Kuru çekilirken hata olmustur.",
+                    icon: "warning",
+                });
+            }
         },
         error: function (data) { },
         async: false

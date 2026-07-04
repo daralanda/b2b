@@ -5,6 +5,7 @@ var Data = {
     SliderName: '',
     SliderUrl: '',
     Queno: 0,
+    TargetLink:''
 }
 $(document).ready(function () {
     PageLoad();
@@ -30,6 +31,13 @@ function PageLoad() {
                 },
 
                 {
+                    "data": "TargetLink",
+                    render: function (x) {
+                        return "<a href='" + x + "' class='btn btn-success' target='_balnk'>Linki Ac</a>"
+                    }
+                },
+
+                {
                     "data": "SliderId",
                     render: function (data) {
                         return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a>  | <a onclick='Delete(this)' class='btn btn-xs btn-danger mr-1 text-white delete'  id='" + data + "' ><i class='fas fa-trash'></i> Sil</a>";
@@ -49,6 +57,7 @@ function FormClean() {
     document.getElementById("SliderUrl").value = "";
     document.getElementById("Queno").value = 0;
     document.getElementById("SilinecekResimler").innerHTML = "";
+    document.getElementById("TargetLink").value = "";
 }
 
 function btnClick(obj) {
@@ -66,6 +75,7 @@ function btnClick(obj) {
         document.getElementById("SliderName").value = subdata.SliderName;
         document.getElementById("ImageUrl").value = subdata.SliderUrl;
         document.getElementById("Queno").value = subdata.Queno;
+        document.getElementById("TargetLink").value = subdata.TargetLink;
         document.getElementById("SilinecekResimler").innerHTML = '<img src="' + subdata.SliderUrl + '" class="' + subdata.SliderUrl + '" id="silinecekimg"  width="80" height="auto"/>';
     }
     
@@ -74,6 +84,7 @@ function PostData() {
     var state = false;
     Data.SliderName = document.getElementById("SliderName").value;
     Data.Queno = document.getElementById("Queno").value;
+    Data.TargetLink = document.getElementById("TargetLink").value;
     if (document.getElementById("silinecekimg") != null) {
         Data.SliderUrl = document.getElementById("silinecekimg").className;
         state = true;

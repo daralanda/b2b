@@ -18,5 +18,6 @@ namespace B2b.Infrastructure.Service.MainService
         SeoResponseDto GetSeo(string url);
         string GetSliders();
         string GetBanners();
+        string GetBrands();
     }
 }

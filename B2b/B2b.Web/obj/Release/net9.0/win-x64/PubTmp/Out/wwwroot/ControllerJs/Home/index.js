@@ -51,7 +51,7 @@ function LastProducts() {
                                                 <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
                                                 ${pricesHTML}
                                                 <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
-                                                    <i class="bx bx-cart me-1"></i> Sepete Ekle
+                                                    <i class="bx bx-cart me-1"></i>Ekle
                                                 </button>
                                             </div>
                                          </div>
@@ -75,7 +75,7 @@ function LastProducts() {
                         items: 2,
                     },
                     1000: {
-                        items: 5,
+                        items: 6,
                     }
                 }
             });
@@ -127,7 +127,7 @@ function CampaignProducts() {
                                                 <h6 class="product-title mb-2" title="${item.ProductName}">${item.ProductName}</h6>
                                                 ${pricesHTML}
                                                 <button class="btn btn-logo-2 btn-sm mt-2 w-100" onclick="AddCart(${item.ProductId},1)">
-                                                    <i class="bx bx-cart me-1"></i> Sepete Ekle
+                                                    <i class="bx bx-cart me-1"></i>Ekle
                                                 </button>
                                             </div>
                                          </div>
@@ -151,7 +151,7 @@ function CampaignProducts() {
                         items: 2,
                     },
                     1000: {
-                        items: 5,
+                        items: 6,
                     }
                 }
             });

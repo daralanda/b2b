@@ -105,6 +105,7 @@ namespace B2b.Infrastructure.Service.SliderService
                 upd.SliderName = data.SliderName;
                 upd.SliderUrl = data.SliderUrl;
                 upd.Queno = data.Queno;
+                upd.TargetLink= data.TargetLink;
                 _context.SaveChanges();
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                 if (oldImg != data.SliderUrl)

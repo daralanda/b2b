@@ -382,16 +382,22 @@ namespace B2b.Infrastructure.Service.ProductService
         {
             var result = new ResultDto<string>();
             var data = ePPLusPlugin.ReadData<ProductPriceTemplate>(stream);
-
+            var brands = _context.Brands.ToList();
+            var category = _context.Categories.ToList();
             foreach (var item in data)
             {
-                int productId=_context.Products.Where(p=>p.ProductCode== item.ProductCode).Select(p=>p.ProductId).FirstOrDefault();
-                if (productId>0)
+                var product = _context.Products.Where(p => p.ProductCode == item.ProductCode).FirstOrDefault();
+                    int CategoryId = category.Where(p => p.CategoryName == item.CategoryName).FirstOrDefault().CategoryId;
+                    product.CategoryId = (CategoryId!=0)?CategoryId:product.CategoryId;
+                    int BrandId = brands.Where(p => p.BrandName == item.BrandName).FirstOrDefault().BrandId;
+                product.BrandId = (BrandId != 0) ? BrandId : product.BrandId;
+                 _context.SaveChanges();
+                if (product!=null)
                 {
                     int unitTypeId = _context.UnitTypes.Where(u => u.UnitTypeName == item.UnitTypeName).Select(u => u.UnitTypeId).FirstOrDefault();
                     if (unitTypeId>0)
                     {
-                        var price = _context.ProductPrices.Where(p => p.ProductId == productId && p.UnitTypeId == unitTypeId).FirstOrDefault();
+                        var price = _context.ProductPrices.Where(p => p.ProductId == product.ProductId && p.UnitTypeId == unitTypeId).FirstOrDefault();
                         if (price!=null)
                         {
                             price.Price = item.Price;

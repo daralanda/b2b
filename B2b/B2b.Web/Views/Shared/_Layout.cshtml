@@ -200,11 +200,11 @@
                                 <div class="col-xl-5">
                                     <div class="mt-4 mt-xl-3">
                                         <h3 class="mt-1 mb-3" id="ProductName">Ürün Adı</h3>
-                                        <h4 class="mt-1 mb-3" id="ProductCode">Ürün Kodu</h4>
-                                        <h6 class="mt-1 mb-3 text-Success" id="Category"></h6>
-                                        <h6 class="mt-1 mb-3 text-primary" id="Brand"></h6>
-                                        <h6 class="text-success text-uppercase" id="DiscountedRate"></h6>
-                                        <h4 class="mb-4">Fiyat : <span class="text-muted me-2"><del id="Price"></del></span> <b id="DiscountedPrice">s</b></h4>
+                                        <h6 class="" id="ProductCode">Ürün Kodu</h6>
+                                        <h6 class="" id="Category"></h6>
+                                        <h6 class="" id="Brand"></h6>
+                                        <h6 class="text-danger text-uppercase" id="DiscountedRate"></h6>
+                                        <h3 class="mb-4">Fiyat : <span class="text-muted me-2"><del id="Price"></del></span> <b id="DiscountedPrice">s</b></h3>
                                         <div class="table-responsive">
                                             <table class="table mb-0 table-bordered">
                                                 <thead>
@@ -224,7 +224,7 @@
                                                 <input type="number" class="form-control" min="1" max="100" id="Count" value="1" >
                                             </div>
                                             <div class="col-sm-auto">
-                                                <a class="btn btn-primary waves-effect waves-light" id="DetailProduct" onclick="DetailAddCart()"><i class="bx bx-cart me-2"></i> Sepete Ekle</a>
+                                                <a class="btn btn-primary waves-effect waves-light" id="DetailProduct" onclick="DetailAddCart()"><i class="bx bx-cart me-2"></i>Ekle</a>
                                             </div>
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@
 
                             <div class="mt-5">
                                 <h5 class="mb-3">Açıklama :</h5>
-                                <p class="text-muted mb-4" id="Description"></p>
+                                <p class="mb-4" id="Description"></p>
 
                             </div>
                             <!-- end Specifications -->
@@ -272,6 +272,7 @@
     <!-- Responsive examples -->
     <script src="@Domain/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="@Domain/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="@Domain/assets/libs/moment/min/moment.min.js"></script>
     <script src="@Domain/ControllerJs/Main.js"></script>  
  @if (IsSectionDefined("scripts"))
     {
