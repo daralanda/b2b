@@ -73,7 +73,7 @@ namespace B2b.Plugin.EPPlus
                                 IsDefault = worksheet.Cells[row, 11].Value?.ToString(),
                                 UnitTypeCount = int.Parse(worksheet.Cells[row, 12].Value?.ToString() ?? "0"),
                                 ImageUrl = worksheet.Cells[row, 13].Value?.ToString(),
-
+                                IsActive= worksheet.Cells[row, 14].Value?.ToString(),
                                 Result = new ResultDto
                                 {
                                     State = string.IsNullOrEmpty(message),

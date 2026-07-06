@@ -4248,7 +4248,8 @@ div.dataTables_wrapper div.dataTables_filter input {
 .product-ribbon {
     position: absolute;
     right: 0;
-    top: 0
+    top: 0;
+    z-index: 99;
 }
 
 .product-detai-imgs .nav .nav-link {
@@ -5290,6 +5291,7 @@ h4.section-title {
     width: 100%;
     height: auto;
     transition: transform 0.3s ease;
+    min-height: 150px;
 }
 
 .product-card:hover .product-img {

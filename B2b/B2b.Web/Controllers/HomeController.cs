@@ -66,6 +66,10 @@ namespace B2b.Web.Controllers
         {
             return View();
         }
+        public IActionResult UnitTypeList()
+        {
+            return View();
+        }
         public IActionResult ExchangeList()
         {
             return View();

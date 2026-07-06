@@ -6,6 +6,7 @@ namespace B2b.Dal.Entity
     {
         [Key] 
         public int UnitTypeId { get; set; }
+        public string UnitTypeCode { get; set; }
         public string UnitTypeName { get; set; }
     }
 }

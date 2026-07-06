@@ -100,7 +100,9 @@ $(document).ready(function () {
         $('#brand-filter').val('');  // Select elementini sıfırla (Tüm Markalar)
         applyFilters();
     }
-
+        function sonundakiArtiyiSil(text) {
+        return text.replace(/\+ $/, "");
+    }
     function renderPagination(data) {
         $('#pagination-container').pagination({
             dataSource: data,
@@ -120,6 +122,7 @@ $(document).ready(function () {
                         <div class="col-xsm-6 col-md-3 col-lg-2 mb-4">
                             <div class="card product-card h-100 shadow-sm">
                                 <div class="card-body">
+                                    <div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">% ${sonundakiArtiyiSil(item.DiscountTxt)}</span></div>
                                     <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
                                         <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
                                     </div>

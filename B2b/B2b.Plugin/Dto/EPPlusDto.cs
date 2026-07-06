@@ -16,6 +16,7 @@
         public int UnitTypeCount { get; set; }
         public string ImageUrl { get; set; }
         public ResultDto Result { get; set; }
+        public string IsActive { get; set; }
     }
     public class ResultDto
     {

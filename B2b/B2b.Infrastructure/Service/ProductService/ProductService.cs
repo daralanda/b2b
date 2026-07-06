@@ -224,29 +224,29 @@ namespace B2b.Infrastructure.Service.ProductService
 
                 if (item.Result.State!=false)
                 {
-                    var findProduct= Products.Where(p => p.ProductCode == item.ProductCode).FirstOrDefault();
-                    var currency = currencies.Where(c => c.CurrencyCode == item.CurrencyName).FirstOrDefault();
+                    var findProduct= Products.Where(p => p.ProductCode.ToLower() == item.ProductCode.ToLower()).FirstOrDefault();
+                    var currency = currencies.Where(c => c.CurrencyName.ToLower() == item.CurrencyName.ToLower()).FirstOrDefault();
                     if (currency == null)
                     {
                         _context.Currencies.Add(new Currency { CurrencyCode = item.CurrencyName , CurrencyName=item.CurrencyName});
                         _context.SaveChanges();
                         currencies = _context.Currencies.ToList();
                     }
-                    var unittype = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault();
+                    var unittype = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault();
                     if (unittype == null)
                     {
                         _context.UnitTypes.Add(new UnitType { UnitTypeName = item.UnitTypeName });
                         _context.SaveChanges();
                         unitTypes = _context.UnitTypes.ToList();
                     }
-                    var category = categories.Where(c => c.CategoryName == item.CategoryName).FirstOrDefault();
+                    var category = categories.Where(c => c.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault();
                     if (category == null)
                     {
                         _context.Categories.Add(new Category { CategoryName = item.CategoryName, IsActive=true, MainCategoryId=0 });
                         _context.SaveChanges();
                         categories = _context.Categories.ToList();
                     }
-                    var brand = brands.Where(c => c.BrandName == item.BrandName).FirstOrDefault();   
+                    var brand = brands.Where(c => c.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault();   
                     if (brand == null)
                     {
                         _context.Brands.Add(new Brand { BrandName = item.BrandName , Queno=1, ImageUrl=""});
@@ -259,12 +259,12 @@ namespace B2b.Infrastructure.Service.ProductService
                         {
                             ProductCode = item.ProductCode,
                             ProductName = item.ProductName,
-                            BrandId = brands.Where(c => c.BrandName == item.BrandName).FirstOrDefault().BrandId,
-                            CategoryId= categories.Where(c => c.CategoryName == item.CategoryName).FirstOrDefault().CategoryId,
-                            CurrencyId= currencies.Where(c=>c.CurrencyCode == item.CurrencyName).FirstOrDefault().CurrencyId,
+                            BrandId = brands.Where(c => c.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault().BrandId,
+                            CategoryId= categories.Where(c => c.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault().CategoryId,
+                            CurrencyId= currencies.Where(c=>c.CurrencyName.ToLower() == item.CurrencyName.ToLower()).FirstOrDefault().CurrencyId,
                             Description = item.Description,
                             Vat = item.Vat,
-                            IsActive = true,
+                            IsActive = item.IsActive.ToLower()=="evet"?true:false,
                             StockQuantity= item.StockQuantity
                         };
                         _context.Products.Add(product);
@@ -273,7 +273,7 @@ namespace B2b.Infrastructure.Service.ProductService
                         {
                             ProductId = product.ProductId,
                             Price = item.Price,
-                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
+                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault().UnitTypeId,
                             IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
                             Count= item.UnitTypeCount
 
@@ -291,11 +291,18 @@ namespace B2b.Infrastructure.Service.ProductService
                     }
                     else
                     {
+                        findProduct.BrandId = brands.Where(c => c.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault().BrandId;
+                        findProduct.CategoryId = categories.Where(c => c.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault().CategoryId;
+                        findProduct.CurrencyId = currencies.Where(c => c.CurrencyName.ToLower() == item.CurrencyName.ToLower()).FirstOrDefault().CurrencyId;
+                        findProduct.Description = item.Description;
+                        findProduct.Vat=item.Vat;
+                        findProduct.StockQuantity=item.StockQuantity;
+                        findProduct.IsActive = item.IsActive.ToLower() == "evet" ? true : false;
                         ProductPrice productPrice = new()
                         {
                             ProductId = findProduct.ProductId,
                             Price = item.Price,
-                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName == item.UnitTypeName).FirstOrDefault().UnitTypeId,
+                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault().UnitTypeId,
                             IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
                             Count = item.UnitTypeCount
                         };
@@ -386,10 +393,10 @@ namespace B2b.Infrastructure.Service.ProductService
             var category = _context.Categories.ToList();
             foreach (var item in data)
             {
-                var product = _context.Products.Where(p => p.ProductCode == item.ProductCode).FirstOrDefault();
-                    int CategoryId = category.Where(p => p.CategoryName == item.CategoryName).FirstOrDefault().CategoryId;
+                var product = _context.Products.Where(p => p.ProductCode.ToLower() == item.ProductCode.ToLower()).FirstOrDefault();
+                    int CategoryId = category.Where(p => p.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault().CategoryId;
                     product.CategoryId = (CategoryId!=0)?CategoryId:product.CategoryId;
-                    int BrandId = brands.Where(p => p.BrandName == item.BrandName).FirstOrDefault().BrandId;
+                    int BrandId = brands.Where(p => p.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault().BrandId;
                 product.BrandId = (BrandId != 0) ? BrandId : product.BrandId;
                  _context.SaveChanges();
                 if (product!=null)

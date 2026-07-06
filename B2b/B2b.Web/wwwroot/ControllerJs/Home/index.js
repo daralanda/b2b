@@ -43,6 +43,8 @@ function LastProducts() {
                 items += `
                                      <div class="card product-card">
                                          <div class="card-body">
+                    <div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">% ${sonundakiArtiyiSil(item.DiscountTxt)}</span></div>
+
                                              <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
                                                 
                                                 <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
@@ -119,6 +121,8 @@ function CampaignProducts() {
                 items += `
                                      <div class="card product-card">
                                          <div class="card-body">
+                                                                          <div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">% ${sonundakiArtiyiSil(item.DiscountTxt)}</span></div>
+
                                               <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" >
                  
                                                 <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
@@ -162,7 +166,9 @@ function CampaignProducts() {
         }
     });
 }
-
+function sonundakiArtiyiSil(text) {
+    return text.replace(/\+ $/, "");
+}
 const mergeUniqueData = (arr1, arr2) => {
     // İki diziyi birleştir
     const mergedData = arr1.concat(arr2);
