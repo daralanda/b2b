@@ -106,6 +106,7 @@ namespace B2b.Infrastructure.Service.UnitTypeService
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
                 var upd = _context.UnitTypes.Where(p => p.UnitTypeId == data.UnitTypeId).First();
                 upd.UnitTypeName = data.UnitTypeName;
+                upd.UnitTypeCode= data.UnitTypeCode;
                 _context.SaveChanges();
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                 state = true;

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("B2b.Integration")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b19cb95335b4e5d948bdbfed71ab0ff9c0e4211b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8223b3740a16d2488e7830748e39f95b001b3dc3")]
 [assembly: System.Reflection.AssemblyProductAttribute("B2b.Integration")]
 [assembly: System.Reflection.AssemblyTitleAttribute("B2b.Integration")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

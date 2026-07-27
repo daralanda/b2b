@@ -409,6 +409,7 @@ namespace B2b.Infrastructure.Service.ProductService
                         {
                             price.Price = item.Price;
                             price.Count = item.Count;
+                            
                             _context.SaveChanges();
                         }
                     }

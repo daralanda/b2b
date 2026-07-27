@@ -27,6 +27,7 @@ namespace B2b.Infrastructure.Service.ExchangeService
                 }
                 else
                 {
+                    data.ExchangeId = res.ExchangeId;
                     Update(data);
                 }
                 state = true;

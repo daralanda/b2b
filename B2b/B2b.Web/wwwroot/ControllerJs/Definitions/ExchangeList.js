@@ -4,13 +4,15 @@ var Data = {
     Buying: 0,
     Selling: 0,
     CurrencyId: 0
-}
+};
 var Currency = [];
+
 $(document).ready(function () {
+    // Önce döviz tiplerini çekip, işlem bittiğinde sayfa verilerini yüklüyoruz
     GetCurrency();
     PageLoad();
-    
 });
+
 function PageLoad() {
     $.ajax({
         url: '/api/ExchangeApi/GetAll',
@@ -22,32 +24,39 @@ function PageLoad() {
             DataList = data.List;
             console.clear();
             console.log(data);
+
             var columns = [
                 {
                     "data": "CurrencyId",
-                    render: function (data) {
-                        return Currency.find(x => x.CurrencyId == data).CurrencyName;
+                    "render": function (data) {
+                        var item = Currency.find(x => x.CurrencyId == data);
+                        return item ? item.CurrencyName : "-";
                     }
                 },
                 { "data": "Buying" },
                 { "data": "Selling" },
                 {
                     "data": "TransactionDate",
-                    "render": function (data) {
+                    "render": function (data, type, row) {
+                        // DataTables sıralama (sort) yaparken sayısal zaman damgası (timestamp) kullanır
+                        if (type === 'sort' || type === 'type') {
+                            return data ? new Date(data).getTime() : 0;
+                        }
+                        // Ekranda gösterilecek görsel format
                         return TarihFormat(data);
                     }
                 },
                 {
                     "data": "ExchangeId",
-                    render: function (data) {
-                        return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1text-white edit'  id='" + data + "'  data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a> ";
+                    "render": function (data) {
+                        return "<a onclick='btnClick(this)' class='btn btn-xs btn-info mr-1 text-white edit' id='" + data + "' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-pencil-alt'></i></a>";
                     }
                 }
             ];
-            DatatablesLoadOrder("datatables", DataList, columns, [[3, "desc"]])
+
+            // 3. indeks (TransactionDate) sütununa göre azalan (desc) sıralama
+            DatatablesLoadOrder("datatables", DataList, columns, [[3, "desc"]]);
             $('#exampleModal').modal('hide');
-
-
         }
     });
 }
@@ -70,27 +79,27 @@ function btnClick(obj) {
         document.getElementById("btnSumbit").innerHTML = "Döviz Kuru Güncelle";
         Data.ExchangeId = obj.id;
         var subdata = DataList.find(x => x.ExchangeId == obj.id);
-        document.getElementById("Buying").value = subdata.Buying;
-        document.getElementById("Selling").value = subdata.Selling;
-        document.getElementById("CurrencyId").value = subdata.CurrencyId;
+        if (subdata) {
+            document.getElementById("Buying").value = subdata.Buying;
+            document.getElementById("Selling").value = subdata.Selling;
+            document.getElementById("CurrencyId").value = subdata.CurrencyId;
+        }
     }
-    
 }
+
 function PostData() {
     var state = true;
     Data.Buying = document.getElementById("Buying").value;
     Data.Selling = document.getElementById("Selling").value;
     Data.CurrencyId = document.getElementById("CurrencyId").value;
-  
 
-    if (Data.ExchangeId == 0 && state == true)
-    {
+    if (Data.ExchangeId == 0 && state == true) {
         $.ajax({
             url: '/api/ExchangeApi/Add',
             type: 'Post',
             dataType: 'Json',
             headers: { 'Authorization': localStorage.getItem("token") },
-            data: JSON.stringify(Data), 
+            data: JSON.stringify(Data),
             contentType: 'application/json',
             success: function (data) {
                 if (data.State) {
@@ -99,7 +108,7 @@ function PostData() {
                         text: "Döviz Kuru başarıyla eklenmiştir.",
                         icon: "success",
                     });
-                    PageLoad();  
+                    PageLoad();
                 }
                 else {
                     Swal.fire({
@@ -126,7 +135,7 @@ function PostData() {
                         text: "Döviz Kuru başarıyla güncellenmiştir.",
                         icon: "success",
                     });
-                    PageLoad();  
+                    PageLoad();
                 }
                 else {
                     Swal.fire({
@@ -137,10 +146,9 @@ function PostData() {
                 }
             }
         });
-
     }
-  
 }
+
 function GetCurrency() {
     $.ajax({
         url: '/api/CurrencyApi/GetAll',
@@ -148,6 +156,7 @@ function GetCurrency() {
         dataType: 'Json',
         headers: { 'Authorization': localStorage.getItem("token") },
         contentType: 'application/json',
+        async: false,
         success: function (data) {
             Currency = data.List;
             var options = "<option value=''>Lütfen Seçiniz</option>";
@@ -155,8 +164,7 @@ function GetCurrency() {
                 options += "<option value='" + x.CurrencyId + "'>" + x.CurrencyName + "</option>";
             });
             document.getElementById("CurrencyId").innerHTML = options;
-        },
-        async: false
+        }
     });
 }
 
@@ -167,10 +175,11 @@ function AutoUpdate() {
         dataType: 'Json',
         headers: { 'Authorization': localStorage.getItem("token") },
         contentType: 'application/json',
+        async: false,
         success: function (data) {
             if (data.State) {
                 Swal.fire({
-                    title: "Döviz Kuru ",
+                    title: "Döviz Kuru",
                     text: "Döviz Kuru başarıyla çekilmiştir.",
                     icon: "success",
                 });
@@ -179,12 +188,11 @@ function AutoUpdate() {
             else {
                 Swal.fire({
                     title: "Döviz Kuru",
-                    text: "Döviz Kuru çekilirken hata olmustur.",
+                    text: "Döviz Kuru çekilirken hata oluşmuştur.",
                     icon: "warning",
                 });
             }
         },
-        error: function (data) { },
-        async: false
+        error: function (data) { }
     });
 }
