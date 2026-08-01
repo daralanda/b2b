@@ -1,5 +1,6 @@
 ﻿/* ==========================================================================
    PRODUCT.JS - YENİ YATAY FİLTRE VE SELECT YAPISINA UYARLANMIŞ VERSİYON
+   (QueryString / URL Sync Destekli)
    ========================================================================== */
 let allProductsData = [];
 let filteredProducts = [];
@@ -7,8 +8,11 @@ let selectedBrandId = ''; // Tekli select seçimi için tutulan değişken
 let currentView = 'grid'; // Varsayılan görünüm: 'grid' veya 'list'
 
 $(document).ready(function () {
-    GetCategories();
-    GetProducts();
+    // 1. Kategorileri Yükle (Callback tamamlanınca QueryString UI'a uygulanır)
+    GetCategories(function () {
+        // 2. Ürünleri Yükle
+        GetProducts();
+    });
 
     function normalizeTR(text) {
         if (!text) return "";
@@ -39,6 +43,11 @@ $(document).ready(function () {
                 if (allProductsData.length > 0) {
                     updateCategoryCounts();
                     buildBrandFilter();
+
+                    // URL'deki QueryString verilerini form elemanlarına aktar
+                    applyQueryStringFiltersToUI();
+
+                    // Filtreleri çalıştır ve listele
                     applyFilters();
                 } else {
                     $('#product-list').html('<div class="col-12 text-center"><p>Ürün bulunamadı.</p></div>');
@@ -47,13 +56,52 @@ $(document).ready(function () {
         });
     }
 
-    function applyFilters() {
-        const searchTerm = normalizeTR($('#searchInput').val().trim());
-        const categoryId = $('#category-list').val() || ''; // select elementinden değer alıyoruz
-        const brandId = $('#brand-filter').val() || ''; // select elementinden değer alıyoruz
+    // URL'deki QueryString parametrelerini okuyarak HTML elemanlarına basar
+    function applyQueryStringFiltersToUI() {
+        const urlParams = new URLSearchParams(window.location.search);
 
-        // Filtre temizle butonu görünürlüğü (Arama veya filtrelerden biri aktifse görünür)
-        if (searchTerm !== "" || categoryId !== "" || brandId !== "") {
+        if (urlParams.has('search')) {
+            $('#searchInput').val(urlParams.get('search'));
+        }
+        if (urlParams.has('categoryId')) {
+            $('#category-list').val(urlParams.get('categoryId'));
+        }
+        if (urlParams.has('brandId')) {
+            $('#brand-filter').val(urlParams.get('brandId'));
+        }
+        if (urlParams.has('sort')) {
+            $('#sortSelect').val(urlParams.get('sort'));
+        }
+    }
+
+    // Aktif filtre değerlerine göre URL QueryString parametrelerini günceller (Sayfa yenilenmez)
+    function updateUrlQueryString() {
+        const urlParams = new URLSearchParams();
+
+        const search = $('#searchInput').val().trim();
+        const categoryId = $('#category-list').val() || '';
+        const brandId = $('#brand-filter').val() || '';
+        const sort = $('#sortSelect').val() || '';
+
+        if (search !== '') urlParams.set('search', search);
+        if (categoryId !== '') urlParams.set('categoryId', categoryId);
+        if (brandId !== '') urlParams.set('brandId', brandId);
+        if (sort !== '') urlParams.set('sort', sort);
+
+        const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+        window.history.pushState({ path: newUrl }, '', newUrl);
+    }
+
+    function applyFilters() {
+        // Her filtre uygulandığında URL'yi güncelle
+        updateUrlQueryString();
+
+        const searchTerm = normalizeTR($('#searchInput').val().trim());
+        const categoryId = $('#category-list').val() || '';
+        const brandId = $('#brand-filter').val() || '';
+
+        // Filtre temizle butonu görünürlüğü
+        if (searchTerm !== "" || categoryId !== "" || brandId !== "" || $('#sortSelect').val() !== "") {
             $('#clearFiltersArea').removeClass('d-none');
         } else {
             $('#clearFiltersArea').addClass('d-none');
@@ -74,15 +122,16 @@ $(document).ready(function () {
     }
 
     function applySorting() {
+        updateUrlQueryString();
+
         const sortType = $('#sortSelect').val();
         filteredProducts.sort((a, b) => {
-            // İndirimli fiyat varsa onu, yoksa normal fiyatı baz alarak sıralar
             const priceA = a.DiscountedPrice > 0 ? a.DiscountedPrice : a.Price;
             const priceB = b.DiscountedPrice > 0 ? b.DiscountedPrice : b.Price;
 
             switch (sortType) {
-                case 'priceAsc': return priceA - priceB;   // Fiyat: Düşükten Yükseğe
-                case 'priceDesc': return priceB - priceA;  // Fiyat: Yüksekten Düşüğe
+                case 'priceAsc': return priceA - priceB;
+                case 'priceDesc': return priceB - priceA;
                 case 'nameAsc': return a.ProductName.localeCompare(b.ProductName, 'tr');
                 case 'nameDesc': return b.ProductName.localeCompare(a.ProductName, 'tr');
                 default: return 0;
@@ -94,13 +143,19 @@ $(document).ready(function () {
     function resetFilters() {
         $('#searchInput').val('');
         $('#sortSelect').val('');
-        $('#category-list').val(''); // Select elementini sıfırla (Tüm Kategoriler)
-        $('#brand-filter').val('');  // Select elementini sıfırla (Tüm Markalar)
+        $('#category-list').val('');
+        $('#brand-filter').val('');
+
         applyFilters();
     }
+
     function sonundakiArtiyiSil(text) {
-        return text.replace(/\+ $/, "");
+        if (!text) return "";
+        text = text.toString().replace(/\s+/g, "");
+        text = text.replace(/\+ $/, "");
+        return text;
     }
+
     function renderPagination(data) {
         $('#pagination-container').pagination({
             dataSource: data,
@@ -119,9 +174,8 @@ $(document).ready(function () {
                         html += `
                         <div class="col-xsm-6 col-md-3 col-lg-2 mb-4">
                             <div class="card product-card h-100 shadow-sm">
-                           
                                 <div class="card-body">
-                                 <div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">% ${sonundakiArtiyiSil(item.DiscountTxt)}</span></div>
+                                    <div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-danger font-size-11">% ${sonundakiArtiyiSil(item.DiscountTxt)}</span></div>
                                     <div class="product-img position-relative text-center" onclick="GetProduct(${item.ProductId})" data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl" style="cursor:pointer;">
                                         <img src="${item.ProductImage}" class="img-fluid mx-auto d-block mt-2" style="max-height:150px; object-fit:contain;">
                                     </div>
@@ -201,7 +255,7 @@ $(document).ready(function () {
         });
     }
 
-    // Event Listeners (Select Elemanlarının Değişimini Dinler)
+    // Event Listeners (Select ve Arama Elemanlarının Değişimini Dinler)
     $('#searchInput').on('keyup', applyFilters);
     $('#category-list').on('change', applyFilters);
     $('#brand-filter').on('change', applyFilters);
@@ -241,19 +295,18 @@ $(document).ready(function () {
     }
 
     function updateCategoryCounts() {
-        // Seçenek metinlerinin yanına adet bilgisini (12) formatında yazar
         $('#category-list option').each(function () {
             const id = $(this).val();
             if (id !== "") {
                 const count = allProductsData.filter(p => p.CategoryId == id).length;
-                const originalText = $(this).text().replace(/\s\(\d+\)/g, ''); // Varsa eski sayıyı siler
+                const originalText = $(this).text().replace(/\s\(\d+\)/g, '');
                 $(this).text(`${originalText} (${count})`);
             }
         });
     }
 });
 
-function GetCategories() {
+function GetCategories(callback) {
     const cat = $('#category-list');
     cat.html(`<option value="">Tüm Kategoriler</option>`);
     $.ajax({
@@ -266,7 +319,6 @@ function GetCategories() {
                     cat.append(`<option value="${item.CategoryId}">${item.CategoryName}</option>`);
                 });
 
-                // Kategoriler API'den geç gelirse adetleri senkronize etmek için ek kontrol
                 if (allProductsData.length > 0) {
                     $('#category-list option').each(function () {
                         const id = $(this).val();
@@ -276,6 +328,9 @@ function GetCategories() {
                         }
                     });
                 }
+            }
+            if (typeof callback === 'function') {
+                callback();
             }
         }
     });

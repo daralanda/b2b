@@ -78,7 +78,8 @@ namespace B2b.Web.Controllers
         {
             return View();
         }
-        
+        public IActionResult FileList() { return View(); }
+
         #endregion
 
         public IActionResult Register()

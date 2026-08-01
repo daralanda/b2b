@@ -100,8 +100,10 @@ $(document).ready(function () {
         $('#brand-filter').val('');  // Select elementini sıfırla (Tüm Markalar)
         applyFilters();
     }
-        function sonundakiArtiyiSil(text) {
-        return text.replace(/\+ $/, "");
+    function sonundakiArtiyiSil(text) {
+        text = text.replace(/\s+/g, "");
+        text = text.replace(/\+ $/, "");
+        return text;
     }
     function renderPagination(data) {
         $('#pagination-container').pagination({

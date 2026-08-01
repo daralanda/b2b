@@ -4,6 +4,7 @@ var Data = {
     BrandName: '',
     ImageUrl: '',
     Queno: 0,
+    BrandUrl:''
 }
 $(document).ready(function () {
     PageLoad();
@@ -50,6 +51,7 @@ function FormClean() {
     document.getElementById("ImageUrl").value = "";
     document.getElementById("Queno").value = 0;
     document.getElementById("SilinecekResimler").innerHTML = "";
+    document.getElementById("BrandUrl").value = "";
 }
 
 function btnClick(obj) {
@@ -67,6 +69,7 @@ function btnClick(obj) {
         document.getElementById("BrandName").value = subdata.BrandName;
         document.getElementById("ImageUrl").value = subdata.ImageUrl;
         document.getElementById("Queno").value = subdata.Queno;
+        document.getElementById("BrandUrl").value = subdata.BrandUrl;
         document.getElementById("SilinecekResimler").innerHTML = '<img src="' + subdata.ImageUrl + '" class="' + subdata.ImageUrl + '" id="silinecekimg"  width="80" height="auto"/>';
     }
     
@@ -75,6 +78,7 @@ function PostData() {
     var state = false;
     Data.BrandName = document.getElementById("BrandName").value;
     Data.Queno = document.getElementById("Queno").value;
+    Data.BrandUrl = document.getElementById("BrandUrl").value;
     if (document.getElementById("silinecekimg") != null) {
         Data.ImageUrl = document.getElementById("silinecekimg").className;
         state = true;

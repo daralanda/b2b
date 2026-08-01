@@ -29,7 +29,7 @@ function LastProducts() {
 
                 // ISCampaign veya Price != DiscountedPrice ise indirim rozeti ve fiyatları göster
                 if (item.IsCampaign === 1 || item.Price !== item.DiscountedPrice) {
-                    discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-primary font-size-11">-% ${item.TotalDiscountRate}</span></div>`;
+                    discountBadge = `<div class="avatar-sm product-ribbon"><span class="avatar-title rounded-circle bg-primary font-size-11">-%${item.TotalDiscountRate }</span></div>`;
                     pricesHTML = `<h5 class="my-0 d-flex flex-column flex-sm-row align-items-sm-center">
     <span class="text-muted me-2 mb-1 mb-sm-0 ">
         <del>${formatPrice(item.Price)}</del>
@@ -167,7 +167,9 @@ function CampaignProducts() {
     });
 }
 function sonundakiArtiyiSil(text) {
-    return text.replace(/\+ $/, "");
+    text = text.replace(/\s+/g, "");
+    text = text.replace(/\+ $/, "");
+    return text;
 }
 const mergeUniqueData = (arr1, arr2) => {
     // İki diziyi birleştir

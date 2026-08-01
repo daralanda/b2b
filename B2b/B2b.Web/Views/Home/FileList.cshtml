@@ -1,0 +1,81 @@
+﻿@using System.Configuration;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <!-- Skote Toolbar / Search Row -->
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-5 col-sm-12 mb-2 mb-md-0">
+                        <div class="search-box">
+                            <div class="position-relative">
+                                <input type="text" id="fileSearchInput" class="form-control bg-light border-light rounded" placeholder="Dosya ara...">
+                                <i class="bx bx-search-alt search-icon position-absolute top-50 translate-middle-y ms-2 text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 col-sm-12">
+                        <div class="d-flex flex-wrap align-items-center justify-content-md-end gap-2">
+                            <div class="d-flex align-items-center gap-1">
+                                <label for="sortBy" class="form-label mb-0 me-1 text-muted">Sırala:</label>
+                                <select id="sortBy" class="form-select form-select-sm w-auto">
+                                    <option value="Name">Dosya Adı</option>
+                                    <option value="Size">Boyut</option>
+                                    <option value="CreatedDate">Tarih</option>
+                                </select>
+
+                                <select id="sortOrder" class="form-select form-select-sm w-auto">
+                                    <option value="asc">Artan</option>
+                                    <option value="desc">Azalan</option>
+                                </select>
+                            </div>
+
+                            <button id="btnRefresh" class="btn btn-sm btn-soft-secondary ms-1">
+                                <i class="bx bx-refresh fs-5 align-middle"></i> Yenile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skote Responsive Grid Container -->
+                <div id="fileGrid" class="row"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Skote File Preview Modal -->
+<div class="modal fade" id="filePreviewModal" tabindex="-1" aria-labelledby="filePreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-truncate" id="filePreviewModalLabel">Dosya Ön İzleme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body p-0 text-center bg-light d-flex align-items-center justify-content-center" style="min-height: 400px; max-height: 75vh; overflow: auto;">
+                <div id="previewContainer" class="w-100 h-100 d-flex align-items-center justify-content-center p-3">
+                    <!-- Dinamik içerik buraya yüklenecek -->
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <span id="previewFileInfo" class="text-muted font-size-12"></span>
+                <div>
+                    <a id="btnPreviewDownload" href="#" target="_blank" class="btn btn-primary btn-sm">
+                        <i class="bx bx-download me-1"></i> Dosyayı Aç / İndir
+                    </a>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="@Domain/ControllerJs/Definitions/FileList.js"></script>
+}

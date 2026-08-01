@@ -283,6 +283,10 @@ function PostData() {
                         icon: "warning",
                     });
                 }
+            },
+            error: function (x) {
+                console.clear();
+                console.log(x);
             }
         });
 

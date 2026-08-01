@@ -720,6 +720,64 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "B2b.Web.Controllers.Api.FileListApiController",
+    "Method": "DeleteFile",
+    "RelativePath": "api/FileListApi/DeleteFile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "B2b.Web.Controllers.Api.DeleteFileRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.FileListApiController",
+    "Method": "GetFiles",
+    "RelativePath": "api/FileListApi/GetFiles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "sortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "order",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.FileListApiController",
+    "Method": "RenameFile",
+    "RelativePath": "api/FileListApi/RenameFile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "B2b.Web.Controllers.Api.RenameFileRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "B2b.Web.Controllers.Api.LoginApiController",
     "Method": "Login",
     "RelativePath": "api/LoginApi/Login",

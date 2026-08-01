@@ -9,5 +9,6 @@ namespace B2b.Dal.Entity
         public string BrandName { get; set; }
         public string ImageUrl { get; set; }
         public int Queno { get; set; }
+        public string BrandUrl { get; set; }
     }
 }

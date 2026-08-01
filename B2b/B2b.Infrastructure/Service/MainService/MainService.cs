@@ -291,7 +291,7 @@ namespace B2b.Infrastructure.Service.MainService
             string result = "";
             foreach (var item in data)
             {
-                result += " <div class='item'><img src='" + item.ImageUrl + "' alt='" + item.BrandName + "' class='home-banner'/></div>";
+                result += " <a href='"+item.BrandUrl+"' targer='_blank'><div class='item'><img src='" + item.ImageUrl + "' alt='" + item.BrandName + "' class='home-banner'/></div></a>";
             }
             return result;
         }

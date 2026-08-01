@@ -447,8 +447,8 @@ $('#brandSlider').owlCarousel({
     autoHeight: false,
     autoplay: true,
     responsive: {
-        0: {
-            items: 1
+        600: {
+            items: 3
         },
         1000: {
             items:8
@@ -607,7 +607,7 @@ function GetProduct(id) {
     document.getElementById("Brand").innerText = "Marka : " + row.BrandName;
     document.getElementById("Price").innerText = row.Price.toFixed(2) + " TL";
     document.getElementById("DiscountedPrice").innerText = row.DiscountedPrice.toFixed(2) + " TL";
-    document.getElementById("DiscountedRate").innerText = "İndirim Oranı : %" + row.TotalDiscountRate;
+    document.getElementById("DiscountedRate").innerText = "%" + row.TotalDiscountRate;
     document.getElementById("Description").innerText = row.Description;
     $.ajax({
         url: '/api/CommerceApi/GetProduct?ProductId=' + id,
@@ -620,14 +620,14 @@ function GetProduct(id) {
             response.List.forEach(function (item) {
                 if (item.IsDefault) {
                     content.innerHTML += `<tr class="red-row">
-                    <td>${item.UnitTypeName} için ${item.Count} adet </td>
+                    <td>${item.UnitTypeName} / ${item.Count} adet </td>
                     <td>${item.Price.toFixed(2)} TL</td>
                     <td>${item.DiscountedPrice.toFixed(2)} TL</td>
                 </tr>`;
                 }
                 else {
                     content.innerHTML += `<tr>
-                    <td>${item.UnitTypeName} için ${item.Count} adet </td>
+                    <td>${item.UnitTypeName} / ${item.Count} adet </td>
                     <td>${item.Price.toFixed(2)} TL</td>
                     <td>${item.DiscountedPrice.toFixed(2)} TL</td>
                 </tr>`;

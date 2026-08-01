@@ -111,6 +111,7 @@ namespace B2b.Infrastructure.Service.BrandService
                 string oldImg = upd.ImageUrl;
                 upd.BrandName = data.BrandName;
                 upd.ImageUrl = data.ImageUrl;
+                upd.BrandUrl = data.BrandUrl;   
                 upd.Queno = data.Queno;
                 _context.SaveChanges();
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
