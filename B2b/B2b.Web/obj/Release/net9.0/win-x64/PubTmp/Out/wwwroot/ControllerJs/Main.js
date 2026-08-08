@@ -203,7 +203,10 @@ function url_slug(s, opt) {
 //    focus: !0,
 //    lang: 'tr-TR'
 //})
-
+function getMainAuthHeader() {
+    const token = localStorage.getItem('token');
+    return token ? { 'Authorization': `Bearer ${token}` } : {};
+}
 var Imgdata = [];
 function FileUpload(obj) {
     var snc = "";
@@ -215,11 +218,13 @@ function FileUpload(obj) {
             data.append('file', x);
         })
         $.ajax({
-            url: '/upload/upload-file',
+            url: '/api/FileApi/uploadfile',
             processData: false,
             contentType: false,
             data: data,
-            headers: { 'Authorization': localStorage.getItem("token") },
+            headers: {
+                ...getMainAuthHeader(),
+            },
             type: 'Post',
             success: function (data) {
                 PostFiles = data.Img;
@@ -227,6 +232,10 @@ function FileUpload(obj) {
                 snc = '<a id="' + data.Img + '" class="' + data.Img + '" onclick="DeleteFile(this)">' + data.Img + ' X Sil </a>';
                 document.getElementById("SilinecekResimler").innerHTML = '<img src="' + data.Img + '" class="' + data.Img + '" id="silinecekimg" width="80" height="auto"/>';;
 
+            },
+            error: function (x) {
+                console.clear();
+                console.log(x);
             },
             async: false
         });
@@ -242,11 +251,14 @@ function DeleteFile(obj) {
     Imgdata.forEach(function (x) {
         if (x.FileId == obj.id) {
             $.ajax({
-                url: '/upload/delete-file',
+                url: '/api/FileApi/deletefile',
                 data: JSON.stringify(x),
                 type: 'Post',
                 contentType: 'application/json',
                 dataType: 'json',
+                headers: {
+                    ...getMainAuthHeader(),
+                },
                 success: function (data) {
                     if (data.state) {
                         var Xdata = $("." + obj.id);
@@ -609,6 +621,7 @@ function GetProduct(id) {
     document.getElementById("DiscountedPrice").innerText = row.DiscountedPrice.toFixed(2) + " TL";
     document.getElementById("DiscountedRate").innerText = "%" + row.TotalDiscountRate;
     document.getElementById("Description").innerText = row.Description;
+    document.getElementById("Barcode").innerText = "Barkod : " + row.Barcode;
     $.ajax({
         url: '/api/CommerceApi/GetProduct?ProductId=' + id,
         type: 'Get',
@@ -620,14 +633,14 @@ function GetProduct(id) {
             response.List.forEach(function (item) {
                 if (item.IsDefault) {
                     content.innerHTML += `<tr class="red-row">
-                    <td>${item.UnitTypeName} / ${item.Count} adet </td>
+                    <td>${item.UnitTypeName} / ${item.Count} </td>
                     <td>${item.Price.toFixed(2)} TL</td>
                     <td>${item.DiscountedPrice.toFixed(2)} TL</td>
                 </tr>`;
                 }
                 else {
                     content.innerHTML += `<tr>
-                    <td>${item.UnitTypeName} / ${item.Count} adet </td>
+                    <td>${item.UnitTypeName} / ${item.Count}</td>
                     <td>${item.Price.toFixed(2)} TL</td>
                     <td>${item.DiscountedPrice.toFixed(2)} TL</td>
                 </tr>`;

@@ -49,11 +49,74 @@ namespace B2b.Infrastructure.Service.ProductService
                 Message = message,
             };
         }
-        public ResultDto<Product> GetAll()
+        public ResultDto<ProductListDtos> GetAll()
         {
+            var data =new  List<ProductListDtos>();
             try
             {
-                products = _context.Products.ToList();
+                var productList = _context.Products.ToList();
+                var priceList=_context.ProductPrices.ToList();
+                var brands = _context.Brands.ToList();
+                var categories= _context.Categories.ToList();
+                var currency = _context.Currencies.ToList();
+                var images = _context.ProductImages.ToList();
+                var unitTypes = _context.UnitTypes.ToList();
+                data = productList.Select(p =>
+                {
+                    // 1. IsDefault = true olan fiyat kaydı
+                    var defaultPrice = priceList.FirstOrDefault(pr => pr.ProductId == p.ProductId && pr.IsDefault);
+
+                    // 2. İlk resim kaydı
+                    var firstImage = images
+                        .Where(img => img.ProductId == p.ProductId)
+                        .OrderBy(img => img.Queue)
+                        .FirstOrDefault();
+
+                    // 3. İlgili yan tablo kayıtları
+                    var brand = brands.FirstOrDefault(b => b.BrandId == p.BrandId);
+                    var category = categories.FirstOrDefault(c => c.CategoryId == p.CategoryId);
+                    var curr = currency.FirstOrDefault(c => c.CurrencyId == p.CurrencyId);
+
+                    // Birim tipi fiyat tablosundan alınıyorsa
+                    var unitType = defaultPrice != null
+                        ? unitTypes.FirstOrDefault(u => u.UnitTypeId == defaultPrice.UnitTypeId)
+                        : null;
+
+                    return new ProductListDtos
+                    {
+                        // Ana Ürün Bilgileri
+                        ProductId = p.ProductId,
+                        ProductName = p.ProductName,
+                        ProductCode = p.ProductCode,
+                        CategoryId = p.CategoryId,
+                        BrandId = p.BrandId,
+                        CurrencyId = p.CurrencyId,
+                        Vat = p.Vat,
+                        StockQuantity = p.StockQuantity,
+                        Description = p.Description,
+                        IsActive = p.IsActive,
+
+                        // Yan Tablo Isim Alanları
+                        CategoryName = category?.CategoryName,
+                        BrandName = brand?.BrandName,
+                        CurrencyName = curr?.CurrencyName,
+
+                        // Resim Bilgisi (Yoksa varsayılan resim atar)
+                        ImageUrl = firstImage?.ImageUrl ?? "/uploads/default.jpg",
+
+                        // Fiyat Tablosundan Gelen Alanlar
+                        Barcode = defaultPrice?.Barcode,
+                        Price = defaultPrice?.Price ?? 0,
+                        IsDefault = defaultPrice?.IsDefault ?? false,
+
+                        // Birim Tipi Bilgileri
+                        UnitTypeId = unitType?.UnitTypeId ?? 0,
+                        UnitTypeName = unitType?.UnitTypeName,
+
+                        // Adet / Ekstra alan ihtiyacınıza göre (Varsayılan 1)
+                        Count = defaultPrice?.Count ?? 0,
+                    };
+                }).ToList();
                 state = true;
                 message = "Products retrieved successfully.";
             }
@@ -62,11 +125,11 @@ namespace B2b.Infrastructure.Service.ProductService
                 state = false;
                 message = ex.Message;
             }
-            return new ResultDto<Product>
+            return new ResultDto<ProductListDtos>
             {
                 State = state,
                 Message = message,
-                List = products
+                List = data
             };
         }
         public ResultDto<Product> GetById(int id)
@@ -275,7 +338,8 @@ namespace B2b.Infrastructure.Service.ProductService
                             Price = item.Price,
                             UnitTypeId = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault().UnitTypeId,
                             IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
-                            Count= item.UnitTypeCount
+                            Count= item.UnitTypeCount,
+                            Barcode=item.Barcode
 
                         };
                         _context.ProductPrices.Add(productPrice);
@@ -304,7 +368,8 @@ namespace B2b.Infrastructure.Service.ProductService
                             Price = item.Price,
                             UnitTypeId = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault().UnitTypeId,
                             IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
-                            Count = item.UnitTypeCount
+                            Count = item.UnitTypeCount,
+                            Barcode = item.Barcode
                         };
                         var price = _context.ProductPrices.Where(p => p.ProductId == findProduct.ProductId && p.UnitTypeId == productPrice.UnitTypeId).FirstOrDefault();
                         if (price == null)
@@ -409,7 +474,7 @@ namespace B2b.Infrastructure.Service.ProductService
                         {
                             price.Price = item.Price;
                             price.Count = item.Count;
-                            
+                            price.Barcode = item.Barcode;
                             _context.SaveChanges();
                         }
                     }

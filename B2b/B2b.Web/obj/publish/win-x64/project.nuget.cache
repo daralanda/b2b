@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uZz1blqGW90=",
+  "dgSpecHash": "x0q81M4XZUE=",
   "success": true,
   "projectFilePath": "C:\\Users\\Hidir\\Desktop\\Projects\\b2b\\B2b\\B2b.Web\\B2b.Web.csproj",
   "expectedPackageFiles": [
@@ -173,10 +173,10 @@
     "C:\\Users\\Hidir\\.nuget\\packages\\system.text.json\\9.0.11\\system.text.json.9.0.11.nupkg.sha512",
     "C:\\Users\\Hidir\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\Hidir\\.nuget\\packages\\system.threading.tasks.dataflow\\8.0.0\\system.threading.tasks.dataflow.8.0.0.nupkg.sha512",
-    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.17\\microsoft.netcore.app.runtime.win-x64.9.0.17.nupkg.sha512",
-    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.17\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.17.nupkg.sha512",
-    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.17\\microsoft.aspnetcore.app.runtime.win-x64.9.0.17.nupkg.sha512",
-    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\9.0.17\\microsoft.netcore.app.crossgen2.win-x64.9.0.17.nupkg.sha512"
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.18\\microsoft.netcore.app.runtime.win-x64.9.0.18.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.18\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.18.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.18\\microsoft.aspnetcore.app.runtime.win-x64.9.0.18.nupkg.sha512",
+    "C:\\Users\\Hidir\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\9.0.18\\microsoft.netcore.app.crossgen2.win-x64.9.0.18.nupkg.sha512"
   ],
   "logs": []
 }

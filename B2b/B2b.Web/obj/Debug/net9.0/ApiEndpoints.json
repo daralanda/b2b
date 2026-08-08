@@ -720,6 +720,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "B2b.Web.Controllers.Api.FileApiController",
+    "Method": "DeleteFile",
+    "RelativePath": "api/FileApi/DeleteFile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "value",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.FileApiController",
+    "Method": "UploadFile",
+    "RelativePath": "api/FileApi/UploadFile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "B2b.Web.Controllers.Api.FileListApiController",
     "Method": "DeleteFile",
     "RelativePath": "api/FileListApi/DeleteFile",
@@ -773,6 +799,22 @@
         "Name": "model",
         "Type": "B2b.Web.Controllers.Api.RenameFileRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.FileListApiController",
+    "Method": "UploadFiles",
+    "RelativePath": "api/FileListApi/UploadFiles",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "files",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1517,32 +1559,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "B2b.Web.Controllers.Api.FileApiController",
-    "Method": "DeleteFile",
-    "RelativePath": "upload/delete-file",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "B2b.Web.Controllers.Api.FileApiController",
-    "Method": "UploadFileImg",
-    "RelativePath": "upload/upload-file",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   }
 ]

@@ -14,7 +14,7 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTm
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\hostfxr.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\hostpolicy.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\mscordaccore.dll
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\mscordaccore_amd64_amd64_9.0.1726.26416.dll
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\mscordaccore_amd64_amd64_9.0.1826.31522.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\mscordbi.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\mscorrc.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\PubTmp\Out\msquic.dll

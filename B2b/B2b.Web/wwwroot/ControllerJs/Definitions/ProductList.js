@@ -39,29 +39,34 @@ function PageLoad() {
             console.log(data);
             var columns = [
                 {
-                    "data": "ProductId",
-                    render: function (data) {
-                        var res = (ImageList.find(x => x.ProductId == data) != null) ? ImageList.find(x => x.ProductId == data).ImageUrl :"/uploads/default.jpg";
-                        return "<img src='" + res + "' width='50' height='auto' >";
+                    "data": "ImageUrl",
+                    "render": function (data, type, row) {
+                        // data: Sütundaki veri (yani URL)
+                        // row: Tüm satır verisi (gerekirse diğer alanlara erişmek için kullanılır)
+
+                        // Veri boşsa veya null ise varsayılan bir resim göster (Güvenlik önlemi)
+                        var imageUrl = data ? data : '/uploads/default.jpg';
+
+                        // HTML img etiketini döndür
+                        // class='img-fluid rounded' gibi sınıflar (Bootstrap vb.) görseli güzelleştirir.
+                        // alt='${row.ProductName}' ile ürün adını alt etiketi olarak ekliyoruz.
+                        return `<img src="${imageUrl}" alt="${row.ProductName}" class="img-thumbnail" style="max-height: 50px; max-width: 50px;" />`;
                     }
-                },
+},
                 { "data": "ProductCode" },
                 { "data": "ProductName" },
-                {
-                    "data": "CategoryId",
-                    render: function (data) {
-                        var result= Categories.find(x => x.CategoryId == data);
-                        return (result != null) ? result.CategoryName : "";
-                    }
-                },
-                {
-                    "data": "BrandId",
-                    render: function (data) {
-                        var result = Brands.find(x => x.BrandId == data);
-                        return (result != null) ? result.BrandName : "";
-                    }
-                },
+                {"data": "CategoryId"},
+                {"data": "BrandId"},
                 { "data": "StockQuantity" },
+                { "data": "Barcode", "visible": false },
+                { "data": "Count", "visible": false },
+                { "data": "CurrencyName", "visible": false },
+                { "data": "IsDefault", "visible": false },
+                { "data": "Price", "visible": false },
+                { "data": "UnitTypeName", "visible": false },
+                { "data": "Description", "visible": false },
+                { "data": "Vat", "visible": false },
+                { "data": "ImageUrl", "visible": false },
                 {
                     "data": "IsActive",
                     render: function (data) {
@@ -98,7 +103,8 @@ function NewRowPrice() {
         UnitTypeId: parseInt(document.getElementById("unitType").value),
         Count: parseInt(document.getElementById("Count").value),
         Price: parseFloat(document.getElementById("Price").value),
-        IsDefault:parseInt(document.getElementById("IsDefault").value),
+        IsDefault: parseInt(document.getElementById("IsDefault").value),
+        Barcode: document.getElementById("Barcode").value,
         ProductPriceId:0
     }
    // var sub = table2.rows().data();
@@ -203,6 +209,7 @@ function PostData() {
                 Count: x.Count,
                 UnitTypeId: x.UnitTypeId,
                 IsDefault: x.IsDefault,
+                Barcode:x.Barcode
             })
         })
     }
@@ -224,6 +231,7 @@ function PostData() {
                 Count: x.Count,
                 UnitTypeId: x.UnitTypeId,
                 IsDefault: x.IsDefault,
+                Barcode: x.Barcode
             })
         })
     }
@@ -467,6 +475,7 @@ const table2 = new DataTable('#priceTable', {
                 return UnitTypeList.find(y => y.id == x).text;
             },
         },
+        { "data": "Barcode" },
         { "data": "Count" },
         { "data": "Price" },
         {
@@ -481,6 +490,7 @@ const table2 = new DataTable('#priceTable', {
                 return '<a id="deleteRowPrice"  class="btn btn-danger text-white pull-right">Sil</a>';
             }
         },
+        
     ]
 });
 document.querySelector('#addRowPrice').addEventListener('click', NewRowPrice);

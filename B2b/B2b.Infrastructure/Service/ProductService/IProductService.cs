@@ -8,7 +8,7 @@ namespace B2b.Infrastructure.Service.ProductService
         ResultDto<Product> Add(Product data);
         ResultDto<Product> GetById(int id);
         ResultDto<Product> Remove(int id);
-        ResultDto<Product> GetAll();
+        ResultDto<ProductListDtos> GetAll();
         ResultDto<Product> Update(Product data);
         ResultDto<ProductPrice> GetPrice(int id);
         ResultDto<ProductImage> GetImage(int id);

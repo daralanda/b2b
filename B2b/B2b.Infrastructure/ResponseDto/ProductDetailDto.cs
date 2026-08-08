@@ -19,6 +19,7 @@
         public int IsCampaign { get; set; }
         public decimal TotalDiscountRate { get; set; }
         public string DiscountTxt { get; set; }
+        public string Barcode { get; set; }
 
     }
 }

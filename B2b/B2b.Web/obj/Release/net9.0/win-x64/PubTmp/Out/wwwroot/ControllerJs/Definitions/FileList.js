@@ -6,7 +6,7 @@
     const btnRefresh = document.getElementById('btnRefresh');
     const fileGrid = document.getElementById('fileGrid');
 
-    // Modal Elemanları
+    // Ön İzleme Modalı Elemanları
     const previewModalEl = document.getElementById('filePreviewModal');
     const previewModal = new bootstrap.Modal(previewModalEl);
     const previewModalLabel = document.getElementById('filePreviewModalLabel');
@@ -14,6 +14,17 @@
     const previewFileInfo = document.getElementById('previewFileInfo');
     const btnPreviewDownload = document.getElementById('btnPreviewDownload');
 
+    // Dosya Yükleme Modalı Elemanları
+    const uploadModalEl = document.getElementById('fileUploadModal');
+    const fileInput = document.getElementById('fileInput');
+    const dropZone = document.getElementById('dropZone');
+    const selectedFilesContainer = document.getElementById('selectedFilesContainer');
+    const selectedFilesList = document.getElementById('selectedFilesList');
+    const btnUploadSubmit = document.getElementById('btnUploadSubmit');
+    const uploadProgressContainer = document.getElementById('uploadProgressContainer');
+    const uploadProgressBar = document.getElementById('uploadProgressBar');
+
+    let selectedFiles = [];
     let searchTimeout = null;
 
     // İlk Yükleme
@@ -32,12 +43,161 @@
         }, 300);
     });
 
-    // Grid İçi Tıklamalar İçin Event Delegation
+    // --- YÜKLEME VE SÜRÜKLE-BIRAK İŞLEMLERİ ---
+
+    // Dosya seçimi değiştiğinde
+    fileInput.addEventListener('change', (e) => {
+        handleFileSelection(Array.from(e.target.files));
+    });
+
+    // Sürükle - Bırak Efektleri
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add('border-primary', 'bg-soft-primary');
+        }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('border-primary', 'bg-soft-primary');
+        }, false);
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFileSelection(Array.from(files));
+    });
+
+    function handleFileSelection(files) {
+        if (!files || files.length === 0) return;
+
+        // Mevcut seçilenlerin üzerine ekle
+        selectedFiles = [...selectedFiles, ...files];
+        renderSelectedFiles();
+    }
+
+    function renderSelectedFiles() {
+        selectedFilesList.innerHTML = '';
+        if (selectedFiles.length === 0) {
+            selectedFilesContainer.classList.add('d-none');
+            btnUploadSubmit.disabled = true;
+            return;
+        }
+
+        selectedFilesContainer.classList.remove('d-none');
+        btnUploadSubmit.disabled = false;
+
+        selectedFiles.forEach((file, index) => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item d-flex align-items-center justify-content-between p-2 font-size-12';
+            li.innerHTML = `
+                <div class="text-truncate me-2">
+                    <i class="bx bx-file me-1 text-primary"></i>
+                    <strong>${escapeHtml(file.name)}</strong> 
+                    <span class="text-muted">(${formatBytes(file.size)})</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-soft-danger py-0 px-1" data-remove-index="${index}">
+                    <i class="bx bx-x"></i>
+                </button>
+            `;
+            selectedFilesList.appendChild(li);
+        });
+    }
+
+    // Seçilen listeden dosya çıkarma
+    selectedFilesList.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-remove-index]');
+        if (!btn) return;
+        const index = parseInt(btn.dataset.removeIndex, 10);
+        selectedFiles.splice(index, 1);
+        renderSelectedFiles();
+    });
+
+    // Yüklemeyi Başlat Butonu
+    btnUploadSubmit.addEventListener('click', () => {
+        if (selectedFiles.length === 0) return;
+
+        const formData = new FormData();
+        selectedFiles.forEach(file => {
+            formData.append('files', file);
+        });
+
+        btnUploadSubmit.disabled = true;
+        uploadProgressContainer.classList.remove('d-none');
+        uploadProgressBar.style.width = '0%';
+
+        // XMLHttpRequest ile progress takibi yapabilen yükleme
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/FileListApi/UploadFiles', true);
+
+        // JWT token ekle
+        const token = localStorage.getItem('token');
+        if (token) {
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+        }
+
+        xhr.upload.onprogress = (e) => {
+            if (e.lengthComputable) {
+                const percentComplete = Math.round((e.loaded / e.total) * 100);
+                uploadProgressBar.style.width = percentComplete + '%';
+            }
+        };
+
+        xhr.onload = function () {
+            btnUploadSubmit.disabled = false;
+            uploadProgressContainer.classList.add('d-none');
+
+            if (xhr.status === 200) {
+                const res = JSON.parse(xhr.responseText);
+                if (res.Success || res.success) {
+                    Swal.fire('Başarılı!', res.Message || res.message, 'success');
+
+                    // Modalı kapat ve değişkenleri sıfırla
+                    resetUploadModal();
+                    const uploadModalInstance = bootstrap.Modal.getInstance(uploadModalEl);
+                    if (uploadModalInstance) uploadModalInstance.hide();
+
+                    loadFiles();
+                } else {
+                    Swal.fire('Hata!', res.Message || res.message || 'Yükleme başarısız.', 'error');
+                }
+            } else {
+                Swal.fire('Hata!', 'Dosya yüklenirken sunucuda bir hata oluştu.', 'error');
+            }
+        };
+
+        xhr.onerror = function () {
+            btnUploadSubmit.disabled = false;
+            uploadProgressContainer.classList.add('d-none');
+            Swal.fire('Hata!', 'Ağ hatası oluştu.', 'error');
+        };
+
+        xhr.send(formData);
+    });
+
+    function resetUploadModal() {
+        selectedFiles = [];
+        fileInput.value = '';
+        renderSelectedFiles();
+        uploadProgressBar.style.width = '0%';
+        uploadProgressContainer.classList.add('d-none');
+    }
+
+    // Modal kapandığında sıfırla
+    uploadModalEl.addEventListener('hidden.bs.modal', resetUploadModal);
+
+
+    // --- GRID TIKLAMALARI VE YARDIMCI FONKSİYONLAR ---
+
     fileGrid.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-action]');
         if (!btn) return;
 
-        // Sayfa yenilenmesini engelle
         if (btn.tagName === 'A') {
             e.preventDefault();
         }
@@ -59,13 +219,11 @@
         }
     });
 
-    // JWT / Auth Header
     function getAuthHeader() {
         const token = localStorage.getItem('token');
         return token ? { 'Authorization': `Bearer ${token}` } : {};
     }
 
-    // API'den Dosyaları Getirme
     function loadFiles() {
         const search = searchInput.value.trim();
         const sortBy = sortByEl.value;
@@ -100,7 +258,6 @@
             });
     }
 
-    // 6'lı Grid Yapısı ile Kartları Çizdirme
     function renderGrid(files) {
         fileGrid.innerHTML = '';
 
@@ -121,8 +278,6 @@
             const fileExtension = (file.Extension || file.extension || '').replace('.', '').toLowerCase();
 
             const cardCol = document.createElement('div');
-
-            // Masaüstü ekranlarda tam 6'lı dizilim: col-xl-2 (12/2 = 6)
             cardCol.className = 'col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3';
 
             cardCol.innerHTML = `
@@ -171,7 +326,6 @@
         });
     }
 
-    // Kart Üzerinde Thumbnail Oluşturma
     function renderThumbnail(url, ext) {
         const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
         if (imageExts.includes(ext)) {
@@ -190,7 +344,6 @@
         return `<i class="${iconClass} display-4"></i>`;
     }
 
-    // Modal Penceresinde Canlı Ön İzleme
     function openPreviewModal(filename, url, ext, size) {
         previewModalLabel.textContent = filename;
         previewFileInfo.textContent = `Boyut: ${size} | Tip: ${ext.toUpperCase()}`;
@@ -256,7 +409,15 @@
             .replace(/'/g, "&#039;");
     }
 
-    // Link Kopyalama
+    function formatBytes(bytes, decimals = 2) {
+        if (!+bytes) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+    }
+
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
             Swal.fire({
@@ -272,7 +433,6 @@
         });
     }
 
-    // Ad Değiştirme (SweetAlert2)
     function renameFile(oldName) {
         Swal.fire({
             title: 'Yeniden Adlandır',
@@ -317,7 +477,6 @@
         });
     }
 
-    // Dosya Silme (SweetAlert2)
     function deleteFile(fileName) {
         Swal.fire({
             title: 'Emin misiniz?',

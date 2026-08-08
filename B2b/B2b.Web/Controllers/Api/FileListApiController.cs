@@ -127,7 +127,58 @@ namespace B2b.Web.Controllers.Api
                 return StatusCode(500, new { Success = false, Message = ex.Message });
             }
         }
+        [HttpPost]
+        [RequestSizeLimit(100 * 1024 * 1024)] // İsteğe bağlı: Maksimum yükleme boyutu (Örn: 100MB)
+        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        {
+            try
+            {
+                if (files == null || files.Count == 0)
+                    return BadRequest(new { Success = false, Message = "Yüklenecek dosya seçilmedi." });
 
+                var folderPath = UploadsFolderPath;
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                var uploadedFiles = new List<string>();
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var filePath = Path.Combine(folderPath, fileName);
+
+                        // Aynı isimde dosya varsa üzerine yazmamak için (Ornek: dosya_1.pdf)
+                        var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+                        var extension = Path.GetExtension(fileName);
+                        int count = 1;
+
+                        while (System.IO.File.Exists(filePath))
+                        {
+                            fileName = $"{fileNameWithoutExt}_{count}{extension}";
+                            filePath = Path.Combine(folderPath, fileName);
+                            count++;
+                        }
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        uploadedFiles.Add(fileName);
+                    }
+                }
+
+                return Ok(new { Success = true, Message = $"{uploadedFiles.Count} adet dosya başarıyla yüklendi.", Files = uploadedFiles });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Success = false, Message = ex.Message });
+            }
+        }
         private static string FormatSize(long bytes)
         {
             string[] suffixes = { "B", "KB", "MB", "GB", "TB" };

@@ -55,6 +55,15 @@
                         <th>Kategori</th>
                         <th>Marka</th>
                         <th>Stok Durumu</th>
+                        <th>Barkod</th>
+                        <th>Birim İçi Adet</th>
+                        <th>Para Birimi</th>
+                        <th>Varsayılan Mı</th>
+                        <th>Fiyat</th>
+                        <th>Birim</th>
+                        <th>Açıklama</th>
+                        <th>Vergi Oranı</th>
+                        <th>Resim Link</th>
                         <th>Durumu</th>
                         <th width="95px"></th>
                     </tr>
@@ -178,13 +187,18 @@
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-12">
+                                        <div class="col-md-2 col-sm-12">
                                             <div class="mb-3">
                                                 <label for="formrow-inputState" class="form-label">Birim</label>
                                                 <select id="unitType" class="form-select"></select>
                                             </div>
                                         </div>
-
+                                        <div class="col-lg-2 col-sm-12">
+                                            <div class="mb-3">
+                                                <label for="formrow-inputCity" class="form-label">Barkod</label>
+                                                <input type="text"  class="form-control" id="Barcode" placeholder="">
+                                            </div>
+                                        </div>
                                         <div class="col-lg-2 col-sm-12">
                                             <div class="mb-3">
                                                 <label for="formrow-inputCity" class="form-label">içi Adet</label>
@@ -219,6 +233,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Birim</th>
+                                                    <th>Barkod</th>
                                                     <th>içi Adet</th>
                                                     <th>Fiyat</th>
                                                     <th>Varsayılan</th>

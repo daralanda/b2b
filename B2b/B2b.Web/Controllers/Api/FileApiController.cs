@@ -6,12 +6,11 @@ namespace B2b.Web.Controllers.Api
 {
     [ApiController]
     [Authorize]
+    [Route("api/[controller]/[action]")]
     public class FileApiController : ControllerBase
     {
-
-        [Route("upload/upload-file")]
         [HttpPost, DisableRequestSizeLimit]
-        public IActionResult UploadFileImg()
+        public IActionResult UploadFile()
         {
             try
             {
@@ -41,7 +40,7 @@ namespace B2b.Web.Controllers.Api
             }
         }
 
-        [Route("upload/delete-file")]
+
         [HttpPost]
         public IActionResult DeleteFile([FromBody]string value)
         {
