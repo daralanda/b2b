@@ -51,38 +51,15 @@ namespace B2b.Infrastructure.Service.ProductService
         }
         public ResultDto<ProductListDtos> GetAll()
         {
-            var data =new  List<ProductListDtos>();
+            var data = new List<ProductListDtos>();
+
             try
             {
-                var productList = _context.Products.ToList();
-                var priceList=_context.ProductPrices.ToList();
-                var brands = _context.Brands.ToList();
-                var categories= _context.Categories.ToList();
-                var currency = _context.Currencies.ToList();
-                var images = _context.ProductImages.ToList();
-                var unitTypes = _context.UnitTypes.ToList();
-                data = productList.Select(p =>
-                {
-                    // 1. IsDefault = true olan fiyat kaydı
-                    var defaultPrice = priceList.FirstOrDefault(pr => pr.ProductId == p.ProductId && pr.IsDefault);
-
-                    // 2. İlk resim kaydı
-                    var firstImage = images
-                        .Where(img => img.ProductId == p.ProductId)
-                        .OrderBy(img => img.Queue)
-                        .FirstOrDefault();
-
-                    // 3. İlgili yan tablo kayıtları
-                    var brand = brands.FirstOrDefault(b => b.BrandId == p.BrandId);
-                    var category = categories.FirstOrDefault(c => c.CategoryId == p.CategoryId);
-                    var curr = currency.FirstOrDefault(c => c.CurrencyId == p.CurrencyId);
-
-                    // Birim tipi fiyat tablosundan alınıyorsa
-                    var unitType = defaultPrice != null
-                        ? unitTypes.FirstOrDefault(u => u.UnitTypeId == defaultPrice.UnitTypeId)
-                        : null;
-
-                    return new ProductListDtos
+                // 1. AsNoTracking() ile takip kapatıldı.
+                // 2. ToList() en sona alındı; böylece tüm JOIN ve Select işlemleri SQL tarafında tek sorguda biter.
+                data = _context.Products
+                    .AsNoTracking()
+                    .Select(p => new ProductListDtos
                     {
                         // Ana Ürün Bilgileri
                         ProductId = p.ProductId,
@@ -96,27 +73,63 @@ namespace B2b.Infrastructure.Service.ProductService
                         Description = p.Description,
                         IsActive = p.IsActive,
 
-                        // Yan Tablo Isim Alanları
-                        CategoryName = category?.CategoryName,
-                        BrandName = brand?.BrandName,
-                        CurrencyName = curr?.CurrencyName,
+                        // İlişkili Tablo İsim Alanları (SQL LEFT JOIN olarak çevrilir)
+                        CategoryName = _context.Categories
+                            .Where(c => c.CategoryId == p.CategoryId)
+                            .Select(c => c.CategoryName)
+                            .FirstOrDefault(),
 
-                        // Resim Bilgisi (Yoksa varsayılan resim atar)
-                        ImageUrl = firstImage?.ImageUrl ?? "/uploads/default.jpg",
+                        BrandName = _context.Brands
+                            .Where(b => b.BrandId == p.BrandId)
+                            .Select(b => b.BrandName)
+                            .FirstOrDefault(),
 
-                        // Fiyat Tablosundan Gelen Alanlar
-                        Barcode = defaultPrice?.Barcode,
-                        Price = defaultPrice?.Price ?? 0,
-                        IsDefault = defaultPrice?.IsDefault ?? false,
+                        CurrencyName = _context.Currencies
+                            .Where(c => c.CurrencyId == p.CurrencyId)
+                            .Select(c => c.CurrencyName)
+                            .FirstOrDefault(),
 
-                        // Birim Tipi Bilgileri
-                        UnitTypeId = unitType?.UnitTypeId ?? 0,
-                        UnitTypeName = unitType?.UnitTypeName,
+                        // İlk Resim Bilgisi (Queue sırasına göre)
+                        ImageUrl = _context.ProductImages
+                            .Where(img => img.ProductId == p.ProductId)
+                            .OrderBy(img => img.Queue)
+                            .Select(img => img.ImageUrl)
+                            .FirstOrDefault() ?? "/uploads/default.jpg",
 
-                        // Adet / Ekstra alan ihtiyacınıza göre (Varsayılan 1)
-                        Count = defaultPrice?.Count ?? 0,
-                    };
-                }).ToList();
+                        // Varsayılan Fiyat (IsDefault = true)
+                        Barcode = _context.ProductPrices
+                            .Where(pr => pr.ProductId == p.ProductId && pr.IsDefault)
+                            .Select(pr => pr.Barcode)
+                            .FirstOrDefault(),
+
+                        Price = _context.ProductPrices
+                            .Where(pr => pr.ProductId == p.ProductId && pr.IsDefault)
+                            .Select(pr => (decimal?)pr.Price)
+                            .FirstOrDefault() ?? 0,
+
+                        IsDefault = _context.ProductPrices
+                            .Where(pr => pr.ProductId == p.ProductId && pr.IsDefault)
+                            .Select(pr => (bool?)pr.IsDefault)
+                            .FirstOrDefault() ?? false,
+
+                        Count = _context.ProductPrices
+                            .Where(pr => pr.ProductId == p.ProductId && pr.IsDefault)
+                            .Select(pr => (int?)pr.Count)
+                            .FirstOrDefault() ?? 0,
+
+                        // Birim Tipi Bilgileri (Price tablosu üzerinden Join)
+                        UnitTypeId = (from pr in _context.ProductPrices
+                                      where pr.ProductId == p.ProductId && pr.IsDefault
+                                      join u in _context.UnitTypes on pr.UnitTypeId equals u.UnitTypeId
+                                      select (int?)u.UnitTypeId).FirstOrDefault() ?? 0,
+
+                        UnitTypeName = (from pr in _context.ProductPrices
+                                        where pr.ProductId == p.ProductId && pr.IsDefault
+                                        join u in _context.UnitTypes on pr.UnitTypeId equals u.UnitTypeId
+                                        select u.UnitTypeName).FirstOrDefault()
+                    })
+                    .ToList();
+
                 state = true;
                 message = "Products retrieved successfully.";
             }
@@ -125,6 +138,7 @@ namespace B2b.Infrastructure.Service.ProductService
                 state = false;
                 message = ex.Message;
             }
+
             return new ResultDto<ProductListDtos>
             {
                 State = state,
@@ -215,7 +229,8 @@ namespace B2b.Infrastructure.Service.ProductService
                         UnitTypeId = item.UnitTypeId,
                         ProductId = upd.ProductId,
                         IsDefault = item.IsDefault,
-                        Count = item.Count
+                        Count = item.Count,
+                        Barcode=item.Barcode
                         
                     });
                     _context.SaveChanges();

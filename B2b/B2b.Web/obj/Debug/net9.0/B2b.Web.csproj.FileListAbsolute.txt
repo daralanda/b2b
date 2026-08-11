@@ -2216,14 +2216,12 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\0dz2
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\du3c03sy1a-{0}-7xrbstk5fr-7xrbstk5fr.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\3fc8a2416q-{0}-3nu6vwdx76-3nu6vwdx76.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\lrxsgjs301-{0}-b6819pvgrj-b6819pvgrj.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\leqxpzbeo6-{0}-2y3y6zmqg8-2y3y6zmqg8.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jzg8fdf1io-{0}-uaozjohprv-uaozjohprv.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\rxn31cev7z-{0}-7nvc7jjgqa-7nvc7jjgqa.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\j7o1m0n4wo-{0}-cp7fltzruk-cp7fltzruk.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\x6cfsec8j7-{0}-yuav9tcu84-yuav9tcu84.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\qaneki62kb-{0}-isa4okzwxc-isa4okzwxc.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\ljicp4ukpu-{0}-3eqfuvrhqs-3eqfuvrhqs.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\xgu3t9evbd-{0}-z23gsbg6br-z23gsbg6br.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\bf32moi6d7-{0}-f0cc5stkot-f0cc5stkot.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\m654rjppmq-{0}-rudzl347uw-rudzl347uw.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\gfl0qixzku-{0}-eivvdwkotk-eivvdwkotk.gz
@@ -2245,4 +2243,6 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.genrunt
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\ref\B2b.Web.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\txqo5c1ta7-{0}-49smcli1xu-49smcli1xu.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jqfbd6u9ew-{0}-n8yzmd9oua-n8yzmd9oua.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\5hq0e2w07k-{0}-ge9d37n55l-ge9d37n55l.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\leqxpzbeo6-{0}-x1stt5xkm7-x1stt5xkm7.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\xgu3t9evbd-{0}-vmkvvcde5h-vmkvvcde5h.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\5hq0e2w07k-{0}-6ii8ewk0re-6ii8ewk0re.gz

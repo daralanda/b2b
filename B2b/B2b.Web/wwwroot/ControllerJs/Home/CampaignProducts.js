@@ -159,6 +159,7 @@ $(document).ready(function () {
                                         <th class="mobil-gizle">Ürün Kodu</th>
                                         <th>Ürün Adı</th>
                                         <th class="text-center" style="width: 90px;">Birim</th>
+                                        <th class="text-center" style="width: 90px;">Birim İçi</th>
                                         <th class="text-end" style="width: 140px;">Fiyat</th>
                                         <th class="text-center" style="width: 180px;">Miktar / İşlem</th>
                                     </tr>
@@ -185,6 +186,7 @@ $(document).ready(function () {
                                 </span>
                             </td>
                             <td class="text-center"><span class="text-secondary small fw-bold">${productUnit}</span></td>
+                            <td class="text-center"><span class="text-secondary small fw-bold">${item.UnitCount}</span></td>
                             <td>${pricesHTML}</td>
                             <td>
                                 <div class="input-group input-group-sm">

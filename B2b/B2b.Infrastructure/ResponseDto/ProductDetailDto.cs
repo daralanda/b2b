@@ -20,6 +20,7 @@
         public decimal TotalDiscountRate { get; set; }
         public string DiscountTxt { get; set; }
         public string Barcode { get; set; }
+        public int UnitCount { get; set; }
 
     }
 }
