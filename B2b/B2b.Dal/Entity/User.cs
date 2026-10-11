@@ -23,5 +23,6 @@ namespace B2b.Dal.Entity
         public Role Role { get; set; }
         public DateTime CreateDate { get; set; }
         public ICollection<UserToken> UserTokens { get; set; }
+        public virtual List<UserBrandDiscount> UserBrandDiscounts { get; set; }
     }
 }

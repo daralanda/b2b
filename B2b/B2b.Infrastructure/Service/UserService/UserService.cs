@@ -4,6 +4,7 @@ using B2b.Infrastructure.RequestDto;
 using B2b.Infrastructure.ResponseDto;
 using B2b.Plugin.Mail;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace B2b.Infrastructure.Service.UserService
 {
@@ -58,7 +59,7 @@ namespace B2b.Infrastructure.Service.UserService
         }
         public List<User> GetAll()
         {
-            var data = _context.Users.ToList();
+            var data = _context.Users.Include(u => u.UserBrandDiscounts).ToList();
             return data;
         }
         public void UserUpdate(User user)
@@ -67,6 +68,7 @@ namespace B2b.Infrastructure.Service.UserService
             {
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
                 var data = _context.Users.Where(p => p.UserId == user.UserId).FirstOrDefault();
+                var del = _context.UserBrandDiscounts.Where(p => p.UserId == user.UserId).ToList();
                 if (data != null)
                 {
                     data.Password = user.Password;
@@ -84,6 +86,11 @@ namespace B2b.Infrastructure.Service.UserService
                     data.DiscountRate = user.DiscountRate;
                     _context.SaveChanges();
                     _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+                    _context.UserBrandDiscounts.RemoveRange(del);
+                    _context.SaveChanges();
+                    _context.UserBrandDiscounts.AddRange(user.UserBrandDiscounts);
+                    _context.SaveChanges();
                 }
             }
             catch
@@ -96,6 +103,7 @@ namespace B2b.Infrastructure.Service.UserService
             {
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
                 var data = _context.Users.Where(p => p.UserId == user.UserId).FirstOrDefault();
+                var del=_context.UserBrandDiscounts.Where(p=>p.UserId== user.UserId).ToList();
                 if (data != null)
                 {
                     data.Password = user.Password;
@@ -113,8 +121,15 @@ namespace B2b.Infrastructure.Service.UserService
                     data.CityId = user.CityId;
                     data.IsIndividual = user.IsIndividual;
                     data.DiscountRate = user.DiscountRate;
+                    
                     _context.SaveChanges();
                     _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+                    _context.UserBrandDiscounts.RemoveRange(del);
+                    _context.SaveChanges();
+                    _context.UserBrandDiscounts.AddRange(user.UserBrandDiscounts);
+                    _context.SaveChanges();
+
                 }
             }
             catch

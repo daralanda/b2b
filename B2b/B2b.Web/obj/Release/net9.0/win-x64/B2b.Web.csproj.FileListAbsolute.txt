@@ -3411,7 +3411,6 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compr
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\m654rjppmq-{0}-rudzl347uw-rudzl347uw.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\gfl0qixzku-{0}-eivvdwkotk-eivvdwkotk.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\htrsovxteo-{0}-mvjsxld3r0-mvjsxld3r0.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\qe8uey368g-{0}-edknwwq3wa-edknwwq3wa.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\p7hpoai08z-{0}-j22lpq1h9p-j22lpq1h9p.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\d2d9tglx8u-{0}-j22lpq1h9p-j22lpq1h9p.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\staticwebassets.build.json
@@ -3427,9 +3426,10 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\B2b.W
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\B2b.Web.genruntimeconfig.cache
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\ref\B2b.Web.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\57bndw1zmy-{0}-rohly6k3kl-rohly6k3kl.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\mscordaccore_amd64_amd64_9.0.1826.31522.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\txqo5c1ta7-{0}-49smcli1xu-49smcli1xu.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\jqfbd6u9ew-{0}-n8yzmd9oua-n8yzmd9oua.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\5hq0e2w07k-{0}-wcp62pdvot-wcp62pdvot.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\leqxpzbeo6-{0}-x1stt5xkm7-x1stt5xkm7.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\xgu3t9evbd-{0}-vmkvvcde5h-vmkvvcde5h.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\bin\Release\net9.0\win-x64\mscordaccore_amd64_amd64_9.0.1926.36724.dll
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\5hq0e2w07k-{0}-j3j6f1e4f5-j3j6f1e4f5.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\win-x64\compressed\qe8uey368g-{0}-kxd68xut3m-kxd68xut3m.gz

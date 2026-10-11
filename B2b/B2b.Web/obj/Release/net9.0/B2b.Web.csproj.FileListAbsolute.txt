@@ -2224,7 +2224,6 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\bf
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\m654rjppmq-{0}-rudzl347uw-rudzl347uw.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\gfl0qixzku-{0}-eivvdwkotk-eivvdwkotk.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\htrsovxteo-{0}-mvjsxld3r0-mvjsxld3r0.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\qe8uey368g-{0}-edknwwq3wa-edknwwq3wa.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\p7hpoai08z-{0}-j22lpq1h9p-j22lpq1h9p.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\d2d9tglx8u-{0}-j22lpq1h9p-j22lpq1h9p.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\staticwebassets.build.json
@@ -2242,6 +2241,7 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\ref\B2b.Web.d
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\57bndw1zmy-{0}-rohly6k3kl-rohly6k3kl.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\txqo5c1ta7-{0}-49smcli1xu-49smcli1xu.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\jqfbd6u9ew-{0}-n8yzmd9oua-n8yzmd9oua.gz
-C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\5hq0e2w07k-{0}-wcp62pdvot-wcp62pdvot.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\leqxpzbeo6-{0}-x1stt5xkm7-x1stt5xkm7.gz
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\xgu3t9evbd-{0}-vmkvvcde5h-vmkvvcde5h.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\5hq0e2w07k-{0}-j3j6f1e4f5-j3j6f1e4f5.gz
+C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Web\obj\Release\net9.0\compressed\qe8uey368g-{0}-kxd68xut3m-kxd68xut3m.gz

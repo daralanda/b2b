@@ -589,11 +589,15 @@ wwwroot\assets\libs\tui-date-picker\tui-date-picker.min.js
 wwwroot\assets\libs\tui-dom\tui-dom.min.js
 wwwroot\assets\libs\tui-time-picker\tui-time-picker.min.css
 wwwroot\assets\libs\tui-time-picker\tui-time-picker.min.js
+wwwroot\uploads\0cc139f6-710f-4573-b161-b1ccc2f71dcd-00a481a4-0c14-4a05-a32a-9b7b1dc426fd-BOA 1.png
+wwwroot\uploads\8f58f092-8dd0-4270-92e7-decd8135ab95-00a481a4-0c14-4a05-a32a-9b7b1dc426fd-BOA 1.png
 wwwroot\uploads\Stok.xlsx
 wwwroot\uploads\UrunFiyatGuncelleme.xlsx
+wwwroot\uploads\b2cdf4d7-9f3e-45a7-9335-6cad7ca85d5c-00a481a4-0c14-4a05-a32a-9b7b1dc426fd-BOA 1.png
 wwwroot\uploads\banner2.jpg
 wwwroot\uploads\bf76f658-dfed-4377-9c59-40ecac6eb0e3-kare-logo.png
 wwwroot\uploads\c5bab915-00dc-4a00-b445-659217bc57b4-kare-logo.png
+wwwroot\uploads\cf4bcf91-ad62-4023-9c75-b22c26886acd-logo.png
 wwwroot\uploads\default.jpeg
 wwwroot\uploads\default.jpg
 wwwroot\uploads\default_1.jpg

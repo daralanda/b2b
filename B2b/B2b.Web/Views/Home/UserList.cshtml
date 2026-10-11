@@ -3,23 +3,23 @@
     ViewData["Title"] = "Kullanıcılar";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string Domain = Context.Request.Scheme + "://" + this.Context.Request.Host.Value;
-
 }
-
 
 <div class="col-12">
     <div class="card">
         <div class="card-body">
             <div class="row mb-2">
-                <div class="col-sm-12" style=" text-align: right;">
-                    <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right insert" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="mdi mdi-plus-circle mr-1"></i> Yeni Kullanıcı Ekle</a>
+                <div class="col-sm-12" style="text-align: right;">
+                    <a onclick='btnClick(this)' id="new" class="btn btn-primary insert text-white pull-right" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="mdi mdi-plus-circle mr-1"></i> Yeni Kullanıcı Ekle
+                    </a>
                 </div>
             </div>
 
             <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="datatables">
                 <thead>
                     <tr>
-                        <th>Kullancı Adı </th>
+                        <th>Kullanıcı Adı</th>
                         <th>Ad</th>
                         <th>Soyad</th>
                         <th>Yetki Grubu</th>
@@ -29,19 +29,173 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+    </div>
+</div>
 
-        </div> <!-- end card-body-->
-    </div> <!-- end card-->
-</div> <!-- end col -->
-@section scripts{
-    <!-- JsGrid js -->
+<!-- Modal ve Tab Yapısı -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Kullanıcı İşlemleri</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Sekmeler (Tabs) -->
+                <ul class="nav nav-tabs nav-bordered mb-3" id="userTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">
+                            <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                            <span class="d-none d-md-block">Genel Bilgiler</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="brand-discounts-tab" data-bs-toggle="tab" href="#brand-discounts" role="tab" aria-controls="brand-discounts" aria-selected="false">
+                            <i class="mdi mdi-tag-multiple d-md-none d-block"></i>
+                            <span class="d-none d-md-block">Marka İndirimleri</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Sekme İçerikleri -->
+                <div class="tab-content">
+                    <!-- 1. Sekme: Genel Bilgiler -->
+                    <div class="tab-pane show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" placeholder="Kullanıcı Adı">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="firstname">Adı</label>
+                                    <input type="text" class="form-control" id="firstname" placeholder="Adı">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="lastname">Soyadı</label>
+                                    <input type="text" class="form-control" id="lastname" placeholder="Soyadı">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="phone">Telefon</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Telefon">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="password">Parola</label>
+                                    <input type="text" class="form-control" id="password" placeholder="Parola">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="role">Yetki Tipi</label>
+                                    <select id="role" class="form-control"></select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="isactive">Aktif Durumu</label>
+                                    <select id="isactive" class="form-control">
+                                        <option value="0">Pasif</option>
+                                        <option value="1">Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="CustomerName">Firma Adı</label>
+                                    <input type="text" class="form-control" id="CustomerName" placeholder="Firma Adı">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="TaxOffice">Vergi Dairesi</label>
+                                    <input type="text" class="form-control" id="TaxOffice" placeholder="Vergi Dairesi">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="TaxNo">Vergi No</label>
+                                    <input type="text" class="form-control" id="TaxNo" placeholder="Vergi No">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="CityId">Şehir</label>
+                                    <select id="CityId" onchange="CityChange()" class="form-control"></select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="DistrictId">İlçe</label>
+                                    <select id="DistrictId" class="form-control"></select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="discountRate">Genel İndirim Oranı</label>
+                                    <input type="number" class="form-control" id="discountRate" placeholder="İndirim Oranı">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="IsIndividual">Müşteri Tipi</label>
+                                    <select id="IsIndividual" class="form-control">
+                                        <option value="0">Bireysel</option>
+                                        <option value="1">Firma</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="Address">Adres</label>
+                                    <input type="text" class="form-control" id="Address" placeholder="Adres">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Sekme: Marka Bazlı İndirimler -->
+                    <div class="tab-pane" id="brand-discounts" role="tabpanel" aria-labelledby="brand-discounts-tab">
+                        <div class="row mb-3 p-3 bg-light rounded border">
+                            <div class="col-md-5">
+                                <label for="selectBrand">Marka Seç</label>
+                                <select id="selectBrand" class="form-control">
+                                    <option value="">Marka Seçiniz...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputDiscountRate">İndirim Oranı (%)</label>
+                                <input type="number" class="form-control" id="inputDiscountRate" placeholder="Örn: 15.5" min="0" max="100" step="0.01">
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="button" class="btn btn-success w-100" onclick="AddBrandDiscountRow()">
+                                    <i class="mdi mdi-plus mr-1"></i> Satır Ekle
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                                    <table class="table table-bordered table-striped dt-responsive nowrap w-100" id="brandDiscountTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Marka Adı</th>
+                                                <th style="width: 200px;">İndirim Oranı (%)</th>
+                                                <th style="width: 70px; text-align: center;">İşlem</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="brandDiscountTableBody">
+                                            <!-- Dinamik eklenen satırlar buraya gelecek -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" onclick="PostData(this)" class="btn btn-primary" id="btnSumbit">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
     <link href="@Domain/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <script src="@Domain/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="@Domain/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Buttons examples -->
     <script src="@Domain/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="@Domain/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
     <script src="@Domain/assets/libs/jszip/jszip.min.js"></script>
@@ -50,104 +204,8 @@
     <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
     <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="@Domain/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <!-- Responsive examples -->
     <script src="@Domain/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="@Domain/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-    <script src="@Domain/ControllerJs/UserGroup/UserList.js"></script>>
-    <!-- Init js -->
+
+    <script src="@Domain/ControllerJs/UserGroup/UserList.js"></script>
 }
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-    <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-            </div>
-            <div class="modal-body">
-           <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Kullanıcı Adı">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Adı</label>
-                            <input type="text" class="form-control" id="firstname" placeholder="Adı">
-                        </div>
-                        <div class="form-group">
-                            <label for="position">Soyadı</label>
-                            <input type="text" class="form-control" id="lastname" placeholder="Soyadı">
-                        </div>
-                        <div class="form-group">
-                            <label for="position">Telefon</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Telefon">
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Parola</label>
-                            <input type="text" class="form-control" id="password" placeholder="Parola">
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Yetki Tipi</label>
-                            <select id="role" class="form-control"></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="category"> Aktif Durumu</label>
-                            <select id="isactive" class="form-control">
-                                <option value="0"> Pasif</option>
-                                <option value="1"> Aktif</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">Firma Adı</label>
-                            <input type="text" class="form-control" id="CustomerName" placeholder="Firma Adı">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Vergi Dairesi</label>
-                            <input type="text" class="form-control" id="TaxOffice" placeholder="Vergi Dairesi">
-                        </div>
-                        <div class="form-group">
-                            <label for="position">Vergi No</label>
-                            <input type="text" class="form-control" id="TaxNo" placeholder="Vergi No">
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Şehir</label>
-                            <select id="CityId" onchange="CityChange()" class="form-control"></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">İlçe</label>
-                            <select id="DistrictId" class="form-control"></select>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="category">İndirim Oranı</label>
-                            <input type="number" class="form-control" id="discountRate" placeholder="İndirim Oranı">
-                        </div>
-                   
-                        <div class="form-group">
-                            <label for="category"> Müşteri Tipi</label>
-                            <select id="IsIndividual" class="form-control">
-                                <option value="0"> Bireysel</option>
-                                <option value="1"> Firma</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="category">Adres</label>
-                            <input type="text" class="form-control" id="Address" placeholder="Adres">
-                        </div>
-                    </div>
-                </div>
-            
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                <button type="button" onclick="PostData(this)" class="btn btn-primary" id="btnSumbit">Kaydet</button>
-            </div>
-        </div>
-    </div>
-</div>

@@ -29,6 +29,7 @@ namespace B2b.Dal.Context
         public virtual DbSet<Slider> Sliders { get; set; }
         public virtual DbSet<UnitType> UnitTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserBrandDiscount> UserBrandDiscounts { get; set; }
         public virtual DbSet<UserToken> UserTokens { get; set; }
        
 

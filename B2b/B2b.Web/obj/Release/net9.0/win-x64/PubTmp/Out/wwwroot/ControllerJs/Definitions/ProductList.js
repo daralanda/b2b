@@ -342,15 +342,15 @@ function FileUpload(elem) {
     formData.append("file", fileInput);
 
     $.ajax({
-        url: "/api/ProductApi/UploadImage",
+        url: "/api/FileApi/UploadFile",
         type: "POST",
         data: formData,
         contentType: false,
         processData: false,
         headers: { 'Authorization': localStorage.getItem("token") },
         success: function (res) {
-            if (res.State || res.success) {
-                var path = res.FilePath || res.filePath || res.Url || res.data;
+            if (res.state || res.success) {
+                var path = res.Img ;
                 if (document.getElementById("ImageUrl")) {
                     document.getElementById("ImageUrl").innerText = path;
                 }
