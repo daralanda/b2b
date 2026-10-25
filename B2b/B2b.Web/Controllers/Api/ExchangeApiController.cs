@@ -41,6 +41,16 @@ namespace B2b.Web.Controllers.Api
             return Ok(_service.Update(data));
         }
         [HttpGet]
+        public IActionResult GetDaily()
+        {
+            return Ok(_service.GetDaily());
+        }
+        [HttpGet]
+        public IActionResult GetCentralBank()
+        {
+            return Ok(_service.GetCentralBank());
+        }
+        [HttpGet]
         public IActionResult AutoUpdate()
         {
             return Ok(_service.AutoUpdate());

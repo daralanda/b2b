@@ -66,7 +66,7 @@ namespace B2b.Infrastructure.Service.OrderService
                 var data = _context.Orders.Where(p => p.OrderId == id).FirstOrDefault();
                 var orderDetails = (from x in _context.OrderDetails
                                     join y in _context.Products on x.ProductId equals y.ProductId
-                                    join z in _context.ProductImages on x.ProductId equals z.ProductId into imgGroup
+                                    join z in _context.ProductImages.Where(i => i.ImageUrl != null && i.ImageUrl.Trim() != "") on x.ProductId equals z.ProductId into imgGroup
                                     from z in imgGroup.Take(1).DefaultIfEmpty()
                                     where x.OrderId == id
                                     select new OrderDetailDto

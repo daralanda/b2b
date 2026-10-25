@@ -4,11 +4,18 @@ using B2b.Infrastructure.ResponseDto;
 using B2b.Infrastructure.Service.CurrencyService;
 using B2b.Plugin.Exchange;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace B2b.Infrastructure.Service.ExchangeService
 {
     public class ExchangeService(B2bDbContext context) : IExchangeService
     {
+        // TCMB kurları günde bir kez yayınlanır; her istekte TCMB'ye gitmemek için uygulama genelinde kısa süreli önbellek
+        private static readonly TimeSpan CentralBankCacheDuration = TimeSpan.FromMinutes(30);
+        private static readonly object _centralBankLock = new();
+        private static List<DailyExchangeDto> _centralBankCache;
+        private static DateTime _centralBankCachedAt;
+
         private readonly B2bDbContext _context = context;
         bool state = false;
         string message = string.Empty;
@@ -63,6 +70,75 @@ namespace B2b.Infrastructure.Service.ExchangeService
                 Message = message,
                 List = list
             };
+        }
+        // Her para biriminin en güncel kuru (footer'daki günlük kur paneli için)
+        public ResultDto<DailyExchangeDto> GetDaily()
+        {
+            var daily = new List<DailyExchangeDto>();
+            try
+            {
+                daily = (from c in _context.Currencies
+                         let e = _context.Exchanges.Where(p => p.CurrencyId == c.CurrencyId)
+                                                   .OrderByDescending(p => p.TransactionDate)
+                                                   .FirstOrDefault()
+                         where e != null
+                         orderby c.CurrencyId
+                         select new DailyExchangeDto
+                         {
+                             CurrencyCode = c.CurrencyCode,
+                             CurrencyName = c.CurrencyName,
+                             Buying = e.Buying,
+                             Selling = e.Selling,
+                             TransactionDate = e.TransactionDate,
+                             Source = "Kayıtlı kur"
+                         }).ToList();
+                state = true;
+                message = "Daily exchange retrieved successfully.";
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                state = false;
+            }
+            return new ResultDto<DailyExchangeDto>
+            {
+                State = state,
+                Message = message,
+                List = daily
+            };
+        }
+        // Footer için USD/EUR kurları, doğrudan TCMB'den (30 dk önbellekli).
+        // TCMB'ye ulaşılamazsa önce eski önbellek, o da yoksa veritabanındaki son kayıtlı kur döner.
+        public ResultDto<DailyExchangeDto> GetCentralBank()
+        {
+            lock (_centralBankLock)
+            {
+                if (_centralBankCache != null && DateTime.Now - _centralBankCachedAt < CentralBankCacheDuration)
+                    return new ResultDto<DailyExchangeDto> { State = true, Message = "Central bank exchange retrieved from cache.", List = _centralBankCache };
+
+                var bulletin = ExchangePlugin.GetBulletin();
+                if (bulletin != null && bulletin.CurrencyExchange.Count > 0)
+                {
+                    DateTime.TryParseExact(bulletin.Tarih, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var bulletinDate);
+                    _centralBankCache = bulletin.CurrencyExchange
+                        .OrderBy(p => p.CurrencyCode == "USD" ? 0 : 1)
+                        .Select(p => new DailyExchangeDto
+                        {
+                            CurrencyCode = p.CurrencyCode,
+                            CurrencyName = p.Isim,
+                            Buying = decimal.Parse(p.ForexBuying, CultureInfo.InvariantCulture),
+                            Selling = decimal.Parse(p.ForexSelling, CultureInfo.InvariantCulture),
+                            TransactionDate = bulletinDate,
+                            Source = "TCMB"
+                        }).ToList();
+                    _centralBankCachedAt = DateTime.Now;
+                    return new ResultDto<DailyExchangeDto> { State = true, Message = "Central bank exchange retrieved successfully.", List = _centralBankCache };
+                }
+
+                if (_centralBankCache != null)
+                    return new ResultDto<DailyExchangeDto> { State = true, Message = "Central bank unreachable; returning last cached exchange.", List = _centralBankCache };
+            }
+            return GetDaily();
         }
         public ResultDto<Exchange> GetById(int id)
         {

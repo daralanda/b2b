@@ -22,6 +22,7 @@
     <link href="@Domain/assets/css/icon-line-pro-style.css" rel="stylesheet" />
     <link href="@Domain/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="@Domain/assets/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="@Domain/assets/libs/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="@Domain/assets/libs/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" />
@@ -152,16 +153,23 @@
             </div>
             <!-- End Page-content -->
 
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Kare El Aletleri.
+            <!-- Sabit, açılır kapanır footer: TCMB USD/EUR kurları (Main.js yükler, durum tarayıcıda hatırlanır) -->
+            <footer class="footer site-footer" id="siteFooter">
+                <button type="button" class="site-footer-toggle" id="siteFooterToggle" aria-expanded="true" aria-controls="siteFooterContent">
+                    <i class="bx bx-dollar-circle"></i> Döviz Kurları <i class="bx bx-chevron-down site-footer-chevron"></i>
+                </button>
+                <script>
+                    // Kapalı tercih edildiyse sayfa çizilmeden uygula (açık görünüp kapanma titremesi olmasın)
+                    try { if (localStorage.getItem('siteFooterCollapsed') === '1') { document.getElementById('siteFooter').classList.add('collapsed'); document.getElementById('siteFooterToggle').setAttribute('aria-expanded', 'false'); } } catch (e) { }
+                </script>
+                <div class="site-footer-content" id="siteFooterContent">
+                    <div class="container-fluid">
+                        <div class="site-footer-rates" id="exchangeFooterRates">
+                            <span class="text-muted">Kurlar yükleniyor...</span>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by HeliosDiji
-                            </div>
+                        <div class="site-footer-bottom">
+                            <span><script>document.write(new Date().getFullYear())</script> © Kare El Aletleri.</span>
+                            <span class="d-none d-sm-inline">Design & Develop by HeliosDiji</span>
                         </div>
                     </div>
                 </div>
@@ -204,6 +212,9 @@
                                         <h4 class=" text-uppercase">Fiyat : <span class="text-muted me-2 text-danger "><span id="Price"></span></span></h4>
                                         <h4 class="text-uppercase">İndirim Oranı : <span class="text-muted me-2 text-danger "><span id="DiscountedRate"></span></span></h4>
                                         <h4 class="text-uppercase">İndrimli Fiyat : <span class="text-muted me-2 text-danger "><span id="DiscountedPrice"></span></span></h4>
+                                        <div class="product-brand-logo d-none" id="BrandLogo">
+                                            <img id="BrandLogoImg" src="" alt="">
+                                        </div>
                                         <hr />
                                             <div class="table-responsive">
                                             <table class="table mb-0 table-bordered">
