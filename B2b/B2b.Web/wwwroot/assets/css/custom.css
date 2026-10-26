@@ -1,0 +1,244 @@
+/* Tema (app.min.css) üzerine yapılan proje özel düzeltmeler. app.min.css'ten sonra yüklenmelidir. */
+
+/* Tema 380px altında .navbar-brand-box'ı tamamen gizliyor; logoyu küçültüp 300px'e kadar sığacak şekilde görünür tut. */
+@media (max-width: 380px) {
+    .navbar-brand-box {
+        display: block;
+        padding: 0 .25rem;
+    }
+
+        .navbar-brand-box .logo-sm img {
+            height: 18px;
+        }
+
+    #page-topbar .navbar-header {
+        padding: 0 .5rem 0 0;
+    }
+
+        /* Hamburger butonundaki Bootstrap .px-3 !important kullandığı için burada da gerekli. */
+        #page-topbar .navbar-header > .d-flex:first-child > .btn,
+        #page-header-cart-dropdown,
+        #page-header-user-dropdown {
+            padding-left: .5rem !important;
+            padding-right: .5rem !important;
+        }
+
+    #page-header-user-dropdown {
+        display: inline-flex;
+        align-items: center;
+    }
+
+        #page-header-user-dropdown > span {
+            max-width: 90px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+}
+
+/* Ürün detayı modalı: mobilde birim/fiyat tablosundaki yazılar alt satıra kaymasın. */
+@media (max-width: 575.98px) {
+    .bs-example-modal-xl .modal-body {
+        padding: .5rem;
+    }
+
+        .bs-example-modal-xl .modal-body > .card > .card-body {
+            padding: .75rem;
+        }
+
+    .bs-example-modal-xl .table-responsive > .table {
+        font-size: .75rem;
+    }
+
+        .bs-example-modal-xl .table-responsive > .table > :not(caption) > * > * {
+            padding: .4rem .25rem;
+            white-space: nowrap;
+        }
+}
+
+/* Ürün detayı modalı: mobilde soldaki küçük resimler ana resmin altına, yatay şerit olarak geçsin. */
+@media (max-width: 575.98px) {
+    .product-detai-imgs > .row > div {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+        .product-detai-imgs > .row > div:first-child {
+            order: 2;
+        }
+
+    .product-detai-imgs #v-pills-tab {
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        gap: .5rem;
+        overflow-x: auto;
+        margin-top: .5rem;
+    }
+
+        .product-detai-imgs #v-pills-tab .nav-link {
+            flex: 0 0 64px;
+            margin: 0;
+            padding: .25rem;
+        }
+}
+
+/* Ürün kartı iskonto rozeti: 48px'lik daire "5+25+25" gibi çoklu oranlara sığmıyor; içeriğe göre büyüyen dikdörtgen yap.
+   .rounded-circle, .font-size-11 ve .bg-danger !important kullandığı için burada da gerekli. */
+.product-ribbon.avatar-sm {
+    width: auto;
+    height: auto;
+    top: .5rem;
+    right: .5rem;
+}
+
+    .product-ribbon .avatar-title {
+        border-radius: .25rem !important;
+        padding: .25rem .5rem;
+        font-size: 12px !important;
+        font-weight: 600;
+        line-height: 1.2;
+        white-space: nowrap;
+        letter-spacing: .02em;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    }
+
+        /* Temanın açık kırmızısı (#f46a6a) beyaz yazıyla ~2.9:1 kontrast veriyor; ~5:1 için koyulaştır. */
+        .product-ribbon .avatar-title.bg-danger {
+            background-color: #d32f2f !important;
+        }
+
+/* Ürün listesi (tablo) görünümündeki İskonto kolonunun rozeti; kart rozetiyle aynı görünüm. */
+.discount-badge {
+    display: inline-block;
+    padding: .2rem .45rem;
+    border-radius: .25rem;
+    background-color: #d32f2f;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .02em;
+    white-space: nowrap;
+}
+
+/* Ürünler / Kampanyalı Ürünler: mobilde liste görünümü kapalı (JS her zaman grid çizer); görünüm butonlarını gizle. */
+@media (max-width: 767.98px) {
+    div:has(> .btn-group > #btn-list) {
+        display: none;
+    }
+}
+
+/* Ürün detayı modalı: indirimli fiyatın altındaki marka logosu. */
+.product-brand-logo {
+    margin: .25rem 0 .5rem;
+}
+
+    .product-brand-logo img {
+        max-height: 48px;
+        max-width: 160px;
+        object-fit: contain;
+    }
+
+/* Sabit, açılır kapanır footer (TCMB döviz kurları). Tema footer'ı 60px sabit ve sayfanın altına yapışık;
+   burada ekranın altına sabitlenir. İçeriğin footer altında kalmaması için Main.js footer yüksekliğini
+   --site-footer-height olarak yazar. z-index: açılır menülerin (1000) ve üst barın (1002) altında kalır. */
+.footer.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    padding: 0;
+    z-index: 999;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, .08);
+}
+
+body[data-layout=horizontal] .page-content {
+    /* + sekme yüksekliği (~22px) ve biraz boşluk */
+    padding-bottom: calc(var(--site-footer-height, 60px) + 2.5rem);
+}
+
+.site-footer-toggle {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    padding: .2rem .75rem;
+    border: 0;
+    border-radius: .375rem .375rem 0 0;
+    background-color: var(--bs-footer-bg);
+    color: var(--bs-footer-color);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, .08);
+}
+
+    .site-footer-toggle:hover,
+    .site-footer-toggle:focus-visible {
+        color: var(--bs-primary);
+    }
+
+.site-footer-chevron {
+    transition: transform .2s;
+}
+
+.site-footer.collapsed .site-footer-chevron {
+    transform: rotate(180deg);
+}
+
+.site-footer-content {
+    padding: .5rem 0;
+}
+
+.site-footer.collapsed .site-footer-content {
+    display: none;
+}
+
+/* Solda telif, sağda döviz kurları */
+.site-footer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .25rem 1.5rem;
+}
+
+.site-footer-copy {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.site-footer-rates {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .25rem 1.5rem;
+    margin-left: auto;
+    font-size: 13px;
+}
+
+.site-footer-rate {
+    white-space: nowrap;
+}
+
+    .site-footer-rate .rate-code {
+        display: inline-block;
+        min-width: 2.5rem;
+        font-weight: 700;
+        color: var(--bs-body-color);
+    }
+
+    .site-footer-rate .rate-value {
+        font-weight: 600;
+        color: var(--bs-body-color);
+        margin-right: .5rem;
+    }
+
+.site-footer-meta {
+    font-size: 12px;
+}

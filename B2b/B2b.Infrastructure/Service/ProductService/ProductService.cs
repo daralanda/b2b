@@ -22,6 +22,8 @@ namespace B2b.Infrastructure.Service.ProductService
                 var product=_context.Products.Where(p => p.ProductCode == data.ProductCode).FirstOrDefault();
                 if (product== null)
                 {
+                    // Adresi boş resim satırları kaydedilmez
+                    data.ProductImages = data.ProductImages?.Where(i => !string.IsNullOrWhiteSpace(i.ImageUrl)).ToList();
                     _context.Products.Add(data);
                     _context.SaveChanges();
                     state = true;
@@ -91,7 +93,7 @@ namespace B2b.Infrastructure.Service.ProductService
 
                         // İlk Resim Bilgisi (Queue sırasına göre)
                         ImageUrl = _context.ProductImages
-                            .Where(img => img.ProductId == p.ProductId)
+                            .Where(img => img.ProductId == p.ProductId && img.ImageUrl != null && img.ImageUrl.Trim() != "")
                             .OrderBy(img => img.Queue)
                             .Select(img => img.ImageUrl)
                             .FirstOrDefault() ?? "/uploads/default.jpg",
@@ -211,7 +213,8 @@ namespace B2b.Infrastructure.Service.ProductService
                 _context.ProductPrices.RemoveRange(price);
                 _context.SaveChanges();
 
-                foreach (var item in data.ProductImages)
+                // Adresi boş resim satırları yeniden kaydedilmez
+                foreach (var item in data.ProductImages.Where(i => !string.IsNullOrWhiteSpace(i.ImageUrl)))
                 {
                     _context.ProductImages.Add(new ProductImage
                     {
@@ -271,7 +274,7 @@ namespace B2b.Infrastructure.Service.ProductService
             var result = new ResultDto<ProductImage>();
             try
             {
-                result.List = _context.ProductImages.Where(p => p.ProductId == id).ToList();
+                result.List = _context.ProductImages.Where(p => p.ProductId == id && p.ImageUrl != null && p.ImageUrl.Trim() != "").ToList();
                 state = true;
                 message = "product retrieved successfully.";
             }
@@ -283,153 +286,270 @@ namespace B2b.Infrastructure.Service.ProductService
             return result;
         }
 
+        // ---- Excel yardımcıları -------------------------------------------------
+
+        private static Dictionary<string, T> BuildLookup<T>(IEnumerable<T> items, Func<T, string> key)
+        {
+            return items
+                .Where(i => !string.IsNullOrWhiteSpace(key(i)))
+                .GroupBy(i => key(i).Trim(), StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
+        }
+
+        private static bool IsYes(string value, bool defaultValue)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return defaultValue;
+            var v = value.Trim();
+            return v.Equals("evet", StringComparison.OrdinalIgnoreCase)
+                || v.Equals("e", StringComparison.OrdinalIgnoreCase)
+                || v.Equals("true", StringComparison.OrdinalIgnoreCase)
+                || v == "1";
+        }
+
+        private const int MaxReportedMessages = 500;
+
+        private static void AddMessage(List<string> list, string text)
+        {
+            if (list.Count < MaxReportedMessages) list.Add(text);
+            else if (list.Count == MaxReportedMessages) list.Add("... (çok fazla uyarı var, kalanlar gösterilmiyor)");
+        }
+
         public ResultDto<string> ProductAllSet(Stream stream)
         {
-            var result = new ResultDto<string>();
-            stream.Position = 0;
-            var data= ePPLusPlugin.ExcelUpload(stream);
-            int i = 1;
-            List<Brand> brands = _context.Brands.ToList();
-            List<Category> categories = _context.Categories.ToList();
-            List<UnitType> unitTypes = _context.UnitTypes.ToList();    
-            List<Currency> currencies = _context.Currencies.ToList();
-    
-            var list= new List<string>();
+            // Güncellenen ürün/fiyatların kaydedilmesi için izleme açık olmalı; işlem sonunda eski değer geri yüklenir.
+            var previousTracking = _context.ChangeTracker.QueryTrackingBehavior;
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+            try
+            {
+                return ImportProducts(stream);
+            }
+            finally
+            {
+                _context.ChangeTracker.QueryTrackingBehavior = previousTracking;
+            }
+        }
+
+        private ResultDto<string> ImportProducts(Stream stream)
+        {
+            var result = new ResultDto<string> { List = new List<string>() };
+            var data = ePPLusPlugin.ExcelUpload(stream);
+            if (data.Count == 0)
+            {
+                result.State = false;
+                result.Message = "Excel dosyasında işlenecek satır bulunamadı.";
+                return result;
+            }
+
+            // Referans tablolar bir kez okunur (eskiden her satırda tüm ürün tablosu yeniden çekiliyordu).
+            var brands = BuildLookup(_context.Brands.ToList(), b => b.BrandName);
+            var categories = BuildLookup(_context.Categories.ToList(), c => c.CategoryName);
+            var unitTypes = BuildLookup(_context.UnitTypes.ToList(), u => u.UnitTypeName);
+            var currencies = BuildLookup(_context.Currencies.ToList(), c => c.CurrencyName);
+            var products = BuildLookup(_context.Products.ToList(), p => p.ProductCode);
+            var existingPrices = _context.ProductPrices.ToList()
+                .GroupBy(p => p.ProductId)
+                .ToDictionary(g => g.Key, g => g.GroupBy(p => p.UnitTypeId).ToDictionary(u => u.Key, u => u.First()));
+            var existingImages = _context.ProductImages.Select(i => new { i.ProductId, i.ImageUrl }).ToList()
+                .GroupBy(i => i.ProductId)
+                .ToDictionary(g => g.Key, g => new HashSet<string>(g.Select(i => i.ImageUrl)));
+
+            // Fiyat ve resimler ürün nesnesine göre tutulur: yeni ürünlerin ProductId'si kayıttan önce 0 olduğu için
+            // her yeni üründe SaveChanges çağırmak gerekmez (binlerce satırda isteği dakikalarca uzatan buydu).
+            var priceMaps = new Dictionary<Product, Dictionary<int, ProductPrice>>();
+            var imageSets = new Dictionary<Product, HashSet<string>>();
+            Dictionary<int, ProductPrice> PricesOf(Product p)
+            {
+                if (!priceMaps.TryGetValue(p, out var map))
+                    priceMaps[p] = map = p.ProductId != 0 && existingPrices.TryGetValue(p.ProductId, out var e) ? e : new Dictionary<int, ProductPrice>();
+                return map;
+            }
+            HashSet<string> ImagesOf(Product p)
+            {
+                if (!imageSets.TryGetValue(p, out var set))
+                    imageSets[p] = set = p.ProductId != 0 && existingImages.TryGetValue(p.ProductId, out var e) ? e : new HashSet<string>();
+                return set;
+            }
+
+            Brand GetBrand(string name)
+            {
+                if (!brands.TryGetValue(name, out var brand))
+                {
+                    brand = new Brand { BrandName = name, Queno = 1, ImageUrl = "" };
+                    _context.Brands.Add(brand);
+                    _context.SaveChanges();
+                    brands[name] = brand;
+                }
+                return brand;
+            }
+            Category GetCategory(string name)
+            {
+                if (!categories.TryGetValue(name, out var category))
+                {
+                    category = new Category { CategoryName = name, IsActive = true, MainCategoryId = 0 };
+                    _context.Categories.Add(category);
+                    _context.SaveChanges();
+                    categories[name] = category;
+                }
+                return category;
+            }
+            UnitType GetUnitType(string name)
+            {
+                if (!unitTypes.TryGetValue(name, out var unitType))
+                {
+                    unitType = new UnitType { UnitTypeName = name };
+                    _context.UnitTypes.Add(unitType);
+                    _context.SaveChanges();
+                    unitTypes[name] = unitType;
+                }
+                return unitType;
+            }
+            Currency GetCurrency(string name)
+            {
+                if (!currencies.TryGetValue(name, out var currency))
+                {
+                    currency = new Currency { CurrencyCode = name, CurrencyName = name };
+                    _context.Currencies.Add(currency);
+                    _context.SaveChanges();
+                    currencies[name] = currency;
+                }
+                return currency;
+            }
+
+            int created = 0, updated = 0, failed = 0, pending = 0;
+            bool fatal = false;
+
             foreach (var item in data)
             {
-                List<Product> Products = _context.Products.ToList();
-                List<ProductPrice> productPrices = _context.ProductPrices.ToList();
-
-                if (item.Result.State!=false)
+                if (item.Result == null || !item.Result.State)
                 {
-                    var findProduct= Products.Where(p => p.ProductCode.ToLower() == item.ProductCode.ToLower()).FirstOrDefault();
-                    var currency = currencies.Where(c => c.CurrencyName.ToLower() == item.CurrencyName.ToLower()).FirstOrDefault();
-                    if (currency == null)
+                    failed++;
+                    AddMessage(result.List, $"Satır {item.RowNumber}: {item.Result?.Message?.Trim()}");
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(item.Warning))
+                    AddMessage(result.List, $"Satır {item.RowNumber}: {item.Warning}");
+
+                try
+                {
+                    var code = item.ProductCode.Trim();
+                    var brand = GetBrand(item.BrandName.Trim());
+                    var category = GetCategory(item.CategoryName.Trim());
+                    var unitType = GetUnitType(item.UnitTypeName.Trim());
+                    var currency = GetCurrency(item.CurrencyName.Trim());
+                    bool isActive = IsYes(item.IsActive, true);
+                    bool isDefault = IsYes(item.IsDefault, true);
+
+                    if (!products.TryGetValue(code, out var product))
                     {
-                        _context.Currencies.Add(new Currency { CurrencyCode = item.CurrencyName , CurrencyName=item.CurrencyName});
-                        _context.SaveChanges();
-                        currencies = _context.Currencies.ToList();
-                    }
-                    var unittype = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault();
-                    if (unittype == null)
-                    {
-                        _context.UnitTypes.Add(new UnitType { UnitTypeName = item.UnitTypeName });
-                        _context.SaveChanges();
-                        unitTypes = _context.UnitTypes.ToList();
-                    }
-                    var category = categories.Where(c => c.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault();
-                    if (category == null)
-                    {
-                        _context.Categories.Add(new Category { CategoryName = item.CategoryName, IsActive=true, MainCategoryId=0 });
-                        _context.SaveChanges();
-                        categories = _context.Categories.ToList();
-                    }
-                    var brand = brands.Where(c => c.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault();   
-                    if (brand == null)
-                    {
-                        _context.Brands.Add(new Brand { BrandName = item.BrandName , Queno=1, ImageUrl=""});
-                        _context.SaveChanges();
-                        brands = _context.Brands.ToList();
-                    }
-                    if (findProduct==null)
-                    {
-                        Product product = new()
+                        product = new Product
                         {
-                            ProductCode = item.ProductCode,
-                            ProductName = item.ProductName,
-                            BrandId = brands.Where(c => c.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault().BrandId,
-                            CategoryId= categories.Where(c => c.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault().CategoryId,
-                            CurrencyId= currencies.Where(c=>c.CurrencyName.ToLower() == item.CurrencyName.ToLower()).FirstOrDefault().CurrencyId,
+                            ProductCode = code,
+                            ProductName = item.ProductName.Trim(),
+                            BrandId = brand.BrandId,
+                            CategoryId = category.CategoryId,
+                            CurrencyId = currency.CurrencyId,
                             Description = item.Description,
                             Vat = item.Vat,
-                            IsActive = item.IsActive.ToLower()=="evet"?true:false,
-                            StockQuantity= item.StockQuantity
+                            IsActive = isActive,
+                            StockQuantity = item.StockQuantity
                         };
                         _context.Products.Add(product);
-                        _context.SaveChanges();
-                        ProductPrice productPrice = new()
-                        {
-                            ProductId = product.ProductId,
-                            Price = item.Price,
-                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault().UnitTypeId,
-                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
-                            Count= item.UnitTypeCount,
-                            Barcode=item.Barcode
-
-                        };
-                        _context.ProductPrices.Add(productPrice);
-                        _context.SaveChanges();
-                        ProductImage productImage = new()
-                        {
-                            ProductId = product.ProductId,
-                            ImageUrl = item.ImageUrl,
-                            Queue = 1
-                        };
-                        _context.ProductImages.Add(productImage);
-                        _context.SaveChanges();
+                        products[code] = product;
+                        created++;
                     }
                     else
                     {
-                        findProduct.BrandId = brands.Where(c => c.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault().BrandId;
-                        findProduct.CategoryId = categories.Where(c => c.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault().CategoryId;
-                        findProduct.CurrencyId = currencies.Where(c => c.CurrencyName.ToLower() == item.CurrencyName.ToLower()).FirstOrDefault().CurrencyId;
-                        findProduct.Description = item.Description;
-                        findProduct.Vat=item.Vat;
-                        findProduct.StockQuantity=item.StockQuantity;
-                        findProduct.IsActive = item.IsActive.ToLower() == "evet" ? true : false;
-                        ProductPrice productPrice = new()
+                        product.BrandId = brand.BrandId;
+                        product.CategoryId = category.CategoryId;
+                        product.CurrencyId = currency.CurrencyId;
+                        product.Description = item.Description;
+                        product.Vat = item.Vat;
+                        product.StockQuantity = item.StockQuantity;
+                        product.IsActive = isActive;
+                        updated++;
+                    }
+
+                    // Yeni (henüz kaydedilmemiş) ürüne navigasyonla, mevcut ürüne ProductId ile bağlanır
+                    var newProduct = product.ProductId == 0 ? product : null;
+                    var productPrices = PricesOf(product);
+                    if (!productPrices.TryGetValue(unitType.UnitTypeId, out var price))
+                    {
+                        price = new ProductPrice
                         {
-                            ProductId = findProduct.ProductId,
+                            ProductId = product.ProductId,
+                            Product = newProduct,
+                            UnitTypeId = unitType.UnitTypeId,
                             Price = item.Price,
-                            UnitTypeId = unitTypes.Where(c => c.UnitTypeName.ToLower() == item.UnitTypeName.ToLower()).FirstOrDefault().UnitTypeId,
-                            IsDefault = item.IsDefault.ToLower() == "evet" ? true : false,
+                            IsDefault = isDefault,
                             Count = item.UnitTypeCount,
                             Barcode = item.Barcode
                         };
-                        var price = _context.ProductPrices.Where(p => p.ProductId == findProduct.ProductId && p.UnitTypeId == productPrice.UnitTypeId).FirstOrDefault();
-                        if (price == null)
+                        _context.ProductPrices.Add(price);
+                        productPrices[unitType.UnitTypeId] = price;
+                    }
+                    else
+                    {
+                        price.Price = item.Price;
+                        price.IsDefault = isDefault;
+                        price.Count = item.UnitTypeCount;
+                        if (!string.IsNullOrEmpty(item.Barcode)) price.Barcode = item.Barcode;
+                    }
+
+                    // Boş resim kaydı eklenmez (eskiden boş ImageUrl'li satır açılıyordu).
+                    if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                    {
+                        if (ImagesOf(product).Add(item.ImageUrl))
                         {
-                            _context.ProductPrices.Add(productPrice);
+                            _context.ProductImages.Add(new ProductImage
+                            {
+                                ProductId = product.ProductId,
+                                Product = newProduct,
+                                ImageUrl = item.ImageUrl,
+                                Queue = 1
+                            });
                         }
-                        else
-                        {
-                            price.Price = item.Price;
-                            price.IsDefault = productPrice.IsDefault;
-                            price.Count = item.UnitTypeCount;
-                        }
+                    }
+
+                    if (++pending >= 200)
+                    {
                         _context.SaveChanges();
-                        ProductImage productImage = new()
-                        {
-                            ProductId = findProduct.ProductId,
-                            ImageUrl = item.ImageUrl,
-                            Queue = 1
-                        };
-                        var image = _context.ProductImages.Where(p => p.ProductId == findProduct.ProductId && p.ImageUrl == productImage.ImageUrl).FirstOrDefault();
-                        if (image == null)
-                        {
-                            _context.ProductImages.Add(productImage);
-                            _context.SaveChanges();
-                        }
-                        else
-                        {
-                            image.ImageUrl = item.ImageUrl;
-                            image.Queue = 1;
-                            _context.SaveChanges();
-                        }
-
-
-
+                        pending = 0;
                     }
                 }
-                else
+                catch (DbUpdateException ex)
                 {
-                    list.Add("Satır " + i + " : " + item.Result.Message);
+                    // Kayıt hatasında izleyici bozulacağı için işlem durdurulur; önceki kayıtlar yazılmıştır.
+                    fatal = true;
+                    failed++;
+                    AddMessage(result.List, $"Satır {item.RowNumber}: Veritabanına yazılamadı, işlem durduruldu. {ex.InnerException?.Message ?? ex.Message}");
+                    break;
                 }
-                    i++;
+                catch (Exception ex)
+                {
+                    failed++;
+                    AddMessage(result.List, $"Satır {item.RowNumber}: {ex.Message}");
+                }
             }
-            result.List = list;
+
+            if (!fatal)
+            {
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    fatal = true;
+                    AddMessage(result.List, "Kayıt sırasında hata: " + (ex.InnerException?.Message ?? ex.Message));
+                }
+            }
+
+            result.State = !fatal && (created + updated) > 0;
+            result.Message = $"{created} ürün eklendi, {updated} ürün güncellendi, {failed} satır hatalı.";
             return result;
         }
+
         public ResultDto<ProductImage> GetImages()
         {
             var result = new ResultDto<ProductImage>();
@@ -467,36 +587,110 @@ namespace B2b.Infrastructure.Service.ProductService
 
         public ResultDto<string> ProductPriceUpdateAll(Stream stream)
         {
-            var result = new ResultDto<string>();
-            var data = ePPLusPlugin.ReadData<ProductPriceTemplate>(stream);
-            var brands = _context.Brands.ToList();
-            var category = _context.Categories.ToList();
+            var result = new ResultDto<string> { List = new List<string>() };
+
+            var parseErrors = new List<string>();
+            List<ProductPriceTemplate> data;
+            try
+            {
+                data = ePPLusPlugin.ReadData<ProductPriceTemplate>(stream, parseErrors);
+            }
+            catch (Exception ex)
+            {
+                result.State = false;
+                result.Message = "Excel dosyası okunamadı: " + ex.Message;
+                return result;
+            }
+            foreach (var e in parseErrors) AddMessage(result.List, e);
+
+            var products = BuildLookup(_context.Products.ToList(), p => p.ProductCode);
+            var brands = BuildLookup(_context.Brands.ToList(), b => b.BrandName);
+            var categories = BuildLookup(_context.Categories.ToList(), c => c.CategoryName);
+            var unitTypes = BuildLookup(_context.UnitTypes.ToList(), u => u.UnitTypeName);
+            var prices = _context.ProductPrices.ToList()
+                .GroupBy(p => p.ProductId + "|" + p.UnitTypeId)
+                .ToDictionary(g => g.Key, g => g.First());
+
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            int updated = 0, skipped = 0, row = 1;
+
             foreach (var item in data)
             {
-                var product = _context.Products.Where(p => p.ProductCode.ToLower() == item.ProductCode.ToLower()).FirstOrDefault();
-                    int CategoryId = category.Where(p => p.CategoryName.ToLower() == item.CategoryName.ToLower()).FirstOrDefault().CategoryId;
-                    product.CategoryId = (CategoryId!=0)?CategoryId:product.CategoryId;
-                    int BrandId = brands.Where(p => p.BrandName.ToLower() == item.BrandName.ToLower()).FirstOrDefault().BrandId;
-                product.BrandId = (BrandId != 0) ? BrandId : product.BrandId;
-                 _context.SaveChanges();
-                if (product!=null)
+                row++;
+                var code = item.ProductCode?.Trim();
+
+                // Tamamen boş satır: sessizce atla
+                if (string.IsNullOrEmpty(code) && string.IsNullOrWhiteSpace(item.ProductName) && item.Price == 0) continue;
+
+                if (string.IsNullOrEmpty(code))
                 {
-                    int unitTypeId = _context.UnitTypes.Where(u => u.UnitTypeName == item.UnitTypeName).Select(u => u.UnitTypeId).FirstOrDefault();
-                    if (unitTypeId>0)
-                    {
-                        var price = _context.ProductPrices.Where(p => p.ProductId == product.ProductId && p.UnitTypeId == unitTypeId).FirstOrDefault();
-                        if (price!=null)
-                        {
-                            price.Price = item.Price;
-                            price.Count = item.Count;
-                            price.Barcode = item.Barcode;
-                            _context.SaveChanges();
-                        }
-                    }
+                    skipped++;
+                    AddMessage(result.List, $"Satır {row}: ProductCode boş, atlandı.");
+                    continue;
                 }
+                if (!products.TryGetValue(code, out var product))
+                {
+                    skipped++;
+                    AddMessage(result.List, $"Satır {row}: '{code}' kodlu ürün bulunamadı, atlandı.");
+                    continue;
+                }
+                if (item.Price <= 0)
+                {
+                    skipped++;
+                    AddMessage(result.List, $"Satır {row}: '{code}' için fiyat 0 veya boş, atlandı.");
+                    continue;
+                }
+
+                var unitName = item.UnitTypeName?.Trim();
+                if (string.IsNullOrEmpty(unitName) || !unitTypes.TryGetValue(unitName, out var unitType))
+                {
+                    skipped++;
+                    AddMessage(result.List, $"Satır {row}: '{code}' için birim '{unitName}' bulunamadı, atlandı.");
+                    continue;
+                }
+                if (!prices.TryGetValue(product.ProductId + "|" + unitType.UnitTypeId, out var price))
+                {
+                    skipped++;
+                    AddMessage(result.List, $"Satır {row}: '{code}' için '{unitName}' biriminde fiyat kaydı yok, atlandı.");
+                    continue;
+                }
+
+                // Kategori / marka bulunamazsa ürünün mevcut değeri korunur, fiyat yine güncellenir.
+                var categoryName = item.CategoryName?.Trim();
+                if (!string.IsNullOrEmpty(categoryName))
+                {
+                    if (categories.TryGetValue(categoryName, out var category)) product.CategoryId = category.CategoryId;
+                    else AddMessage(result.List, $"Satır {row}: '{categoryName}' kategorisi bulunamadı, kategori değişmedi.");
+                }
+                var brandName = item.BrandName?.Trim();
+                if (!string.IsNullOrEmpty(brandName))
+                {
+                    if (brands.TryGetValue(brandName, out var brand)) product.BrandId = brand.BrandId;
+                    else AddMessage(result.List, $"Satır {row}: '{brandName}' markası bulunamadı, marka değişmedi.");
+                }
+
+                if (!seen.Add(code + "|" + unitName))
+                    AddMessage(result.List, $"Satır {row}: '{code}' / '{unitName}' dosyada birden fazla geçiyor, son satırdaki değer geçerli.");
+
+                price.Price = item.Price;
+                if (item.Count > 0) price.Count = item.Count;
+                if (!string.IsNullOrEmpty(item.Barcode)) price.Barcode = item.Barcode;
+                updated++;
             }
 
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                result.State = false;
+                result.Message = "Kayıt sırasında hata: " + (ex.InnerException?.Message ?? ex.Message);
+                return result;
+            }
 
+            result.State = updated > 0;
+            result.Message = $"{updated} ürün fiyatı güncellendi, {skipped} satır atlandı.";
             return result;
         }
     }

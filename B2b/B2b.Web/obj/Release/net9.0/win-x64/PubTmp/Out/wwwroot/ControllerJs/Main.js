@@ -4,6 +4,11 @@
     };
     GetAllCart();
 });
+// Sabit footer (aç/kapa + TCMB kurları).
+// Dosyanın başında kayıtlı ki aşağıdaki üst seviye kodlardan biri hata verse de çalışsın.
+$(function () {
+    InitSiteFooter();
+});
 function DatatablesLoad(tableName, data, columns) {
     var table = $('#' + tableName).DataTable({
      "data": data,
@@ -622,6 +627,22 @@ function GetProduct(id) {
     document.getElementById("DiscountedRate").innerText = "%" + row.TotalDiscountRate;
     document.getElementById("Description").innerText = row.Description;
     document.getElementById("Barcode").innerText = "Barkod : " + row.Barcode;
+    // Marka logosu (indirimli fiyatın altında); logosu olmayan markada gizli kalır
+    $('#BrandLogo').addClass('d-none');
+    $.ajax({
+        url: '/api/BrandApi/GetById?id=' + row.BrandId,
+        type: 'Get',
+        dataType: 'Json',
+        contentType: 'application/json',
+        headers: { 'Authorization': localStorage.getItem("token") },
+        success: function (x) {
+            if (x.Data && x.Data.ImageUrl) {
+                $('#BrandLogoImg').attr({ src: x.Data.ImageUrl, alt: x.Data.BrandName });
+                $('#BrandLogo').removeClass('d-none');
+            }
+        },
+        error: function (x) { }
+    });
     $.ajax({
         url: '/api/CommerceApi/GetProduct?ProductId=' + id,
         type: 'Get',
@@ -729,4 +750,55 @@ function DetailAddCart() {
         async: false
     });
     location.reload();
+}
+// Sabit footer: aç/kapa durumu tarayıcıda hatırlanır (ilk durum _Layout'taki satır içi script'te uygulanır)
+function InitSiteFooter() {
+    var footer = document.getElementById('siteFooter');
+    if (!footer) return;
+    // İçerik footer'ın altında kalmasın: yüksekliği CSS değişkenine yaz (custom.css .page-content kullanır)
+    var setFooterHeight = () => document.documentElement.style.setProperty('--site-footer-height', footer.offsetHeight + 'px');
+    if (window.ResizeObserver) new ResizeObserver(setFooterHeight).observe(footer);
+    setFooterHeight();
+
+    $('#siteFooterToggle').on('click', function () {
+        var collapsed = footer.classList.toggle('collapsed');
+        this.setAttribute('aria-expanded', String(!collapsed));
+        try { localStorage.setItem('siteFooterCollapsed', collapsed ? '1' : '0'); } catch (e) { }
+        setFooterHeight();
+        if (!collapsed) GetCentralBankExchange();
+    });
+    if (!footer.classList.contains('collapsed')) GetCentralBankExchange();
+}
+// TCMB USD/EUR kurları (sunucuda 30 dk önbellekli); footer açıkken bir kez yüklenir
+var centralBankExchangeLoaded = false;
+function GetCentralBankExchange() {
+    if (centralBankExchangeLoaded) return;
+    centralBankExchangeLoaded = true;
+    var rates = $('#exchangeFooterRates');
+    var formatRate = (rate) => rate.toLocaleString('tr-TR', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+    $.ajax({
+        url: '/api/ExchangeApi/GetCentralBank',
+        type: 'Get',
+        dataType: 'Json',
+        contentType: 'application/json',
+        headers: { 'Authorization': localStorage.getItem("token") },
+        success: function (x) {
+            rates.empty();
+            if (!x.State || !x.List || x.List.length === 0) {
+                rates.append($('<span class="text-muted">').text('Kur bilgisi bulunamadı.'));
+                return;
+            }
+            x.List.forEach(function (item) {
+                rates.append($('<span class="site-footer-rate">').attr('title', item.CurrencyName || item.CurrencyCode)
+                    .append($('<span class="rate-code">').text(item.CurrencyCode))
+                    .append('Alış ').append($('<span class="rate-value">').text(formatRate(item.Buying)))
+                    .append('Satış ').append($('<span class="rate-value">').text(formatRate(item.Selling))));
+            });
+            rates.append($('<span class="site-footer-meta">').text(x.List[0].Source + ' · ' + TarihFormat(x.List[0].TransactionDate)));
+        },
+        error: function () {
+            centralBankExchangeLoaded = false;
+            rates.html('<span class="text-muted">Kur bilgisi alınamadı.</span>');
+        }
+    });
 }

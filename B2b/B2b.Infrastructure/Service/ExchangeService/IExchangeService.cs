@@ -9,6 +9,8 @@ namespace B2b.Infrastructure.Service.ExchangeService
         ResultDto<Exchange> GetById(int id);
         ResultDto<Exchange> Remove(int id);
         ResultDto<Exchange> GetAll();
+        ResultDto<DailyExchangeDto> GetDaily();
+        ResultDto<DailyExchangeDto> GetCentralBank();
         ResultDto<Exchange> Update(Exchange data);
         ResultDto<Exchange> AutoUpdate();
     }

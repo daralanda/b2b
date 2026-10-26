@@ -2,6 +2,8 @@
 {
     public class EPPlusDto
     {
+        public int RowNumber { get; set; }
+        public string Warning { get; set; }
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
         public string CategoryName { get; set; }

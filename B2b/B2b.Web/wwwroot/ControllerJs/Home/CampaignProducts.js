@@ -5,6 +5,7 @@ let allProductsData = [];
 let filteredProducts = [];
 let selectedBrandId = ''; // Tekli select seçimi için tutulan değişken
 let currentView = 'grid'; // Varsayılan görünüm: 'grid' veya 'list'
+const mobileQuery = window.matchMedia('(max-width: 767.98px)'); // Mobilde liste görünümü kapalı, her zaman grid
 
 $(document).ready(function () {
    
@@ -112,7 +113,7 @@ $(document).ready(function () {
             callback: function (pageData) {
                 let html = '';
 
-                if (currentView === 'grid') {
+                if (currentView === 'grid' || mobileQuery.matches) {
                     // ================= GRID (IZGARA) GÖRÜNÜMÜ =================
                     pageData.forEach(item => {
                         const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
@@ -160,6 +161,7 @@ $(document).ready(function () {
                                         <th>Ürün Adı</th>
                                         <th class="text-center" style="width: 90px;">Birim</th>
                                         <th class="text-center" style="width: 90px;">Birim İçi</th>
+                                        <th class="text-center" style="width: 110px;">İskonto</th>
                                         <th class="text-end" style="width: 140px;">Fiyat</th>
                                         <th class="text-center" style="width: 180px;">Miktar / İşlem</th>
                                     </tr>
@@ -168,6 +170,8 @@ $(document).ready(function () {
 
                     pageData.forEach(item => {
                         const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
+                        const discountTxt = item.DiscountTxt ? sonundakiArtiyiSil(item.DiscountTxt) : '';
+                        const discountHTML = hasDiscount && discountTxt ? `<span class="discount-badge">% ${discountTxt}</span>` : '-';
                         let pricesHTML = hasDiscount
                             ? `<div class="text-end"><del class="text-muted small d-block">${formatPrice(item.Price)}</del><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></div>`
                             : `<div class="text-end"><b>${formatPrice(item.Price)}</b></div>`;
@@ -187,6 +191,7 @@ $(document).ready(function () {
                             </td>
                             <td class="text-center"><span class="text-secondary small fw-bold">${productUnit}</span></td>
                             <td class="text-center"><span class="text-secondary small fw-bold">${item.UnitCount}</span></td>
+                            <td class="text-center">${discountHTML}</td>
                             <td>${pricesHTML}</td>
                             <td>
                                 <div class="input-group input-group-sm">
@@ -228,6 +233,11 @@ $(document).ready(function () {
         $('#btn-grid').removeClass('active');
         $(this).addClass('active');
         applyFilters();
+    });
+
+    // Mobil sınırı geçilince (ör. tablet döndürülünce) liste seçiliyse yeniden çiz
+    mobileQuery.addEventListener('change', function () {
+        if (currentView === 'list') applyFilters();
     });
 
     function buildBrandFilter() {

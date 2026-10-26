@@ -689,6 +689,26 @@
   },
   {
     "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
+    "Method": "GetCentralBank",
+    "RelativePath": "api/ExchangeApi/GetCentralBank",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
+    "Method": "GetDaily",
+    "RelativePath": "api/ExchangeApi/GetDaily",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "B2b.Web.Controllers.Api.ExchangeApiController",
     "Method": "Remove",
     "RelativePath": "api/ExchangeApi/Remove",
     "HttpMethod": "GET",

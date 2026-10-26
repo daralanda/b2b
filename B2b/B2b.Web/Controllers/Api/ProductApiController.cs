@@ -62,7 +62,8 @@ namespace B2b.Web.Controllers.Api
         [HttpPost]
         public IActionResult ProductAllSet(IFormFile file)
         {
-            //var stream = file.OpenReadStream();
+            var invalid = ValidateExcelFile(file);
+            if (invalid != null) return BadRequest(invalid);
 
             using var ms = new MemoryStream();
             file.CopyTo(ms);
@@ -84,11 +85,23 @@ namespace B2b.Web.Controllers.Api
 
         public IActionResult ProductPriceUpdateAll(IFormFile file)
         {
+            var invalid = ValidateExcelFile(file);
+            if (invalid != null) return BadRequest(invalid);
+
             using var ms = new MemoryStream();
             file.CopyTo(ms);
             ms.Position = 0; // 
             var result = _service.ProductPriceUpdateAll(ms);
             return Ok(result);
+        }
+
+        private static ResultDto<string> ValidateExcelFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return new ResultDto<string> { State = false, Message = "Dosya seçilmedi veya boş." };
+            if (!string.Equals(Path.GetExtension(file.FileName), ".xlsx", StringComparison.OrdinalIgnoreCase))
+                return new ResultDto<string> { State = false, Message = "Yalnızca .xlsx uzantılı Excel dosyası yüklenebilir." };
+            return null;
         }
     }
 }

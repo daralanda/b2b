@@ -34,3 +34,15 @@ C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Int
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\refint\B2b.Integration.dll
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.pdb
 C:\Users\Hidir\Desktop\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\ref\B2b.Integration.dll
+D:\Projects\b2b\B2b\B2b.Integration\bin\Debug\net9.0\B2b.Integration.deps.json
+D:\Projects\b2b\B2b\B2b.Integration\bin\Debug\net9.0\B2b.Integration.dll
+D:\Projects\b2b\B2b\B2b.Integration\bin\Debug\net9.0\B2b.Integration.pdb
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.AssemblyInfoInputs.cache
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.AssemblyInfo.cs
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.csproj.CoreCompileInputs.cache
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.sourcelink.json
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.dll
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\refint\B2b.Integration.dll
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\B2b.Integration.pdb
+D:\Projects\b2b\B2b\B2b.Integration\obj\Debug\net9.0\ref\B2b.Integration.dll

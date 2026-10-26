@@ -8,6 +8,9 @@ namespace B2b.Plugin.Dto
         [XmlElement(ElementName = "CurrencyName")]
         public string CurrencyName { get; set; }
 
+        [XmlElement(ElementName = "Isim")]
+        public string Isim { get; set; }
+
         [XmlElement(ElementName = "ForexBuying")]
         public string ForexBuying { get; set; }
 

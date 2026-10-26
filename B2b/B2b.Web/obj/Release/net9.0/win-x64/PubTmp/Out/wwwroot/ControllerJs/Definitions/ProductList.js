@@ -562,52 +562,21 @@ function CopyProduct() {
    EXCEL AKTARIM VE TOPLU GÜNCELLEME İŞLEMLERİ
    ========================================================================== */
 function uploadExcel() {
-    var fileInput = $("#fileInput")[0];
-    var resultDiv = $("#uploadResult");
-
-    if (!fileInput || fileInput.files.length === 0) {
-        resultDiv.html("<div class='text-danger'>⚠️ Lütfen bir dosya seçin!</div>");
-        return;
-    }
-
-    var formData = new FormData();
-    formData.append("file", fileInput.files[0]);
-
-    $.ajax({
-        url: "/api/ProductApi/ProductAllSet",
-        type: "POST",
-        data: formData,
-        processData: false,
-        headers: { 'Authorization': localStorage.getItem("token") },
-        contentType: false,
-        beforeSend: function () {
-            resultDiv.html("<div class='text-info'>⏳ Yükleniyor...</div>");
-        },
-        success: function (response) {
-            if (response.State) {
-                resultDiv.html("<div class='text-success'>✅ Dosya başarıyla yüklendi!</div>");
-            } else {
-                var myModal = new bootstrap.Modal(document.getElementById('logModal'));
-                var columns = [
-                    { title: "Mesaj", data: null, render: x => x }
-                ];
-                DatatablesLoad("logtables", response.List, columns);
-                myModal.show();
-                resultDiv.html("<div class='text-warning'>Hatalı kayıtlar var!</div>");
-                PageLoad();
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Hata:", error);
-            resultDiv.html("<div class='text-danger'>❌ Hata oluştu: " + xhr.responseText + "</div>");
-        }
-    });
+    postExcelFile("#fileInput", "/api/ProductApi/ProductAllSet");
 }
 
 function uploadExcel2() {
-    var fileInput = $("#fileInput2")[0];
+    postExcelFile("#fileInput2", "/api/ProductApi/ProductPriceUpdateAll");
+}
+
+// Excel yükleme ortak akışı: sunucu mesajı her zaman gösterilir; hatalı satır / uyarı listesi varsa
+// (işlem kısmen başarılı olsa bile) log penceresinde listelenir.
+var isExcelUploading = false; // Aynı dosyanın iki kez gönderilmesini engeller
+function postExcelFile(fileInputSelector, url) {
+    var fileInput = $(fileInputSelector)[0];
     var resultDiv = $("#uploadResult");
 
+    if (isExcelUploading) return;
     if (!fileInput || fileInput.files.length === 0) {
         resultDiv.html("<div class='text-danger'>⚠️ Lütfen bir dosya seçin!</div>");
         return;
@@ -617,32 +586,41 @@ function uploadExcel2() {
     formData.append("file", fileInput.files[0]);
 
     $.ajax({
-        url: "/api/ProductApi/ProductPriceUpdateAll",
+        url: url,
         type: "POST",
         data: formData,
         processData: false,
         headers: { 'Authorization': localStorage.getItem("token") },
         contentType: false,
         beforeSend: function () {
+            isExcelUploading = true;
             resultDiv.html("<div class='text-info'>⏳ Yükleniyor...</div>");
         },
         success: function (response) {
-            if (response.State) {
-                resultDiv.html("<div class='text-success'>✅ Dosya başarıyla yüklendi!</div>");
+            var messages = response.List || [];
+            var text = response.Message || (response.State ? "Dosya başarıyla yüklendi!" : "Dosya işlenemedi.");
+            if (response.State && messages.length === 0) {
+                resultDiv.html($("<div class='text-success'>").text("✅ " + text));
             } else {
-                var myModal = new bootstrap.Modal(document.getElementById('logModal'));
+                resultDiv.html($("<div>").addClass(response.State ? "text-warning" : "text-danger").text((response.State ? "⚠️ " : "❌ ") + text));
+            }
+            if (messages.length > 0) {
                 var columns = [
                     { title: "Mesaj", data: null, render: x => x }
                 ];
-                DatatablesLoad("logtables", response.List, columns);
-                myModal.show();
-                resultDiv.html("<div class='text-warning'>Hatalı kayıtlar var!</div>");
-                PageLoad();
+                DatatablesLoad("logtables", messages, columns);
+                bootstrap.Modal.getOrCreateInstance(document.getElementById('logModal')).show();
             }
+            PageLoad();
         },
         error: function (xhr, status, error) {
             console.error("Hata:", error);
-            resultDiv.html("<div class='text-danger'>❌ Hata oluştu: " + xhr.responseText + "</div>");
+            // Sunucunun doğrulama mesajı (ör. yalnızca .xlsx) varsa onu göster
+            var serverMessage = xhr.responseJSON && (xhr.responseJSON.Message || xhr.responseJSON.message);
+            resultDiv.html($("<div class='text-danger'>").text("❌ " + (serverMessage || ("Hata oluştu: " + (xhr.responseText || error || status)))));
+        },
+        complete: function () {
+            isExcelUploading = false;
         }
     });
 }

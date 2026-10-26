@@ -87,7 +87,7 @@ namespace B2b.Web
         }
         private static void OrderServiceRegister()
         {
-            _services.AddScoped<IOrderService, OrderService>(p => { return new OrderService(_serviceProvider.GetService<B2bDbContext>()); });
+            _services.AddScoped<IOrderService, OrderService>(p => { return new OrderService(_serviceProvider.GetService<B2bDbContext>(), _configuration["Mail:CompanyEmail"]); });
         }
         private static void UnitTypeServiceRegister()
         {

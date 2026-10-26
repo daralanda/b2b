@@ -7,6 +7,8 @@
     <UserSecretsId>d5689e43-2ebf-4b4d-9a79-a7a4685fadc2</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <!-- Windows Uygulama Denetimi imzasız B2b.Web.exe'yi engelliyor; uygulama dotnet.exe ile (B2b.Web.dll) çalışır -->
+    <UseAppHost>false</UseAppHost>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

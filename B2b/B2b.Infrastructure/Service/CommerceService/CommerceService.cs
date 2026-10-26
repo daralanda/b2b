@@ -100,7 +100,8 @@ namespace B2b.Infrastructure.Service.CommerceService
             try
             {
                 result.State = true;
-                result.List = _context.ProductImages.Where(p => p.ProductId == ProductId).OrderBy(p => p.Queue).ToList();
+                // Adresi boş resim kayıtları (eski Excel yüklemelerinden kalan) gösterilmez
+                result.List = _context.ProductImages.Where(p => p.ProductId == ProductId && p.ImageUrl != null && p.ImageUrl.Trim() != "").OrderBy(p => p.Queue).ToList();
                 result.Message = "Resimler başarıyla getirildi.";
             }
             catch (Exception ex)
@@ -213,7 +214,7 @@ namespace B2b.Infrastructure.Service.CommerceService
                 var data = _context.Orders.Where(p => p.OrderId == id).FirstOrDefault();
                 var orderDetails = (from x in _context.OrderDetails
                                     join y in _context.Products on x.ProductId equals y.ProductId
-                                    join z in _context.ProductImages on x.ProductId equals z.ProductId into imgGroup
+                                    join z in _context.ProductImages.Where(i => i.ImageUrl != null && i.ImageUrl.Trim() != "") on x.ProductId equals z.ProductId into imgGroup
                                     from z in imgGroup.Take(1).DefaultIfEmpty()
                                     where x.OrderId == id
                                     select new OrderDetailDto
