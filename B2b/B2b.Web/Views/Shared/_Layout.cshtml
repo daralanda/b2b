@@ -163,13 +163,10 @@
                     try { if (localStorage.getItem('siteFooterCollapsed') === '1') { document.getElementById('siteFooter').classList.add('collapsed'); document.getElementById('siteFooterToggle').setAttribute('aria-expanded', 'false'); } } catch (e) { }
                 </script>
                 <div class="site-footer-content" id="siteFooterContent">
-                    <div class="container-fluid">
+                    <div class="container-fluid site-footer-bar">
+                        <span class="site-footer-copy"><script>document.write(new Date().getFullYear())</script> © Kare El Aletleri.</span>
                         <div class="site-footer-rates" id="exchangeFooterRates">
                             <span class="text-muted">Kurlar yükleniyor...</span>
-                        </div>
-                        <div class="site-footer-bottom">
-                            <span><script>document.write(new Date().getFullYear())</script> © Kare El Aletleri.</span>
-                            <span class="d-none d-sm-inline">Design & Develop by HeliosDiji</span>
                         </div>
                     </div>
                 </div>

@@ -1,14 +1,19 @@
 ﻿using B2b.Dal.Context;
 using B2b.Dal.Entity;
 using B2b.Infrastructure.ResponseDto;
+using B2b.Plugin.Mail;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Net;
+using System.Text;
 
 
 namespace B2b.Infrastructure.Service.OrderService
 {
-    public class OrderService(B2bDbContext context): IOrderService
+    public class OrderService(B2bDbContext context, string companyEmail): IOrderService
     {
         private readonly B2bDbContext _context = context;
+        private readonly string _companyEmail = companyEmail;
         bool state = false;
         string message = string.Empty;
         List<Order> orders = new();
@@ -178,6 +183,10 @@ namespace B2b.Infrastructure.Service.OrderService
                 data.OrderId = res.OrderId;
                 data.OrderNo = res.OrderNo;
                 data.FinalTotal = res.FinalTotal;
+                if (data.OrderId > 0)
+                {
+                    SendOrderMails(data.OrderId, customerId);
+                }
                 state = true;
                 message = "Orders retrieved successfully.";
             }
@@ -190,8 +199,76 @@ namespace B2b.Infrastructure.Service.OrderService
             {
                 State = state,
                 Message = message,
-                Data = data 
+                Data = data
             };
+        }
+
+        // Sipariş oluşunca firmaya (appsettings Mail:CompanyEmail) ve müşteriye bilgi maili gönderir.
+        // SMTP ayarları MailSettings tablosundan okunur. Mail hatası siparişi etkilemez.
+        private void SendOrderMails(int orderId, int customerId)
+        {
+            try
+            {
+                var mailConf = _context.MailSettings.FirstOrDefault();
+                if (mailConf == null) return;
+
+                var customer = _context.Users.Where(p => p.UserId == customerId).FirstOrDefault();
+                var orderData = GetById(orderId).Data;
+                if (orderData == null || orderData.OrderId == 0) return;
+
+                var tr = new CultureInfo("tr-TR");
+                string Enc(string s) => WebUtility.HtmlEncode(s ?? "");
+                // IsIndividual true: kurumsal müşteri (firma adı), false/boş: bireysel müşteri (ad soyad)
+                string customerName = customer == null ? "" :
+                    customer.IsIndividual == true && !string.IsNullOrWhiteSpace(customer.CustomerName) ? customer.CustomerName : customer.FirstName + " " + customer.LastName;
+
+                var rows = new StringBuilder();
+                foreach (var item in orderData.OrderDetails)
+                {
+                    rows.Append("<tr>")
+                        .Append("<td style='padding:6px;border:1px solid #ddd'>").Append(Enc(item.ProductName)).Append("</td>")
+                        .Append("<td style='padding:6px;border:1px solid #ddd'>").Append(Enc(item.UnitType)).Append("</td>")
+                        .Append("<td style='padding:6px;border:1px solid #ddd;text-align:right'>").Append(item.Count).Append("</td>")
+                        .Append("<td style='padding:6px;border:1px solid #ddd;text-align:right'>").Append(item.Price.ToString("N2", tr)).Append("</td>")
+                        .Append("<td style='padding:6px;border:1px solid #ddd;text-align:right'>").Append(item.Discount.ToString("N2", tr)).Append("</td>")
+                        .Append("<td style='padding:6px;border:1px solid #ddd;text-align:right'>").Append(item.VatPrice.ToString("N2", tr)).Append("</td>")
+                        .Append("</tr>");
+                }
+
+                string details =
+                    "<p><b>Sipariş No:</b> " + Enc(orderData.OrderNo) + "<br/>" +
+                    "<b>Sipariş Tarihi:</b> " + orderData.OrderDate.ToString("dd.MM.yyyy HH:mm", tr) + "<br/>" +
+                    "<b>Müşteri:</b> " + Enc(customerName) + "<br/>" +
+                    (customer == null ? "" : "<b>E-posta:</b> " + Enc(customer.Email) + "<br/><b>Telefon:</b> " + Enc(customer.Phone) + "<br/>") +
+                    (string.IsNullOrWhiteSpace(orderData.OrderNote) ? "" : "<b>Sipariş Notu:</b> " + Enc(orderData.OrderNote) + "<br/>") +
+                    "</p>" +
+                    "<table style='border-collapse:collapse;font-size:13px'>" +
+                    "<thead><tr style='background:#f3f3f3'>" +
+                    "<th style='padding:6px;border:1px solid #ddd'>Ürün</th><th style='padding:6px;border:1px solid #ddd'>Birim</th>" +
+                    // CreateOrderFromCart: Price = liste fiyatı, Discount = indirimli birim fiyat, VatPrice = satırın KDV tutarı
+                    "<th style='padding:6px;border:1px solid #ddd'>Adet</th><th style='padding:6px;border:1px solid #ddd'>Liste Fiyatı</th>" +
+                    "<th style='padding:6px;border:1px solid #ddd'>İndirimli Fiyat</th><th style='padding:6px;border:1px solid #ddd'>KDV Tutarı</th>" +
+                    "</tr></thead><tbody>" + rows + "</tbody></table>" +
+                    "<p><b>Toplam:</b> " + orderData.Total.ToString("N2", tr) + "</p>";
+
+                string subject = "Sipariş No: " + orderData.OrderNo;
+                string companyBody = "<p>Yeni bir sipariş alındı.</p>" + details;
+                string customerBody = "<p>Sayın " + Enc(customerName) + ",</p><p>Siparişiniz başarıyla alınmıştır. Teşekkür ederiz.</p>" + details + "<p>Kare El Aletleri</p>";
+                string companyEmail = _companyEmail;
+                string customerEmail = customer?.Email;
+
+                // SMTP gönderimi siparişi bekletmesin diye arka planda yapılır
+                Task.Run(() =>
+                {
+                    if (!string.IsNullOrWhiteSpace(companyEmail))
+                        MailPlugin.MailPost(mailConf.Host, mailConf.Port, mailConf.Email, mailConf.Password, mailConf.EnableSsl, companyEmail, "Yeni " + subject, companyBody);
+                    if (!string.IsNullOrWhiteSpace(customerEmail))
+                        MailPlugin.MailPost(mailConf.Host, mailConf.Port, mailConf.Email, mailConf.Password, mailConf.EnableSsl, customerEmail, "Siparişiniz Alındı - " + subject, customerBody);
+                });
+            }
+            catch
+            {
+            }
         }
 
     }

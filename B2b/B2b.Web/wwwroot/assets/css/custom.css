@@ -198,11 +198,27 @@ body[data-layout=horizontal] .page-content {
     display: none;
 }
 
+/* Solda telif, sağda döviz kurları */
+.site-footer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .25rem 1.5rem;
+}
+
+.site-footer-copy {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
 .site-footer-rates {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: .25rem 1.5rem;
+    margin-left: auto;
     font-size: 13px;
 }
 
@@ -224,13 +240,5 @@ body[data-layout=horizontal] .page-content {
     }
 
 .site-footer-meta {
-    font-size: 12px;
-}
-
-.site-footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: .25rem;
     font-size: 12px;
 }
