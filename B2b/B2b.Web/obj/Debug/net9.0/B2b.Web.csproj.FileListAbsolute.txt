@@ -2804,9 +2804,7 @@ D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.pdb
 D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\B2b.Web.genruntimeconfig.cache
 D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\ref\B2b.Web.dll
 D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\leqxpzbeo6-{0}-lai6vjqxur-lai6vjqxur.gz
-D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\xgu3t9evbd-{0}-fvlrt4twmm-fvlrt4twmm.gz
 D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\jqfbd6u9ew-{0}-sjnv27z90g-sjnv27z90g.gz
-D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\5hq0e2w07k-{0}-67q8xhgwbo-67q8xhgwbo.gz
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\appsettings.Development.json
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\appsettings.json
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Web.staticwebassets.runtime.json
@@ -2815,5 +2813,7 @@ C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Project
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Web.runtimeconfig.json
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Web.dll
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Web.pdb
-D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\aysxkziwiv-{0}-gldbsy6kbe-gldbsy6kbe.gz
 D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\aysxkziwiv-{0}-mso7czzpmt-mso7czzpmt.gz
+D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\5hq0e2w07k-{0}-2glu3fot8u-2glu3fot8u.gz
+D:\Projects\b2b\B2b\B2b.Web\obj\Debug\net9.0\compressed\xgu3t9evbd-{0}-iph9u4rxxu-iph9u4rxxu.gz

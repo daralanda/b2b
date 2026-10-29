@@ -66,3 +66,7 @@ D:\Projects\b2b\B2b\B2b.Dal\obj\Debug\net9.0\ref\B2b.Dal.dll
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Dal.deps.json
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Dal.dll
 C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\13ed1b82-1c23-4f55-80cf-8c1e0a7d2c73\scratchpad\build\B2b.Dal.pdb
+C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\6c4d4bb2-683c-48d9-91b5-d3f24120bda4\scratchpad\build-d\B2b.Dal.deps.json
+C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\6c4d4bb2-683c-48d9-91b5-d3f24120bda4\scratchpad\build-d\B2b.Dal.dll
+C:\Users\Hidir\AppData\Local\Temp\claude\C--Users-Hidir-OneDrive-Desktop-Projects\6c4d4bb2-683c-48d9-91b5-d3f24120bda4\scratchpad\build-d\B2b.Dal.pdb
+D:\Projects\b2b\B2b\B2b.Dal\obj\Debug\net9.0\B2b.Dal.csproj.Up2Date
