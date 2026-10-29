@@ -27,12 +27,28 @@ var Brands = [];
 var IsCopy = false;
 
 $(document).ready(function () {
+    ["ProductName", "ProductCode"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener("input", function () { upperCaseInput(el); });
+    });
     PageLoad();
 });
 
 /* ==========================================================================
    SAYFA YÜKLEME VE EŞZAMANLI (PARALEL) VERİ ÇEKME
    ========================================================================== */
+// Ürün adı ve kodu Türkçe kurallarla büyük harfe çevrilir (i → İ, ı → I)
+function toUpperTr(value) {
+    return (value || "").toLocaleUpperCase("tr-TR");
+}
+
+// Yazarken büyük harfe çevirir; imleç konumu korunur
+function upperCaseInput(el) {
+    var start = el.selectionStart, end = el.selectionEnd;
+    el.value = toUpperTr(el.value);
+    el.setSelectionRange(start, end);
+}
+
 function PageLoad() {
     // 1. Tüm lookup verilerini PARALEL olarak çek
     $.when(
@@ -482,13 +498,13 @@ function btnClick(obj) {
    ========================================================================== */
 function PostData() {
     var state = true;
-    Data.ProductName = document.getElementById("ProductName").value;
+    Data.ProductName = toUpperTr(document.getElementById("ProductName").value.trim());
     Data.IsActive = document.getElementById("IsActive").value == 1 ? true : false;
     Data.CategoryId = document.getElementById("CategoryId").value;
     Data.CurrencyId = document.getElementById("CurrencyId").value;
     Data.Vat = document.getElementById("Vat").value;
     Data.StockQuantity = document.getElementById("StockQuantity").value;
-    Data.ProductCode = document.getElementById("ProductCode").value;
+    Data.ProductCode = toUpperTr(document.getElementById("ProductCode").value.trim());
     Data.BrandId = document.getElementById("BrandId").value;
     Data.Description = document.getElementById("Description").value;
 
@@ -522,6 +538,21 @@ function PostData() {
     var targetUrl = (Data.ProductId == 0) ? '/api/ProductApi/Add' : '/api/ProductApi/Update';
     var targetType = (Data.ProductId == 0) ? 'Post' : 'Put';
 
+    // Zorunlu alan kontrolü; ilk eksik alan kullanıcıya gösterilir
+    var validationError = null;
+    if (!Data.ProductName.trim()) validationError = "Ürün adı boş olamaz.";
+    else if (!Data.ProductCode.trim()) validationError = "Ürün kodu boş olamaz.";
+    else if (!(parseInt(Data.CategoryId) > 0)) validationError = "Kategori seçiniz.";
+    else if (!(parseInt(Data.BrandId) > 0)) validationError = "Marka seçiniz.";
+    else if (!(parseInt(Data.CurrencyId) > 0)) validationError = "Para birimi seçiniz.";
+    else if (parseInt(Data.Vat) < 0) validationError = "KDV negatif olamaz.";
+    else if (parseInt(Data.StockQuantity) < 0) validationError = "Stok negatif olamaz.";
+
+    if (validationError) {
+        state = false;
+        Swal.fire({ title: "Eksik Bilgi", text: validationError, icon: "warning" });
+    }
+
     if (state) {
         $.ajax({
             url: targetUrl,
@@ -535,7 +566,7 @@ function PostData() {
                 if (data.State) {
                     Swal.fire({
                         title: "Ürün " + actionName,
-                        text: "İşlem başarıyla tamamlanmıştır.",
+                        text: data.Message || "İşlem başarıyla tamamlanmıştır.",
                         icon: "success",
                     }).then(() => {
                         PageLoad();
@@ -543,7 +574,7 @@ function PostData() {
                 } else {
                     Swal.fire({
                         title: "Ürün " + actionName,
-                        text: "İşlem sırasında beklenmedik bir sorun oluştu.",
+                        text: data.Message || "İşlem sırasında beklenmedik bir sorun oluştu.",
                         icon: "warning",
                     });
                 }

@@ -161,8 +161,9 @@ $(document).ready(function () {
                                         <th>Ürün Adı</th>
                                         <th class="text-center" style="width: 90px;">Birim</th>
                                         <th class="text-center" style="width: 90px;">Birim İçi</th>
+                                        <th class="text-end" style="width: 120px;">Fiyat</th>
                                         <th class="text-center" style="width: 110px;">İskonto</th>
-                                        <th class="text-end" style="width: 140px;">Fiyat</th>
+                                        <th class="text-end" style="width: 140px;">İndirimli Fiyat</th>
                                         <th class="text-center" style="width: 180px;">Miktar / İşlem</th>
                                     </tr>
                                 </thead>
@@ -172,8 +173,10 @@ $(document).ready(function () {
                         const hasDiscount = item.DiscountedPrice > 0 && item.DiscountedPrice !== item.Price;
                         const discountTxt = item.DiscountTxt ? sonundakiArtiyiSil(item.DiscountTxt) : '';
                         const discountHTML = hasDiscount && discountTxt ? `<span class="discount-badge">% ${discountTxt}</span>` : '-';
-                        let pricesHTML = hasDiscount
-                            ? `<div class="text-end"><del class="text-muted small d-block">${formatPrice(item.Price)}</del><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></div>`
+                        const priceHTML = `<div class="text-end"><b>${formatPrice(item.Price)}</b></div>`;
+                        // İskonto yoksa indirimli fiyat liste fiyatına eşittir
+                        const discountedPriceHTML = hasDiscount
+                            ? `<div class="text-end"><b class="text-danger">${formatPrice(item.DiscountedPrice)}</b></div>`
                             : `<div class="text-end"><b>${formatPrice(item.Price)}</b></div>`;
 
                         const productUnit = item.UnitTypeName || item.Unit || '-';
@@ -191,8 +194,9 @@ $(document).ready(function () {
                             </td>
                             <td class="text-center"><span class="text-secondary small fw-bold">${productUnit}</span></td>
                             <td class="text-center"><span class="text-secondary small fw-bold">${item.UnitCount}</span></td>
+                            <td>${priceHTML}</td>
                             <td class="text-center">${discountHTML}</td>
-                            <td>${pricesHTML}</td>
+                            <td>${discountedPriceHTML}</td>
                             <td>
                                 <div class="input-group input-group-sm">
                                     <input type="number" id="qty_${item.ProductId}" class="form-control text-center" value="1" min="1" style="max-width: 70px;">

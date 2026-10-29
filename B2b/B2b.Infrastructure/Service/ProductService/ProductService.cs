@@ -3,6 +3,8 @@ using B2b.Dal.Entity;
 using B2b.Infrastructure.ResponseDto;
 using B2b.Plugin.EPPlus;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace B2b.Infrastructure.Service.ProductService
 {
@@ -15,28 +17,75 @@ namespace B2b.Infrastructure.Service.ProductService
         string message = string.Empty;
         List<Product> products = new();
         Product product = new();
+
+        private static readonly CultureInfo TrCulture = new("tr-TR");
+
+        // Ürün adı ve kodu her zaman Türkçe kurallarla büyük harf tutulur (i → İ, ı → I);
+        // baştaki/sondaki boşluklar silinir, aradaki çoklu boşluk teke indirilir
+        private static string ToUpperTr(string value) =>
+            value == null ? null : Regex.Replace(value.Trim(), @"\s+", " ").ToUpper(TrCulture);
+
+        // Kayıt eşleştirme anahtarı: tüm boşluklar yok sayılır ("ABC 01" == "abc01")
+        private static string MatchKey(string value) =>
+            value == null ? string.Empty : Regex.Replace(value, @"\s+", "").ToUpper(TrCulture);
+
+        // Boşluk ve harf farkı SQL'de ayıklanamadığı için kodlar bellekte karşılaştırılır
+        private Product FindByCode(string code, int excludeProductId)
+        {
+            var key = MatchKey(code);
+            return _context.Products
+                .AsNoTracking()
+                .Where(p => p.ProductId != excludeProductId)
+                .Select(p => new Product { ProductId = p.ProductId, ProductCode = p.ProductCode, ProductName = p.ProductName })
+                .AsEnumerable()
+                .FirstOrDefault(p => MatchKey(p.ProductCode) == key);
+        }
+
+        private static void NormalizeProduct(Product data)
+        {
+            data.ProductName = ToUpperTr(data.ProductName);
+            data.ProductCode = ToUpperTr(data.ProductCode);
+        }
+
+        // Ekleme ve güncellemede ortak zorunlu alan kontrolü; hata yoksa null döner
+        private string ValidateProduct(Product data)
+        {
+            if (string.IsNullOrWhiteSpace(data.ProductName)) return "Ürün adı boş olamaz.";
+            if (string.IsNullOrWhiteSpace(data.ProductCode)) return "Ürün kodu boş olamaz.";
+            if (data.CategoryId <= 0) return "Kategori seçiniz.";
+            if (data.BrandId <= 0) return "Marka seçiniz.";
+            if (data.CurrencyId <= 0) return "Para birimi seçiniz.";
+            if (data.Vat < 0) return "KDV negatif olamaz.";
+            if (data.StockQuantity < 0) return "Stok negatif olamaz.";
+            return null;
+        }
+
         public ResultDto<Product> Add(Product data)
         {
+            NormalizeProduct(data);
+            var validationError = ValidateProduct(data);
+            if (validationError != null)
+                return new ResultDto<Product> { State = false, Message = validationError };
+            // Kod ve ad (boşluklar yok sayılarak) kayıtlı bir ürünle aynıysa yeni kayıt açılmaz, o ürün güncellenir
+            var existing = FindByCode(data.ProductCode, 0);
+            if (existing != null)
+            {
+                if (MatchKey(existing.ProductName) != MatchKey(data.ProductName))
+                    return new ResultDto<Product> { State = false, Message = $"Bu ürün kodu '{existing.ProductName}' adlı üründe kullanılıyor." };
+
+                data.ProductId = existing.ProductId;
+                var updateResult = Update(data);
+                if (updateResult.State) updateResult.Message = "Ürün zaten kayıtlı olduğu için güncellendi.";
+                return updateResult;
+            }
             try
             {
-                var product=_context.Products.Where(p => p.ProductCode == data.ProductCode).FirstOrDefault();
-                if (product== null)
-                {
-                    // Adresi boş resim satırları kaydedilmez
-                    data.ProductImages = data.ProductImages?.Where(i => !string.IsNullOrWhiteSpace(i.ImageUrl)).ToList();
-                    _context.Products.Add(data);
-                    _context.SaveChanges();
-                    state = true;
-                    message = "Product added successfully.";
-                }
-                else
-                {
-                    return new ResultDto<Product>
-                    {
-                        State = false,
-                        Message = "Bu ürün kodu kullanılıyor."
-                    };
-                }
+                // Adresi boş resim satırları kaydedilmez
+                data.ProductImages = data.ProductImages?.Where(i => !string.IsNullOrWhiteSpace(i.ImageUrl)).ToList();
+                _context.Products.Add(data);
+                _context.SaveChanges();
+                state = true;
+                message = "Ürün eklendi.";
               
                 
             }
@@ -192,6 +241,13 @@ namespace B2b.Infrastructure.Service.ProductService
         }
         public ResultDto<Product> Update(Product data)
         {
+            NormalizeProduct(data);
+            var validationError = ValidateProduct(data);
+            if (validationError != null)
+                return new ResultDto<Product> { State = false, Message = validationError };
+            // Kod başka bir üründe kullanılıyorsa güncelleme yapılmaz
+            if (FindByCode(data.ProductCode, data.ProductId) != null)
+                return new ResultDto<Product> { State = false, Message = "Bu ürün kodu kullanılıyor." };
             try
             {
                 _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
@@ -239,7 +295,7 @@ namespace B2b.Infrastructure.Service.ProductService
                     _context.SaveChanges();
                 }
                 state = true;
-                message = "Product updated successfully.";
+                message = "Ürün güncellendi.";
             }
             catch (Exception ex)
             {
@@ -345,7 +401,8 @@ namespace B2b.Infrastructure.Service.ProductService
             var categories = BuildLookup(_context.Categories.ToList(), c => c.CategoryName);
             var unitTypes = BuildLookup(_context.UnitTypes.ToList(), u => u.UnitTypeName);
             var currencies = BuildLookup(_context.Currencies.ToList(), c => c.CurrencyName);
-            var products = BuildLookup(_context.Products.ToList(), p => p.ProductCode);
+            // Anahtarda boşluk ve harf farkı yok sayılır: "abc 01" kayıtlıysa Excel'deki "ABC01" ile eşleşir
+            var products = BuildLookup(_context.Products.ToList(), p => MatchKey(p.ProductCode));
             var existingPrices = _context.ProductPrices.ToList()
                 .GroupBy(p => p.ProductId)
                 .ToDictionary(g => g.Key, g => g.GroupBy(p => p.UnitTypeId).ToDictionary(u => u.Key, u => u.First()));
@@ -432,7 +489,18 @@ namespace B2b.Infrastructure.Service.ProductService
 
                 try
                 {
-                    var code = item.ProductCode.Trim();
+                    var code = ToUpperTr(item.ProductCode);
+                    var name = ToUpperTr(item.ProductName);
+                    var codeKey = MatchKey(code);
+
+                    // Kod ve ad birlikte tutarsa güncellenir; kod başka adla kayıtlıysa satır atlanır
+                    if (products.TryGetValue(codeKey, out var product) && MatchKey(product.ProductName) != MatchKey(name))
+                    {
+                        failed++;
+                        AddMessage(result.List, $"Satır {item.RowNumber}: '{code}' kodu '{product.ProductName}' adlı üründe kullanılıyor, atlandı.");
+                        continue;
+                    }
+
                     var brand = GetBrand(item.BrandName.Trim());
                     var category = GetCategory(item.CategoryName.Trim());
                     var unitType = GetUnitType(item.UnitTypeName.Trim());
@@ -440,12 +508,12 @@ namespace B2b.Infrastructure.Service.ProductService
                     bool isActive = IsYes(item.IsActive, true);
                     bool isDefault = IsYes(item.IsDefault, true);
 
-                    if (!products.TryGetValue(code, out var product))
+                    if (product == null)
                     {
                         product = new Product
                         {
                             ProductCode = code,
-                            ProductName = item.ProductName.Trim(),
+                            ProductName = name,
                             BrandId = brand.BrandId,
                             CategoryId = category.CategoryId,
                             CurrencyId = currency.CurrencyId,
@@ -455,11 +523,13 @@ namespace B2b.Infrastructure.Service.ProductService
                             StockQuantity = item.StockQuantity
                         };
                         _context.Products.Add(product);
-                        products[code] = product;
+                        products[codeKey] = product;
                         created++;
                     }
                     else
                     {
+                        product.ProductCode = code;
+                        product.ProductName = name;
                         product.BrandId = brand.BrandId;
                         product.CategoryId = category.CategoryId;
                         product.CurrencyId = currency.CurrencyId;
@@ -603,7 +673,7 @@ namespace B2b.Infrastructure.Service.ProductService
             }
             foreach (var e in parseErrors) AddMessage(result.List, e);
 
-            var products = BuildLookup(_context.Products.ToList(), p => p.ProductCode);
+            var products = BuildLookup(_context.Products.ToList(), p => MatchKey(p.ProductCode));
             var brands = BuildLookup(_context.Brands.ToList(), b => b.BrandName);
             var categories = BuildLookup(_context.Categories.ToList(), c => c.CategoryName);
             var unitTypes = BuildLookup(_context.UnitTypes.ToList(), u => u.UnitTypeName);
@@ -617,7 +687,7 @@ namespace B2b.Infrastructure.Service.ProductService
             foreach (var item in data)
             {
                 row++;
-                var code = item.ProductCode?.Trim();
+                var code = ToUpperTr(item.ProductCode);
 
                 // Tamamen boş satır: sessizce atla
                 if (string.IsNullOrEmpty(code) && string.IsNullOrWhiteSpace(item.ProductName) && item.Price == 0) continue;
@@ -628,7 +698,7 @@ namespace B2b.Infrastructure.Service.ProductService
                     AddMessage(result.List, $"Satır {row}: ProductCode boş, atlandı.");
                     continue;
                 }
-                if (!products.TryGetValue(code, out var product))
+                if (!products.TryGetValue(MatchKey(code), out var product))
                 {
                     skipped++;
                     AddMessage(result.List, $"Satır {row}: '{code}' kodlu ürün bulunamadı, atlandı.");
